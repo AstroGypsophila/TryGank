@@ -1,0 +1,3 @@
+include ':app'
+include ':CommonLib';
+project(':CommonLib').projectDir = new File('../TryGankLib/Common/CommonLib')

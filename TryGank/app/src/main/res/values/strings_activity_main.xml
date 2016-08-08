@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btnLogin">去登录</string>
+    <string name="btnLoginNew">去新的登录页</string>
+    <string name="btnList">去列表页</string>
+    
+    <string name="btnByJsonObject">通过JsonObject</string>
+    <string name="btnByFastJson">通过FastJson</string>
+    <string name="btnByGson">通过Gson</string>
+    
+    <string name="btnListDemo">显示列表页</string>
+    <string name="btnTestNullValue">测试空值</string>
+    
+</resources>

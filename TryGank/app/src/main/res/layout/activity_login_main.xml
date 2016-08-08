@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnLogin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="14dp"
+        android:text="登录情形1" />
+
+    <Button
+        android:id="@+id/btnLogin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnLogin1"
+        android:layout_alignRight="@+id/btnLogin1"
+        android:layout_below="@+id/btnLogin1"
+        android:layout_marginTop="14dp"
+        android:text="登录情形2" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnLogin1"
+        android:layout_marginLeft="37dp"
+        android:layout_toRightOf="@+id/btnLogin1"
+        android:text="点击登录按钮，直接去登录页面，成功后去往PersonCenter页面" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignTop="@+id/btnLogin2"
+        android:text="点击后去往JianqiangActivity，如果发现没有登录，登录后再去JianqiangActivity页面" />
+
+    <Button
+        android:id="@+id/btnLogin3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="16dp"
+        android:layout_toLeftOf="@+id/textView1"
+        android:text="登录情形3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignTop="@+id/btnLogin3"
+        android:text="点击后改变颜色，如果发现没有登录，则先登录再改变颜色" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnLogin3"
+        android:layout_below="@+id/btnLogin3"
+        android:layout_marginTop="18dp"
+        android:text="注销" />
+
+</RelativeLayout>

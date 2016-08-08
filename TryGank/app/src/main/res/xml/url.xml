@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url>
+    <Node
+        Key="Android"
+        Expires="0"
+        NetType="get"
+        Url="http://gank.io/api/data/Android/10/1" />
+    <Node
+        Key="getWeatherInfo"
+        Expires="0"
+        NetType="get"
+        Url="http://www.weather.com.cn/data/sk/101010100.html" />
+
+    <Node
+        Key="login"
+        Expires="0"
+        NetType="post"
+        MockClass="com.youngheart.mockdata.MockLoginSuccessInfo"
+        Url="http://www.weather.com.cn/data/sk/101010100.html" />
+</url>
+
