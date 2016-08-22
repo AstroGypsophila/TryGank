@@ -1,51 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    >
+    android:orientation="vertical"
+    tools:context=".activity.toolbar.MainActivity">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnLogin" />
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnLoginNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnLoginNew"
-        />
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnByJsonObject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnByJsonObject" />
+            <include layout="@layout/toolbar" />
 
-    <Button
-        android:id="@+id/btnByFastJson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnByFastJson" />
+            <FrameLayout
+                android:id="@+id/id_content_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+        </android.support.design.widget.CoordinatorLayout>
 
-    <Button
-        android:id="@+id/btnByGson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnByGson" />
-    <Button
-        android:id="@+id/btnListDemo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnListDemo" />
-
-    <Button
-        android:id="@+id/btnTestNullValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnTestNullValue" />
-    
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/navigation_header"
+            app:menu="@menu/navigation_menu"></android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>
