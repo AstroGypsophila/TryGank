@@ -13,7 +13,7 @@
             android:title="navi2" />
         <item
             android:id="@+id/navigation3"
-            android:icon="@drawable/ic_notifications"
+            android:icon="@drawable/ic_share_white"
             android:title="navi3" />
     </group>
 </menu>

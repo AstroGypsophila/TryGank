@@ -42,7 +42,7 @@ public class HttpRequest implements Runnable {
     private HttpResponse response = null;
     private DefaultHttpClient httpClient;
 
-    //切换会ui线程
+    //切换回ui线程
     protected Handler handler;
 
     public HttpRequest(final URLData data, final List<RequestParameter> params, final RequestCallback callback) {

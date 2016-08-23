@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.toolbar.MainActivity">
+    tools:context=".main.view.MainActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer"
@@ -18,11 +18,13 @@
 
             <include layout="@layout/toolbar" />
 
+
             <FrameLayout
                 android:id="@+id/id_content_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></FrameLayout>
         </android.support.design.widget.CoordinatorLayout>
+
 
         <android.support.design.widget.NavigationView
             android:id="@+id/navigation"
@@ -30,7 +32,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/navigation_header"
-            app:menu="@menu/navigation_menu"></android.support.design.widget.NavigationView>
+            app:menu="@menu/navigation_menu">
+
+        </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>
