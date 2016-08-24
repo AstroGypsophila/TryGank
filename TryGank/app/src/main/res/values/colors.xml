@@ -9,4 +9,7 @@
 
     <!--navigation-->
     <color name="account_text_color">#ffffff</color>
+
+    <!--tabindicator-->
+    <color name="tab_indicator">#ffffff</color>
 </resources>

@@ -15,4 +15,9 @@
     <string name="item_02">Item 2</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="top">头条</string>
+    <string name="nba">NBA</string>
+    <string name="cars">汽车</string>
+    <string name="jokes">笑话</string>
 </resources>
