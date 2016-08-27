@@ -12,7 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.news.NewsAdapter;
+import com.gypsophila.trygank.news.model.NewsBean;
+import com.gypsophila.trygank.news.presenter.INewsPresenter;
+import com.gypsophila.trygank.news.presenter.NewsPresenterImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +28,18 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/8/24
  */
-public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class NewsListFragment extends Fragment implements INewsView, SwipeRefreshLayout.OnRefreshListener{
 
 
     private int mType;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private List<String> mData = new ArrayList<>();
+    private List<NewsBean> mData;
+
+    private INewsPresenter mNewsPresenter;
+    private int mPageIndex = 0;
+    private NewsAdapter mAdapter;
 
     public static NewsListFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -44,6 +53,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mType = getArguments().getInt("type");
+        mNewsPresenter = new NewsPresenterImpl(this);
     }
 
     @Override
@@ -54,58 +64,44 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
                 R.color.colorPrimaryDark);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mAdapter = new NewsAdapter(getActivity());
         initData();
-        MyAdapter myAdapter = new MyAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(myAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         return view;
     }
 
     private void initData() {
-        for (int i = 0; i < 20; i++) {
-            mData.add(i + "");
-        }
+        mNewsPresenter.loadNews((BaseActivity) getActivity(), null, null, null, true);
     }
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 3000);
+        mNewsPresenter.loadNews((BaseActivity) getActivity(), null, null, null, true);
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewholder> {
-
-        @Override
-        public MyViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-            MyViewholder viewholder = new MyViewholder(LayoutInflater.from(getActivity()).inflate(R.layout.recycler_item, parent, false));
-            return viewholder;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewholder holder, int position) {
-            holder.tv.setText(mData.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-
-        class MyViewholder extends RecyclerView.ViewHolder {
-
-            public MyViewholder(View itemView) {
-                super(itemView);
-                tv = (TextView) itemView.findViewById(R.id.tv);
-            }
-
-            TextView tv;
-        }
+    @Override
+    public void showProgress() {
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
+    @Override
+    public void addNews(List<NewsBean> newsBeanList) {
+        if (mData==null) {
+            mData = new ArrayList<>();
+        }
+        mData.addAll(newsBeanList);
+        mAdapter.setData(mData);
+    }
 
+    @Override
+    public void hideProgress() {
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoadFailMsg() {
+
+    }
 
 }

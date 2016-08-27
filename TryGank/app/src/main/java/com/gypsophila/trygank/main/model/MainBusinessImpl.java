@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.main.business;
+package com.gypsophila.trygank.main.model;
 
 /**
  * Description :
