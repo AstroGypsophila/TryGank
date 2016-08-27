@@ -36,7 +36,7 @@ public class NewsPresenterImpl implements INewsPresenter {
 
     @Override
     public void loadNews(BaseActivity activity, String apiKey, List<RequestParameter> params, RequestCallback callBack, boolean forceUpdate) {
-
+        mNewsView.showProgress();
         mNewsBusiness.loadNews(
                 activity,
                 "top",
