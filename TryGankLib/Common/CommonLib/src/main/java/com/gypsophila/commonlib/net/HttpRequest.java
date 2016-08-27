@@ -117,27 +117,34 @@ public class HttpRequest implements Runnable {
             if (statusCode == HttpStatus.SC_OK) {
                 final ByteArrayOutputStream content = new ByteArrayOutputStream();
                 response.getEntity().writeTo(content);
-                String strResponse = new String(content.toByteArray()).trim();
+                final String strResponse = new String(content.toByteArray()).trim();
 //                strResponse = "{'isError':false,'errorType':0,'errorMessage':'','result':{'city':'北京','cityid':'101010100','temp':'17','WD':'西南风','WS':'2级','SD':'54%','WSE':'2','time':'23:15','isRadar':'1','Radar':'JC_RADAR_AZ9010_JB','njd':'暂无实况','qy':'1016'}}";
 
                 //设置回调函数
                 if (requestCallback != null) {
-                    final Response responseInJson = JSON.parseObject(strResponse, Response.class);
-                    if (responseInJson.hasError()) {
-                        handleNetworkError(responseInJson.getErrorMessage());
-                    } else {
-                        //把成功获取的数据记录到缓存
-                        if (urlData.getNetType().equals(REQUEST_GET) &&
-                                urlData.getExpires() > 0) {
-                            CacheManager.getInstance().putFileCache(newUrl, responseInJson.getResult(), urlData.getExpires());
+//                    final Response responseInJson = JSON.parseObject(strResponse, Response.class);
+//                    if (responseInJson.hasError()) {
+//                        handleNetworkError(responseInJson.getErrorMessage());
+//                    } else {
+//                        //把成功获取的数据记录到缓存
+//                        if (urlData.getNetType().equals(REQUEST_GET) &&
+//                                urlData.getExpires() > 0) {
+//                            CacheManager.getInstance().putFileCache(newUrl, responseInJson.getResult(), urlData.getExpires());
+//                        }
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                requestCallback.onSuccess(responseInJson.getResult());
+//                            }
+//                        });
+//                    }
+                    //由于获取api接口json返回格式不一，所以解析只能放在实际项目中，先只放入原json字符串
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            requestCallback.onSuccess(strResponse);
                         }
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                requestCallback.onSuccess(responseInJson.getResult());
-                            }
-                        });
-                    }
+                    });
                 }
             }
         } catch (final java.lang.IllegalArgumentException e) {
