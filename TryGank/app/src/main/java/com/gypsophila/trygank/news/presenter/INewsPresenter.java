@@ -1,7 +1,6 @@
 package com.gypsophila.trygank.news.presenter;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
-import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 
 import java.util.List;
@@ -15,8 +14,8 @@ import java.util.List;
 public interface INewsPresenter {
 
     void loadNews(BaseActivity activity,
-                  String apiKey,
+                  int type,
+                  int pageIndex,
                   List<RequestParameter> params,
-                  RequestCallback callBack,
                   boolean forceUpdate);
 }

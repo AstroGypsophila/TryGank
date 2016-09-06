@@ -19,9 +19,15 @@
         Url="http://www.weather.com.cn/data/sk/101010100.html" />
 
     <Node
-        Key="top"
+        Key="netease"
         Expires="0"
         NetType="get"
-        Url="http://c.m.163.com/nc/article/headline/T1348647909107/0-20.html" />
+        Url="http://c.m.163.com/nc/article/" />
+
+    <Node
+        Key="gank"
+        Expires="0"
+        NetType="get"
+        Url="http://gank.io/api/" />
 </url>
 

@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.news;
+package com.gypsophila.trygank.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

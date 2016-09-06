@@ -1,7 +1,6 @@
 package com.gypsophila.trygank.news.view;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.trygank.R;
@@ -28,7 +26,7 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/8/24
  */
-public class NewsListFragment extends Fragment implements INewsView, SwipeRefreshLayout.OnRefreshListener{
+public class NewsListFragment extends Fragment implements INewsView, SwipeRefreshLayout.OnRefreshListener {
 
 
     private int mType;
@@ -65,19 +63,19 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mAdapter = new NewsAdapter(getActivity());
-        initData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
+        onRefresh();
         return view;
-    }
-
-    private void initData() {
-        mNewsPresenter.loadNews((BaseActivity) getActivity(), null, null, null, true);
     }
 
     @Override
     public void onRefresh() {
-        mNewsPresenter.loadNews((BaseActivity) getActivity(), null, null, null, true);
+        mPageIndex = 0;
+        if (mData != null) {
+            mData.clear();
+        }
+        mNewsPresenter.loadNews((BaseActivity) getActivity(), mType, mPageIndex, null, true);
     }
 
     @Override
@@ -87,7 +85,7 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
 
     @Override
     public void addNews(List<NewsBean> newsBeanList) {
-        if (mData==null) {
+        if (mData == null) {
             mData = new ArrayList<>();
         }
         mData.addAll(newsBeanList);
@@ -103,5 +101,4 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
     public void showLoadFailMsg() {
 
     }
-
 }

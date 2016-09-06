@@ -1,15 +1,10 @@
 package com.gypsophila.trygank.engine;
 
-import com.alibaba.fastjson.JSON;
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.DefaultThreadPool;
 import com.gypsophila.commonlib.net.HttpRequest;
 import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
-import com.gypsophila.commonlib.net.Response;
-import com.gypsophila.commonlib.net.URLData;
-import com.gypsophila.commonlib.net.UrlConfigManager;
-import com.gypsophila.trygank.mockdata.MockService;
 
 import java.util.List;
 
@@ -29,51 +24,51 @@ public class RemoteService {
     }
 
     public void invoke(final BaseActivity activity,
-                       final String apiKey,
+                       final String url,
                        final List<RequestParameter> params,
                        final RequestCallback callBack) {
 
-        invoke(activity, apiKey, params, callBack, false);
+        invoke(activity, url, params, callBack, false);
     }
 
     public void invoke(final BaseActivity activity,
-                       final String apiKey,
+                       final String url,
                        final List<RequestParameter> params,
                        final RequestCallback callBack,
                        final boolean forceUpdate) {
 
-        final URLData urlData = UrlConfigManager.findURL(activity, apiKey);
-        if (null!=urlData.getMockClass()) {
-            try {
-                MockService mockService = (MockService) Class.forName(
-                        urlData.getMockClass()).newInstance();
-                String strResponse = mockService.getJsonData();
-
-                final Response responseInJson = JSON.parseObject(strResponse,
-                        Response.class);
-                if (callBack != null) {
-                    if (responseInJson.hasError()) {
-                        callBack.onFail(responseInJson.getErrorMessage());
-                    } else {
-                        callBack.onSuccess(responseInJson.getResult());
-                    }
-                }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        } else {
-            if (forceUpdate) {
-                //如果强制更新，那么就把过期时间强制设置为0
-                urlData.setExpires(0);
-            }
-            HttpRequest request = activity.getRequestManager().createRequest(
-                    urlData, params, callBack);
-            DefaultThreadPool.getInstance().execute(request);
-        }
-
+//        final URLData urlData = UrlConfigManager.findURL(activity, apiKey);
+//        if (null != urlData.getMockClass()) {
+//            try {
+//                MockService mockService = (MockService) Class.forName(
+//                        urlData.getMockClass()).newInstance();
+//                String strResponse = mockService.getJsonData();
+//
+//                final Response responseInJson = JSON.parseObject(strResponse,
+//                        Response.class);
+//                if (callBack != null) {
+//                    if (responseInJson.hasError()) {
+//                        callBack.onFail(responseInJson.getErrorMessage());
+//                    } else {
+//                        callBack.onSuccess(responseInJson.getResult());
+//                    }
+//                }
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (InstantiationException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            if (forceUpdate) {
+//                //如果强制更新，那么就把过期时间强制设置为0
+//                urlData.setExpires(0);
+//            }
+        HttpRequest request = activity.getRequestManager().createRequest(
+                url, params, callBack);
+        DefaultThreadPool.getInstance().execute(request);
     }
+
+//    }
 }

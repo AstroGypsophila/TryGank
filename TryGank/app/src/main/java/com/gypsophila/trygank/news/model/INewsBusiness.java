@@ -1,7 +1,6 @@
 package com.gypsophila.trygank.news.model;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
-import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 
 import java.util.List;
@@ -15,8 +14,9 @@ import java.util.List;
 public interface INewsBusiness {
 
     void loadNews(BaseActivity activity,
-                  String apiKey,
+                  String url,
+                  int type,
                   List<RequestParameter> params,
-                  RequestCallback callBack,
+                  NewsLoadListener listener,
                   boolean forceUpdate);
 }

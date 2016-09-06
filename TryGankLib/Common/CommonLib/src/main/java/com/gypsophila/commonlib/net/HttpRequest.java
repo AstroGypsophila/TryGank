@@ -2,9 +2,8 @@ package com.gypsophila.commonlib.net;
 
 import android.os.Handler;
 
-import com.alibaba.fastjson.JSON;
-import com.gypsophila.commonlib.cache.CacheManager;
 import com.gypsophila.commonlib.utils.BaseUtils;
+import com.orhanobut.logger.Logger;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -33,27 +32,34 @@ public class HttpRequest implements Runnable {
     public static final String REQUEST_GET = "get";
     public static final String REQUEST_POST = "post";
 
-    private URLData urlData;
-    private String url; //原始url
-    private String newUrl; //拼接key-value后的url
-    private HttpUriRequest request = null;
-    private RequestCallback requestCallback = null;
-    private List<RequestParameter> parameters = null;
-    private HttpResponse response = null;
-    private DefaultHttpClient httpClient;
+    private String mUrl; //原始url
+    private String mNewUrl; //拼接key-value后的url
+    private HttpUriRequest mRequest = null;
+    private RequestCallback mRequestCallback = null;
+    private List<RequestParameter> mParameters = null;
+    private HttpResponse mResponse = null;
+    private DefaultHttpClient mHttpClient;
+
+    /**
+     * 请求方式
+     */
+    private String mRequestType = REQUEST_POST;
 
     //切换回ui线程
     protected Handler handler;
 
-    public HttpRequest(final URLData data, final List<RequestParameter> params, final RequestCallback callback) {
-        urlData = data;
-        url = urlData.getUrl();
-        parameters = params;
-        requestCallback = callback;
-        if (httpClient == null) {
-            httpClient = new DefaultHttpClient();
+    public HttpRequest(final String url, final List<RequestParameter> params, final RequestCallback callback) {
+        mUrl = url;
+        mParameters = params;
+        mRequestCallback = callback;
+        if (mHttpClient == null) {
+            mHttpClient = new DefaultHttpClient();
         }
         handler = new Handler();
+    }
+
+    public void setRequestType(String requestType) {
+        mRequestType = requestType;
     }
 
     @Override
@@ -61,67 +67,69 @@ public class HttpRequest implements Runnable {
     public void run() {
 
         try {
-            if (urlData.getNetType().equals(REQUEST_GET)) {
+            if (REQUEST_GET.equals(mRequestType)) {
                 //添加参数
                 StringBuffer paramBuffer = new StringBuffer();
-                if (parameters != null && parameters.size() > 0) {
+                if (mParameters != null && mParameters.size() > 0) {
 
                     //key进行排序
                     sortKeys();
-                    for (final RequestParameter p : parameters) {
+                    for (final RequestParameter p : mParameters) {
                         if (paramBuffer.length() == 0) {
                             paramBuffer.append(p.getName() + "=" + BaseUtils.UrlEncodeUnicode(p.getValue()));
                         } else {
                             paramBuffer.append("&" + p.getName() + "=" + BaseUtils.UrlEncodeUnicode(p.getValue()));
                         }
                     }
-                    newUrl = url + "?" + paramBuffer.toString();
+                    mNewUrl = mUrl + "?" + paramBuffer.toString();
                 } else {
-                    newUrl = url;
+                    mNewUrl = mUrl;
                 }
 
                 //如果这个get的api有缓存时间(大于0)
-                if (urlData.getExpires() > 0) {
-                    final String content = CacheManager.getInstance().getFileCache(newUrl);
-                    if (content != null) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                requestCallback.onSuccess(content);
-                            }
-                        });
-                    }
-                    return;
-                }
-                request = new HttpGet(newUrl);
-            } else if (urlData.getNetType().equals(REQUEST_POST)) {
-                request = new HttpPost(url);
+//                if (urlData.getExpires() > 0) {
+//                    final String content = CacheManager.getInstance().getFileCache(mNewUrl);
+//                    if (content != null) {
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                mRequestCallback.onSuccess(content);
+//                            }
+//                        });
+//                    }
+//                    return;
+//                }
+                mRequest = new HttpGet(mNewUrl);
+            } else if (REQUEST_POST.equals(mRequestType)) {
+                mRequest = new HttpPost(mUrl);
                 //添加参数
                 final List<BasicNameValuePair> list = new ArrayList<>();
-                if (parameters != null && parameters.size() > 0) {
-                    for (final RequestParameter p : parameters) {
+                if (mParameters != null && mParameters.size() > 0) {
+                    for (final RequestParameter p : mParameters) {
                         list.add(new BasicNameValuePair(p.getName(), p.getValue()));
                     }
-                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
+                    ((HttpPost) mRequest).setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
                 }
             } else {
                 return;
             }
 
-            request.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-            request.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+            mRequest.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+            mRequest.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
 
             //发送请求
-            response = httpClient.execute(request);
-            final int statusCode = response.getStatusLine().getStatusCode();
+            mResponse = mHttpClient.execute(mRequest);
+            final int statusCode = mResponse.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 final ByteArrayOutputStream content = new ByteArrayOutputStream();
-                response.getEntity().writeTo(content);
+                mResponse.getEntity().writeTo(content);
                 final String strResponse = new String(content.toByteArray()).trim();
+                Logger.t("AstroGypsophila").w(strResponse);
+
 //                strResponse = "{'isError':false,'errorType':0,'errorMessage':'','result':{'city':'北京','cityid':'101010100','temp':'17','WD':'西南风','WS':'2级','SD':'54%','WSE':'2','time':'23:15','isRadar':'1','Radar':'JC_RADAR_AZ9010_JB','njd':'暂无实况','qy':'1016'}}";
 
                 //设置回调函数
-                if (requestCallback != null) {
+                if (mRequestCallback != null) {
 //                    final Response responseInJson = JSON.parseObject(strResponse, Response.class);
 //                    if (responseInJson.hasError()) {
 //                        handleNetworkError(responseInJson.getErrorMessage());
@@ -142,7 +150,7 @@ public class HttpRequest implements Runnable {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onSuccess(strResponse);
+                            mRequestCallback.onSuccess(strResponse);
                         }
                     });
                 }
@@ -157,10 +165,10 @@ public class HttpRequest implements Runnable {
     }
 
     void sortKeys() {
-        for (int i = 1; i < parameters.size(); i++) {
+        for (int i = 1; i < mParameters.size(); i++) {
             for (int j = i; j > 0; j--) {
-                RequestParameter p1 = parameters.get(j - 1);
-                RequestParameter p2 = parameters.get(j);
+                RequestParameter p1 = mParameters.get(j - 1);
+                RequestParameter p2 = mParameters.get(j);
                 if (compare(p1.getName(), p2.getName())) {
                     // 交互p1和p2这两个对象，写的超级恶心
                     String name = p1.getName();
@@ -211,7 +219,7 @@ public class HttpRequest implements Runnable {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                requestCallback.onFail(errorMessage);
+                mRequestCallback.onFail(errorMessage);
             }
         });
     }
@@ -231,6 +239,6 @@ public class HttpRequest implements Runnable {
      * @return
      */
     public HttpUriRequest getRequest() {
-        return request;
+        return mRequest;
     }
 }

@@ -5,7 +5,7 @@ package com.gypsophila.commonlib.net;
  */
 public interface RequestCallback {
 
-    public void onSuccess(String content);
+    void onSuccess(String content);
 
-    public void onFail(String errorMessage);
+    void onFail(String errorMessage);
 }

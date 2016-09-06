@@ -39,7 +39,6 @@ public class NewsFragment extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +68,7 @@ public class NewsFragment extends Fragment {
 
         List<Fragment> mFragments = new ArrayList<>();
         List<String> mFragmentTitles = new ArrayList<>();
+
         public MyFragmentPagerAdpater(FragmentManager fm) {
             super(fm);
         }
@@ -90,6 +90,7 @@ public class NewsFragment extends Fragment {
 
         /**
          * 重写tab名字才可显示
+         *
          * @param position
          * @return
          */
