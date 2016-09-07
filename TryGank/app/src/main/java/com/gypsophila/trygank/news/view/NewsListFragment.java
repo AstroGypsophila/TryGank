@@ -63,7 +63,9 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mAdapter = new NewsAdapter(getActivity());
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
         mRecyclerView.setAdapter(mAdapter);
         onRefresh();
         return view;
@@ -101,4 +103,16 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
     public void showLoadFailMsg() {
 
     }
+
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+        }
+    };
 }

@@ -5,10 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.news.model.NewsBean;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsListItemVi
 
     @Override
     public void onBindViewHolder(NewsListItemViewHolder holder, int position) {
-        holder.mTextView.setText(mData.get(position).getTitle());
+        NewsBean bean = mData.get(position);
+        ImageLoaderUtils.loadImage(mContext, holder.mNewsImage, bean.getImgsrc());
+        holder.mNewsTitle.setText(bean.getTitle());
+        holder.mNewsDigest.setText(bean.getDigest());
     }
 
     @Override
@@ -53,14 +60,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsListItemVi
 
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTextView;
+        ImageView mNewsImage;
+        TextView mNewsTitle;
+        TextView mNewsDigest;
 
         public NewsListItemViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.tv);
+            mNewsImage = (ImageView) itemView.findViewById(R.id.news_image);
+            mNewsTitle = (TextView) itemView.findViewById(R.id.news_title);
+            mNewsDigest = (TextView) itemView.findViewById(R.id.news_digest);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                 }
             });
         }
