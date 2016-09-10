@@ -30,7 +30,9 @@ public class NewsPresenterImpl implements INewsPresenter, NewsLoadListener {
 
     @Override
     public void loadNews(BaseActivity activity, final int type, int pageIndex, List<RequestParameter> params, boolean forceUpdate) {
-        mNewsView.showProgress();
+        if (pageIndex == 0) {
+            mNewsView.showProgress();
+        }
         mNewsBusiness.loadNews(
                 activity,
                 getUrl(type, pageIndex),

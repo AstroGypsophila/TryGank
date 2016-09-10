@@ -5,7 +5,7 @@
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00796B</color>
-    <color name="colorAccent">#FD87A9</color>
+    <color name="colorAccent">#009688</color>
 
     <!--navigation-->
     <color name="account_text_color">#ffffff</color>

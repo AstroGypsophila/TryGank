@@ -7,6 +7,7 @@ import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.engine.RemoteService;
 import com.gypsophila.trygank.news.NewsJsonUtils;
 import com.gypsophila.trygank.news.view.NewsFragment;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -30,12 +31,14 @@ public class NewsBusinessImpl implements INewsBusiness {
             @Override
             public void onSuccess(String content) {
                 List<NewsBean> newsBeanList = NewsJsonUtils.readJsonNewsBeans(content, getID(type));
+                Logger.t("AstroGypsophila").w("newsBeanList size = " + newsBeanList.size());
                 listener.onSuccess(newsBeanList);
             }
 
             @Override
             public void onFail(String errorMessage) {
                 listener.onFail(errorMessage);
+                Logger.t("AstroGypsophila").e(errorMessage);
             }
         };
         RemoteService.getInstance().invoke(activity, url, params, callBack, true);
@@ -44,6 +47,7 @@ public class NewsBusinessImpl implements INewsBusiness {
 
     /**
      * 获取ID
+     *
      * @param type
      * @return
      */

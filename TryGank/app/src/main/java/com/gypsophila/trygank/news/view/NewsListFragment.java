@@ -95,6 +95,10 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         }
         mData.addAll(newsBeanList);
         mAdapter.setData(mData);
+        if (newsBeanList == null || newsBeanList.size() <= 0) {
+            mAdapter.isHideFooterView(true);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

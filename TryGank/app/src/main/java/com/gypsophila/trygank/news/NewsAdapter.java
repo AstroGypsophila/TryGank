@@ -26,6 +26,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
 
+    private boolean mIsHideFooterView = false;
     private LayoutInflater mInflater;
     private Context mContext;
     private List<NewsBean> mData;
@@ -38,7 +39,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setData(List<NewsBean> data) {
         mData = data;
-        notifyDataSetChanged();
+    }
+
+    public void isHideFooterView(boolean isHideFooterView) {
+        mIsHideFooterView = isHideFooterView;
     }
 
     @Override
@@ -67,6 +71,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
+        if (mIsHideFooterView) {
+            return TYPE_ITEM;
+        }
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
         } else {
@@ -76,7 +83,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mData == null ? 0 : mData.size() + 1;
+        if (mData == null) return 0;
+        return mData.size() + (mIsHideFooterView ? 0 : 1);
     }
 
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {
