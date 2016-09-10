@@ -38,6 +38,7 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
     private INewsPresenter mNewsPresenter;
     private int mPageIndex = 0;
     private NewsAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
 
     public static NewsListFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -64,7 +65,8 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mAdapter = new NewsAdapter(getActivity());
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         mRecyclerView.setAdapter(mAdapter);
         onRefresh();
@@ -105,14 +107,22 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
     }
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        private int lastVisibleItem;
+
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE
+                    && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                mPageIndex++;
+                mNewsPresenter.loadNews((BaseActivity) getActivity(), mType, mPageIndex, null, true);
+            }
         }
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
         }
     };
 }

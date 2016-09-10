@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.news.model.NewsBean;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,10 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/8/27
  */
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsListItemViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_ITEM = 0;
+    private static final int TYPE_FOOTER = 1;
 
     private LayoutInflater mInflater;
     private Context mContext;
@@ -41,21 +42,41 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsListItemVi
     }
 
     @Override
-    public NewsListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewsListItemViewHolder(mInflater.inflate(R.layout.recycler_item, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM) {
+            View item = mInflater.inflate(R.layout.recycler_item, parent, false);
+            return new NewsListItemViewHolder(item);
+        } else if (viewType == TYPE_FOOTER) {
+            View footer = mInflater.inflate(R.layout.footer_layout, null);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            footer.setLayoutParams(params);
+            return new FooterViewHolder(footer);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(NewsListItemViewHolder holder, int position) {
-        NewsBean bean = mData.get(position);
-        ImageLoaderUtils.loadImage(mContext, holder.mNewsImage, bean.getImgsrc());
-        holder.mNewsTitle.setText(bean.getTitle());
-        holder.mNewsDigest.setText(bean.getDigest());
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof NewsListItemViewHolder) {
+            NewsBean bean = mData.get(position);
+            ImageLoaderUtils.loadImage(mContext, ((NewsListItemViewHolder) holder).mNewsImage, bean.getImgsrc());
+            ((NewsListItemViewHolder) holder).mNewsTitle.setText(bean.getTitle());
+            ((NewsListItemViewHolder) holder).mNewsDigest.setText(bean.getDigest());
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mData == null ? 0 : mData.size();
+        return mData == null ? 0 : mData.size() + 1;
     }
 
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {
@@ -77,4 +98,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsListItemVi
             });
         }
     }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+        public FooterViewHolder(View view) {
+            super(view);
+        }
+    }
+
 }

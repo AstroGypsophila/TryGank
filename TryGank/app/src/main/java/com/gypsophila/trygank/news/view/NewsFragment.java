@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gypsophila.trygank.R;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,9 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, null);
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        if (mViewPager == null) {
+            Logger.t("AstroGypsophila").w(" is null");
+        }
         setupViewPager(mViewPager);
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.top));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.nba));
