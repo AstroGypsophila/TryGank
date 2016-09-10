@@ -1,7 +1,9 @@
 package com.gypsophila.trygank.news.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -65,6 +67,15 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mAdapter = new NewsAdapter(getActivity());
+        mAdapter.OnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(final View view, int position) {
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                ActivityOptionsCompat options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.news_image), "share");
+                startActivity(intent, options.toBundle());
+            }
+        });
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -21,6 +21,7 @@
             android:layout_width="86dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
+            android:transitionName="share"
             android:scaleType="centerCrop" />
 
         <LinearLayout

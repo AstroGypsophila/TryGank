@@ -30,6 +30,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<NewsBean> mData;
+    private OnRecyclerViewItemClickListener mOnItemClicklistener;
 
     public NewsAdapter(Context context) {
         mContext = context;
@@ -49,7 +50,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
             View item = mInflater.inflate(R.layout.recycler_item, parent, false);
-            return new NewsListItemViewHolder(item);
+            final NewsListItemViewHolder holder = new NewsListItemViewHolder(item);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClicklistener.onItemClick(v, holder.getLayoutPosition());
+                }
+            });
+            return holder;
         } else if (viewType == TYPE_FOOTER) {
             View footer = mInflater.inflate(R.layout.footer_layout, null);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -62,10 +70,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof NewsListItemViewHolder) {
+            NewsListItemViewHolder itemHolder = (NewsListItemViewHolder) holder;
             NewsBean bean = mData.get(position);
-            ImageLoaderUtils.loadImage(mContext, ((NewsListItemViewHolder) holder).mNewsImage, bean.getImgsrc());
-            ((NewsListItemViewHolder) holder).mNewsTitle.setText(bean.getTitle());
-            ((NewsListItemViewHolder) holder).mNewsDigest.setText(bean.getDigest());
+            ImageLoaderUtils.loadImage(mContext, itemHolder.mNewsImage, bean.getImgsrc());
+            itemHolder.mNewsTitle.setText(bean.getTitle());
+            itemHolder.mNewsDigest.setText(bean.getDigest());
         }
     }
 
@@ -87,6 +96,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mData.size() + (mIsHideFooterView ? 0 : 1);
     }
 
+    public interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void OnRecyclerViewItemClickListener(OnRecyclerViewItemClickListener listener) {
+        mOnItemClicklistener = listener;
+    }
+
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mNewsImage;
@@ -98,12 +115,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mNewsImage = (ImageView) itemView.findViewById(R.id.news_image);
             mNewsTitle = (TextView) itemView.findViewById(R.id.news_title);
             mNewsDigest = (TextView) itemView.findViewById(R.id.news_digest);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
     }
 
