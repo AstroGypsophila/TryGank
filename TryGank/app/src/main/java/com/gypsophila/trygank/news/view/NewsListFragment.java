@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.news.NewsAdapter;
 import com.gypsophila.trygank.news.model.NewsBean;
 import com.gypsophila.trygank.news.presenter.INewsPresenter;
@@ -114,7 +115,7 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-                mPageIndex++;
+                mPageIndex += AppConstants.PAGE_SIZE;
                 mNewsPresenter.loadNews((BaseActivity) getActivity(), mType, mPageIndex, null, true);
             }
         }
