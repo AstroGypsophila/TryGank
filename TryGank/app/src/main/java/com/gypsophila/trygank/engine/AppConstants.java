@@ -28,6 +28,9 @@ public class AppConstants {
     public static final String CAR_ID = "T1348654060988";
     // 笑话
     public static final String JOKE_ID = "T1350383429665";
-
+    //分页
     public static final String END_URL = "-" + PAGE_SIZE + ".html";
+    //新闻详情页前缀
+    public static final String NEWS_DETAIL_URL = NETEASE_HOST + "nc/article/";
+    public static final String NEWS_DETAIL_END_URL = "/full.html";
 }

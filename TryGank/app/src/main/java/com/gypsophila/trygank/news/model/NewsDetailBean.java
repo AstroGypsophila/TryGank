@@ -1,43 +1,43 @@
 package com.gypsophila.trygank.news.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
  * Github  : https://github.com/AstroGypsophila
- * Date   : 2016/8/27
+ * Date   : 2016/9/18
  */
-public class NewsBean implements Serializable {
-
+public class NewsDetailBean implements Serializable {
     /**
      * docid
      */
     private String docid;
     /**
-     * 标题
+     * title
      */
     private String title;
     /**
-     * 小内容
-     */
-    private String digest;
-    /**
-     * 图片地址
-     */
-    private String imgsrc;
-    /**
-     * 来源
+     * source
      */
     private String source;
     /**
-     * 时间
+     * body
+     */
+    private String body;
+    /**
+     * ptime
      */
     private String ptime;
     /**
-     * TAG
+     * cover
      */
-    private String tag;
+    private String cover;
+    /**
+     * 图片列表
+     */
+    private List<String> imgList;
 
     public String getDocid() {
         return docid;
@@ -55,28 +55,20 @@ public class NewsBean implements Serializable {
         this.title = title;
     }
 
-    public String getDigest() {
-        return digest;
-    }
-
-    public void setDigest(String digest) {
-        this.digest = digest;
-    }
-
-    public String getImgsrc() {
-        return imgsrc;
-    }
-
-    public void setImgsrc(String imgsrc) {
-        this.imgsrc = imgsrc;
-    }
-
     public String getSource() {
         return source;
     }
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getPtime() {
@@ -87,11 +79,19 @@ public class NewsBean implements Serializable {
         this.ptime = ptime;
     }
 
-    public String getTag() {
-        return tag;
+    public String getCover() {
+        return cover;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public List<String> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<String> imgList) {
+        this.imgList = imgList;
     }
 }

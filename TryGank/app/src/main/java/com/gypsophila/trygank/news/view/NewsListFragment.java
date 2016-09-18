@@ -3,6 +3,7 @@ package com.gypsophila.trygank.news.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -67,15 +68,7 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mAdapter = new NewsAdapter(getActivity());
-        mAdapter.OnRecyclerViewItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(final View view, int position) {
-                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                ActivityOptionsCompat options =
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.news_image), "share");
-                startActivity(intent, options.toBundle());
-            }
-        });
+        mAdapter.setOnRecyclerViewItemClickListener(itemClickListener);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -101,13 +94,14 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
 
     @Override
     public void addNews(List<NewsBean> newsBeanList) {
+        mAdapter.isShowFooter(true);
         if (mData == null) {
             mData = new ArrayList<>();
         }
         mData.addAll(newsBeanList);
         mAdapter.setData(mData);
         if (newsBeanList == null || newsBeanList.size() <= 0) {
-            mAdapter.isHideFooterView(true);
+            mAdapter.isShowFooter(false);
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -119,8 +113,25 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
 
     @Override
     public void showLoadFailMsg() {
-
+        if (mPageIndex == 0) {
+            mAdapter.isShowFooter(false);
+            mAdapter.notifyDataSetChanged();
+        }
+        View view = getActivity() == null ? mRecyclerView.getRootView() : getActivity().findViewById(R.id.id_content_container);
+        Snackbar.make(view, R.string.load_data_failed, Snackbar.LENGTH_SHORT).show();
     }
+
+    private NewsAdapter.OnRecyclerViewItemClickListener itemClickListener = new NewsAdapter.OnRecyclerViewItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            NewsBean news = mAdapter.getItem(position);
+            Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+            intent.putExtra("news", news);
+            ActivityOptionsCompat options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.news_image), "share");
+            startActivity(intent, options.toBundle());
+        }
+    };
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         private int lastVisibleItem;

@@ -7,6 +7,7 @@ import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.engine.RemoteService;
 import com.gypsophila.trygank.news.NewsJsonUtils;
 import com.gypsophila.trygank.news.view.NewsFragment;
+import com.gypsophila.trygank.utils.JsonUtils;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -31,7 +32,6 @@ public class NewsBusinessImpl implements INewsBusiness {
             @Override
             public void onSuccess(String content) {
                 List<NewsBean> newsBeanList = NewsJsonUtils.readJsonNewsBeans(content, getID(type));
-                Logger.t("AstroGypsophila").w("newsBeanList size = " + newsBeanList.size());
                 listener.onSuccess(newsBeanList);
             }
 
@@ -42,6 +42,23 @@ public class NewsBusinessImpl implements INewsBusiness {
             }
         };
         RemoteService.getInstance().invoke(activity, url, params, callBack, true);
+    }
+
+    @Override
+    public void loadNewsDetail(BaseActivity activity, String url, final String docId, List<RequestParameter> params, final NewsDetailLoadListener listener, boolean forceUpdate) {
+        RequestCallback callback = new RequestCallback() {
+            @Override
+            public void onSuccess(String content) {
+                NewsDetailBean newsDetailBean = NewsJsonUtils.readJsonNewsDetail(content, docId);
+                listener.onSuccess(newsDetailBean);
+            }
+
+            @Override
+            public void onFail(String errorMessage) {
+
+            }
+        };
+        RemoteService.getInstance().invoke(activity, url, params, callback, true);
     }
 
 

@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.news.model;
+package com.gypsophila.trygank.news.presenter;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
@@ -9,21 +9,13 @@ import java.util.List;
  * Description :
  * Author : AstroGypsophila
  * Github  : https://github.com/AstroGypsophila
- * Date   : 2016/8/27
+ * Date   : 2016/9/18
  */
-public interface INewsBusiness {
+public interface INewsDetailPresenter {
 
-    void loadNews(BaseActivity activity,
-                  String url,
-                  int type,
-                  List<RequestParameter> params,
-                  NewsLoadListener listener,
-                  boolean forceUpdate);
 
     void loadNewsDetail(BaseActivity activity,
-                        String url,
                         String docId,
                         List<RequestParameter> params,
-                        NewsDetailLoadListener listener,
                         boolean forceUpdate);
 }
