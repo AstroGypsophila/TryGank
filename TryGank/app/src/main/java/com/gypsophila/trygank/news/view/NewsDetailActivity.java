@@ -10,12 +10,17 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
 import com.gypsophila.trygank.news.model.NewsBean;
 import com.gypsophila.trygank.news.presenter.INewsDetailPresenter;
 import com.gypsophila.trygank.news.presenter.NewsDetailPresenterImpl;
+import com.gypsophila.trygank.utils.ToolsUtil;
+
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Description :
@@ -23,7 +28,7 @@ import com.gypsophila.trygank.news.presenter.NewsDetailPresenterImpl;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/11
  */
-public class NewsDetailActivity extends AppBaseActivity implements INewsDetaiView{
+public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiView{
 
     private NewsBean news;
     private Toolbar mToolbar;
@@ -32,23 +37,28 @@ public class NewsDetailActivity extends AppBaseActivity implements INewsDetaiVie
     private INewsDetailPresenter mNewsDetailPresenter;
     private ImageView mNewsDetailImg;
     private Context mContext;
+    private SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+//        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_newsdetail);
         mContext = this;
         news = (NewsBean) getIntent().getSerializableExtra("news");
         initToolbar();
+
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeSize(ToolsUtil.getWidthInPx(this));
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(news.getTitle());
         mContentTv = (TextView) findViewById(R.id.news_detail_content);
         mNewsDetailImg = (ImageView) findViewById(R.id.news_detail_img);
         ImageLoaderUtils.loadImage(mContext,mNewsDetailImg,news.getImgsrc());
         mNewsDetailPresenter = new NewsDetailPresenterImpl(this);
-        mNewsDetailPresenter.loadNewsDetail(this, news.getDocid(), null, true);
+        mNewsDetailPresenter.loadNewsDetail(mContext, news.getDocid(), null, true);
     }
 
     private void initToolbar() {

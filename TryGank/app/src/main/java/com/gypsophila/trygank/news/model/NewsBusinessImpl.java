@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.news.model;
 
+import android.content.Context;
+
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
@@ -21,7 +23,7 @@ import java.util.List;
 public class NewsBusinessImpl implements INewsBusiness {
 
     @Override
-    public void loadNews(BaseActivity activity,
+    public void loadNews(Context ctx,
                          String url,
                          final int type,
                          List<RequestParameter> params,
@@ -41,11 +43,15 @@ public class NewsBusinessImpl implements INewsBusiness {
                 Logger.t("AstroGypsophila").e(errorMessage);
             }
         };
-        RemoteService.getInstance().invoke(activity, url, params, callBack, true);
+        if (ctx instanceof BaseActivity) {
+            RemoteService.getInstance().invoke((BaseActivity) ctx, url, params, callBack, true);
+        } else {
+            RemoteService.getInstance().invoke( ctx, url, params, callBack, true);
+        }
     }
 
     @Override
-    public void loadNewsDetail(BaseActivity activity, String url, final String docId, List<RequestParameter> params, final NewsDetailLoadListener listener, boolean forceUpdate) {
+    public void loadNewsDetail(Context ctx, String url, final String docId, List<RequestParameter> params, final NewsDetailLoadListener listener, boolean forceUpdate) {
         RequestCallback callback = new RequestCallback() {
             @Override
             public void onSuccess(String content) {
@@ -58,7 +64,11 @@ public class NewsBusinessImpl implements INewsBusiness {
 
             }
         };
-        RemoteService.getInstance().invoke(activity, url, params, callback, true);
+        if (ctx instanceof BaseActivity) {
+            RemoteService.getInstance().invoke((BaseActivity) ctx, url, params, callback, true);
+        } else {
+            RemoteService.getInstance().invoke(ctx, url, params, callback, true);
+        }
     }
 
 

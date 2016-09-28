@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.engine;
 
+import android.content.Context;
+
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.DefaultThreadPool;
 import com.gypsophila.commonlib.net.HttpRequest;
@@ -68,6 +70,16 @@ public class RemoteService {
         HttpRequest request = activity.getRequestManager().createRequest(
                 url, params, callBack);
         DefaultThreadPool.getInstance().execute(request);
+    }
+
+    public void invoke(final Context ctx,
+                       final String url,
+                       final List<RequestParameter> params,
+                       final RequestCallback callBack,
+                       final boolean forceUpdate) {
+        final HttpRequest request = new HttpRequest(url, params, callBack);
+        DefaultThreadPool.getInstance().execute(request);
+
     }
 
 //    }

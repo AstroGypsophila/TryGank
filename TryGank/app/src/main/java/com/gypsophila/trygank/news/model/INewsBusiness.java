@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.news.model;
 
+import android.content.Context;
+
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
 
@@ -13,14 +15,14 @@ import java.util.List;
  */
 public interface INewsBusiness {
 
-    void loadNews(BaseActivity activity,
+    void loadNews(Context ctx,
                   String url,
                   int type,
                   List<RequestParameter> params,
                   NewsLoadListener listener,
                   boolean forceUpdate);
 
-    void loadNewsDetail(BaseActivity activity,
+    void loadNewsDetail(Context ctx,
                         String url,
                         String docId,
                         List<RequestParameter> params,

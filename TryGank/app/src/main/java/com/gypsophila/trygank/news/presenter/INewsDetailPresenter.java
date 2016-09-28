@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.news.presenter;
 
+import android.content.Context;
+
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
 
@@ -14,7 +16,7 @@ import java.util.List;
 public interface INewsDetailPresenter {
 
 
-    void loadNewsDetail(BaseActivity activity,
+    void loadNewsDetail(Context ctx,
                         String docId,
                         List<RequestParameter> params,
                         boolean forceUpdate);

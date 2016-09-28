@@ -1,6 +1,7 @@
 package com.gypsophila.commonlib.net;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
@@ -21,12 +22,11 @@ public class UrlConfigManager {
 
     /**
      * xml中读入内容
-     * @param activity
      */
-    private static void fetchUrlDataFromXml(final Activity activity) {
+    private static void fetchUrlDataFromXml(final Context ctx) {
         urlList = new ArrayList<URLData>();
 
-        final XmlResourceParser xmlParser = activity.getApplication()
+        final XmlResourceParser xmlParser = ctx.getApplicationContext()
                 .getResources().getXml(R.xml.url);
 
         int eventCode;
@@ -66,11 +66,11 @@ public class UrlConfigManager {
         }
     }
 
-    public static URLData findURL(final Activity activity, final String findKey) {
+    public static URLData findURL(final Context ctx, final String findKey) {
         //如果urlList还没有数据(第一次)
         //或者urlList数据被回收，那么重新加载xml
         if (urlList == null || urlList.isEmpty()) {
-            fetchUrlDataFromXml(activity);
+            fetchUrlDataFromXml(ctx);
         }
         for (URLData data : urlList) {
             if (findKey.equals(data.getKey())) {

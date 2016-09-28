@@ -1,5 +1,6 @@
 package com.gypsophila.trygank.main.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -33,11 +34,15 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        StatusBarUtil.setColor(this,R.color.colorPrimary);
         mContext = this;
         initToolbar();
         initView();
         mMainPresenter = new MainPresenterImpl(this);
         switchToNews();
+    }
+
+    private void setTranslucentForDrawerLayout(Activity activity, DrawerLayout drawerLayout) {
     }
 
     private void initView() {
@@ -51,9 +56,6 @@ public class MainActivity extends AppBaseActivity implements IMainView {
 
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setLogo(R.drawable.ic_launcher);
-        mToolbar.setTitle("Title");
-        mToolbar.setSubtitle("SubTitle");
         mToolbar.inflateMenu(R.menu.base_toolbar_menu); //设置右上角的填充菜单
         setSupportActionBar(mToolbar);
 

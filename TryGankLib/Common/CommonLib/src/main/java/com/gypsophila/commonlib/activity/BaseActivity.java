@@ -1,5 +1,6 @@
 package com.gypsophila.commonlib.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,10 +12,13 @@ import com.gypsophila.commonlib.net.RequestManager;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected RequestManager requestManager = null;
+    private Context mContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestManager = new RequestManager(this);
+        mContext = this;
+        requestManager = new RequestManager();
         super.onCreate(savedInstanceState);
         initVariables();
         initViews(savedInstanceState);

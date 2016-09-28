@@ -1,7 +1,5 @@
 package com.gypsophila.commonlib.net;
 
-import com.gypsophila.commonlib.activity.BaseActivity;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +11,7 @@ public class RequestManager {
 
     private ArrayList<HttpRequest> requestList = null;
 
-    public RequestManager(final BaseActivity activity) {
+    public RequestManager() {
         //异步请求列表
         requestList = new ArrayList<>();
     }

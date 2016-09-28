@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.news.presenter;
 
+import android.content.Context;
+
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.engine.AppConstants;
@@ -28,9 +30,9 @@ public class NewsDetailPresenterImpl implements INewsDetailPresenter, NewsDetail
     }
 
     @Override
-    public void loadNewsDetail(BaseActivity activity, String docId, List<RequestParameter> params, boolean forceUpdate) {
+    public void loadNewsDetail(Context ctx, String docId, List<RequestParameter> params, boolean forceUpdate) {
         mNewsDetailView.showProgress();
-        mNewsBusiness.loadNewsDetail(activity, getUrl(docId), docId, params, this, forceUpdate);
+        mNewsBusiness.loadNewsDetail(ctx, getUrl(docId), docId, params, this, forceUpdate);
     }
 
     private String getUrl(String docId) {
