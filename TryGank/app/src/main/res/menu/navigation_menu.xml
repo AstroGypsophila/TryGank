@@ -5,15 +5,11 @@
         <item
             android:id="@+id/navigation1"
             android:checked="true"
-            android:icon="@drawable/ic_drawer_home"
-            android:title="navi1" />
+            android:icon="@drawable/ic_mood_black"
+            android:title="@string/nav_gank" />
         <item
             android:id="@+id/navigation2"
             android:icon="@drawable/ic_search"
-            android:title="navi2" />
-        <item
-            android:id="@+id/navigation3"
-            android:icon="@drawable/ic_share_white"
-            android:title="navi3" />
+            android:title="@string/nav_netease_news" />
     </group>
 </menu>

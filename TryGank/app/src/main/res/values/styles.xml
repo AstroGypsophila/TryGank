@@ -12,6 +12,7 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <!--父主题是带有ActionBar，而本身项目使用toolbar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -34,7 +35,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.Translucent">
+    <style name="AppTheme.NoActionBar.Translucent">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

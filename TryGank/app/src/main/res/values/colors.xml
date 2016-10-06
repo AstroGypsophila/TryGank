@@ -12,4 +12,6 @@
 
     <!--tabindicator-->
     <color name="tab_indicator">#ffffff</color>
+    <color name="gank_title_text">#cc000000</color>
+    <color name="gank_divider_line">#EBEBEB</color>
 </resources>

@@ -33,4 +33,25 @@ public class AppConstants {
     //新闻详情页前缀
     public static final String NEWS_DETAIL_URL = NETEASE_HOST + "nc/article/";
     public static final String NEWS_DETAIL_END_URL = "/full.html";
+
+    public static final String GANK_HOST = "http://gank.io/api/";
+    //http://gank.io/api/search/query/listview/category/Android/count/10/page/1
+    //http://gank.io/api/history/content/day/2016/05/11
+    /**
+     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
+     * <p>
+     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
+     * 请求个数： 数字，大于0
+     * 第几页：数字，大于0
+     * 例：
+     * http://gank.io/api/data/Android/10/1
+     * http://gank.io/api/data/福利/10/1
+     * http://gank.io/api/data/iOS/20/2
+     * http://gank.io/api/data/all/20/2
+     */
+    public static final String GANK_TYPE_WELFARE = "福利";
+    public static final String GANK_TYPE_IOS = "iOS";
+    public static final String GANK_TYPE_ANDROID = "Android";
+    public static final String GANK_TYPE_FRONT_END = "前端";
+    public static final String GANK_TYPE_VIDEO = "休息视频";
 }

@@ -11,10 +11,24 @@
     <string name="item_02">Item 2</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="user_nickname">Gypsophila</string>
 
     <string name="top">头条</string>
     <string name="nba">NBA</string>
     <string name="cars">汽车</string>
     <string name="jokes">笑话</string>
     <string name="load_data_failed">加载数据失败</string>
+    <string name="nav_netease_news">网易新闻</string>
+    <!--gank-->
+    <string name="gank_today">今天</string>
+    <string name="gank_android">Android</string>
+    <string name="gank_ios">iOS</string>
+    <string name="gank_welfare">福利</string>
+    <string name="gank_front_end">前端</string>
+    <string name="gank_video">休息视频</string>
+    <string name="gank_app">App</string>
+    <string name="gank_via">via %1$s</string>
+    <string name="nav_gank">gank</string>
+
+
 </resources>

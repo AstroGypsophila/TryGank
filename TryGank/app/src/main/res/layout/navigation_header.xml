@@ -11,24 +11,26 @@
         android:layout_height="192dp"
         android:background="@drawable/navigation_header_bg">
 
+        <TextView
+            android:id="@+id/user_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/user_nickname"
+            android:textColor="@color/account_text_color"
+            android:textSize="18sp" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_above="@id/user_nickname"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/ic_account_circle_white" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_image"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="center"
-            android:text="我是用户名"
-            android:textColor="@color/account_text_color"
-            android:textSize="16sp" />
+
     </RelativeLayout>
 
 </LinearLayout>

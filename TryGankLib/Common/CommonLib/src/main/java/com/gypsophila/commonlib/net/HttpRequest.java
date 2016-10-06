@@ -43,7 +43,7 @@ public class HttpRequest implements Runnable {
     /**
      * 请求方式
      */
-    private String mRequestType = REQUEST_POST;
+    private String mRequestType = REQUEST_GET;
 
     //切换回ui线程
     protected Handler handler;

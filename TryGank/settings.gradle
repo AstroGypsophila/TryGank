@@ -1,3 +1,6 @@
-include ':app', ':swipeback'
+include ':app'
 include ':CommonLib';
+include ':SwipeBack';
 project(':CommonLib').projectDir = new File('../TryGankLib/Common/CommonLib')
+include ':SwipeBack';
+project(':SwipeBack').projectDir = new File('../TryGankLib/Common/SwipeBack')

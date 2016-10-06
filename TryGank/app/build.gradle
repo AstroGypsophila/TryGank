@@ -31,6 +31,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.android.support:cardview-v7:23.4.0'
     compile 'org.jsoup:jsoup:1.9.2'
+    compile 'org.sufficientlysecure:html-textview:1.3'
     compile project(':CommonLib')
-    compile project(':swipeback')
+    compile project(':SwipeBack')
 }
