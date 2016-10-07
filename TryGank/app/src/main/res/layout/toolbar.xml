@@ -1,18 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--appbarlayout中 theme采用dark，则会显示白色字体和图标-->
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <!--appbarlayout中 theme采用dark，则会显示白色字体和图标-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <!--popupTheme将action menu变为浅色主题，则对应黑色字体-->
+    android:background="?attr/colorPrimary"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:popupTheme="@style/BaseToolbarPopupTheme"
+    app:theme="@style/ToolBarTheme">
+    <!--popupTheme将action menu变为浅色主题，则对应黑色字体-->
 
-    </android.support.v7.widget.Toolbar>
-</android.support.design.widget.AppBarLayout>
+</android.support.v7.widget.Toolbar>

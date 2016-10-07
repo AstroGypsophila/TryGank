@@ -1,10 +1,12 @@
 package com.gypsophila.trygank.business.news.view;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -26,7 +28,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/11
  */
-public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiView{
+public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiView {
 
     private NewsBean news;
     private Toolbar mToolbar;
@@ -41,8 +43,10 @@ public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //为image延伸至状态栏而设置
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         setContentView(R.layout.activity_newsdetail);
         mContext = this;
         news = (NewsBean) getIntent().getSerializableExtra("news");
@@ -56,7 +60,7 @@ public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiV
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
         mNewsContent = (HtmlTextView) findViewById(R.id.news_detail_content);
         mNewsDetailImg = (ImageView) findViewById(R.id.news_detail_img);
-        ImageLoaderUtils.loadImage(mContext,mNewsDetailImg,news.getImgsrc());
+        ImageLoaderUtils.loadImage(mContext, mNewsDetailImg, news.getImgsrc());
         mNewsDetailPresenter = new NewsDetailPresenterImpl(this);
         mNewsDetailPresenter.loadNewsDetail(mContext, news.getDocid(), null, true);
     }

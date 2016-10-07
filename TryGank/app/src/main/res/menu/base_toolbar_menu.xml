@@ -18,6 +18,7 @@
 
     <item
         android:id="@+id/action_item1"
+        android:icon="@drawable/ic_back_black"
         android:title="@string/item_01"
         app:showAsAction="never" />
 

@@ -26,6 +26,9 @@ public class MainPresenterImpl implements IMainPresenter {
             case R.id.navigation2:
                 mMainView.switchToNews();
                 break;
+            case R.id.favorite:
+                mMainView.switchToFavorite();
+                break;
         }
     }
 }

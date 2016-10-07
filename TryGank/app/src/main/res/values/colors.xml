@@ -7,6 +7,7 @@
     <color name="colorPrimaryDark">#00796B</color>
     <color name="colorAccent">#009688</color>
 
+    <color name="white">#ffffffff</color>
     <!--navigation-->
     <color name="account_text_color">#ffffff</color>
 
@@ -14,4 +15,6 @@
     <color name="tab_indicator">#ffffff</color>
     <color name="gank_title_text">#cc000000</color>
     <color name="gank_divider_line">#EBEBEB</color>
+    <color name="search_hint_color">#ffadadad</color>
+    <color name="search_text_color">#ff474747</color>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
 
-    private boolean mIsShowFooter = true;
+    private boolean mIsShowFooter = false;
     private LayoutInflater mInflater;
     private List<GankBean> mGankBeans;
     private Context mContext;
@@ -61,7 +62,7 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             GankBean gankBean = mGankBeans.get(position);
             gankViewHolder.gankTitle.setText(gankBean.desc);
             gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
-            gankViewHolder.gankTime.setText(gankBean.publishTime.substring(0,10));
+            gankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
         }
 
     }
@@ -92,7 +93,7 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mGankBeans == null ? null : mGankBeans.get(position);
     }
 
-    public static class GankViewHolder extends RecyclerView.ViewHolder {
+    public class GankViewHolder extends RecyclerView.ViewHolder {
         public final TextView gankTitle;
         public final TextView gankVia;
         public final TextView gankTime;
@@ -102,6 +103,14 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             gankTitle = (TextView) itemView.findViewById(R.id.title);
             gankVia = (TextView) itemView.findViewById(R.id.via);
             gankTime = (TextView) itemView.findViewById(R.id.publish_time);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    GankBean gankBean = mGankBeans.get(position);
+                    GankDetailActivity.openWebView(mContext, gankBean);
+                }
+            });
         }
     }
 

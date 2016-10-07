@@ -26,7 +26,9 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/29
  */
-public class GankListFragment extends Fragment implements IGankView, SwipeRefreshLayout.OnRefreshListener{
+public class GankListFragment extends Fragment implements IGankView, SwipeRefreshLayout.OnRefreshListener {
+
+    public static final String TYPE_FAVORITE = "favorite";
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -79,7 +81,10 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
 
     @Override
     public void addNews(List<GankBean> gankBeanList) {
-        mAdapter.isShowFooter(true);
+        //收藏不需要footerview
+        if (!TYPE_FAVORITE.equals(mType)) {
+            mAdapter.isShowFooter(true);
+        }
         if (mData == null) {
             mData = new ArrayList<>();
         }
@@ -107,7 +112,11 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
         if (mData != null) {
             mData.clear();
         }
-        mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
+        if (TYPE_FAVORITE.equals(mType)) {
+            mGankPresenter.loadGankFromDataBase(getActivity());
+        } else {
+            mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
+        }
     }
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
@@ -116,10 +125,15 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE
-                    && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-                mPageIndex++;
-                mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
+            if (TYPE_FAVORITE.equals(mType)) {
+
+            } else {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                    mPageIndex++;
+                    mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
+                }
+
             }
         }
 

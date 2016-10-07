@@ -11,5 +11,9 @@
             android:id="@+id/navigation2"
             android:icon="@drawable/ic_search"
             android:title="@string/nav_netease_news" />
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/ic_favorite_white"
+            android:title="收藏" />
     </group>
 </menu>

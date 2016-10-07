@@ -1,0 +1,141 @@
+package com.gypsophila.trygank.db;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.orhanobut.logger.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Description :
+ * Author : AstroGypsophila
+ * Github  : https://github.com/AstroGypsophila
+ * Date   : 2016/10/7
+ */
+public class GankDataBaseManager {
+
+    public static final String TABLE_NAME = "gank_article";
+    public static final String GANKID = "gankid";
+    public static final String GANKDESC = "gankdesc";
+    public static final String GANKURL = "gankurl";
+    public static final String GANKWHO = "gankwho";
+    public static final String GANKTYPE = "ganktype";
+    public static final String GANKTIME = "ganktime";
+
+    public static synchronized int updateOrInsertGank(Context ctx, GankBean gankBean) {
+        SQLiteDatabase db = null;
+        int re = -1;
+        GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
+        db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GANKID, gankBean.id);
+        values.put(GANKDESC, gankBean.desc);
+        values.put(GANKURL, gankBean.url);
+        values.put(GANKWHO, gankBean.who);
+        values.put(GANKTYPE, gankBean.type);
+        values.put(GANKTIME, gankBean.publishTime);
+
+        String[] whereArgs = new String[]{gankBean.id};
+        re = db.update(TABLE_NAME, values, GANKID + "=?", whereArgs);
+        if (re <= 1) {
+            re = (int) db.insert(TABLE_NAME, null, values);
+        }
+        return re;
+    }
+
+    public static List<GankBean> getGankList(Context ctx) {
+        List<GankBean> gankBeanList = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
+            db = helper.getReadableDatabase();
+            cursor = db.query(TABLE_NAME, null, null, null, null, null, "_id desc");
+            if (cursor.getCount() > 0) {
+                gankBeanList = new ArrayList<>();
+            }
+            while (cursor.moveToNext()) {
+                GankBean gankBean = new GankBean();
+                gankBean.id = cursor.getString(cursor.getColumnIndex(GANKID));
+                gankBean.desc = cursor.getString(cursor.getColumnIndex(GANKDESC));
+                gankBean.url = cursor.getString(cursor.getColumnIndex(GANKURL));
+                gankBean.who = cursor.getString(cursor.getColumnIndex(GANKWHO));
+                gankBean.type = cursor.getString(cursor.getColumnIndex(GANKTYPE));
+                gankBean.publishTime = cursor.getString(cursor.getColumnIndex(GANKTIME));
+                gankBeanList.add(gankBean);
+            }
+            if (gankBeanList != null) {
+                Logger.t("cj_data").w(gankBeanList.size() + "");
+            } else {
+                Logger.t("cj_data").w("null");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                try {
+                    cursor.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return gankBeanList;
+
+    }
+
+    public static GankBean getGankBean(Context ctx, String gankId) {
+        GankBean gankBean = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
+            db = helper.getReadableDatabase();
+            String[] whereArgs = new String[]{gankId};
+            cursor = db.query(TABLE_NAME, null, GANKID + "=?", whereArgs, null, null, null);
+            if (cursor.moveToNext()) {
+                gankBean = new GankBean();
+                gankBean.id = cursor.getString(cursor.getColumnIndex(GANKID));
+                gankBean.desc = cursor.getString(cursor.getColumnIndex(GANKDESC));
+                gankBean.url = cursor.getString(cursor.getColumnIndex(GANKURL));
+                gankBean.who = cursor.getString(cursor.getColumnIndex(GANKWHO));
+                gankBean.type = cursor.getString(cursor.getColumnIndex(GANKTYPE));
+                gankBean.publishTime = cursor.getString(cursor.getColumnIndex(GANKTIME));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                try {
+                    cursor.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return gankBean;
+    }
+
+    public static int deleteGankBean(Context ctx, String gankId) {
+        SQLiteDatabase db = null;
+        int re = -1;
+        try {
+            GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
+            db = helper.getWritableDatabase();
+            String[] whereArgs = new String[]{gankId};
+            re = db.delete(TABLE_NAME, GANKID + "=?", whereArgs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return re;
+    }
+}

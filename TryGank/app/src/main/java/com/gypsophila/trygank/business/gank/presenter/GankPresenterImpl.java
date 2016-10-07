@@ -10,6 +10,7 @@ import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
 import com.gypsophila.trygank.business.gank.view.IGankView;
 import com.gypsophila.trygank.engine.AppConstants;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -35,6 +36,13 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener {
             mGankView.showProgress();
         }
         mGankBusiness.loadBeans((BaseActivity) ctx, getUrl(type, pageIndex), params, this);
+    }
+
+    @Override
+    public void loadGankFromDataBase(Context ctx) {
+        mGankView.showProgress();
+        mGankBusiness.loadBeansFromDataBase((BaseActivity) ctx, this);
+
     }
 
     public String getUrl(String type, int pageIndex) {

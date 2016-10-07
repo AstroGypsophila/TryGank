@@ -18,4 +18,7 @@ public interface IGankBusiness {
                    List<RequestParameter> parameters,
                    GankLoadListener listener);
 
+    void loadBeansFromDataBase(BaseActivity activity, GankLoadListener listener);
+
+
 }

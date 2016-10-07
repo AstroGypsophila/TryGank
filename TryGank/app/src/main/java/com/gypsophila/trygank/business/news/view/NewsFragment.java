@@ -61,6 +61,7 @@ public class NewsFragment extends Fragment {
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_NBA), getString(R.string.nba));
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_CARS), getString(R.string.cars));
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_JOKES), getString(R.string.jokes));
+        viewPager.setOffscreenPageLimit(adapter.getCount()-1);
         viewPager.setAdapter(adapter);
     }
 

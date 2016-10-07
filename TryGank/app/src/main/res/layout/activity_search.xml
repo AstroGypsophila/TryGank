@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_edit_bg"
+            android:layout_margin="8dip"
+            android:background="@drawable/search_edit_bg"
+            android:gravity="center_vertical"
+            android:fitsSystemWindows="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back_iv"
+                android:layout_width="25.0dip"
+                android:layout_height="25.0dip"
+                android:layout_marginLeft="12.0dip"
+                android:layout_marginRight="12.0dip"
+                android:src="@drawable/ic_back_black" />
+
+            <EditText
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/search_et_hint"
+                android:maxLines="1"
+                android:imeOptions="actionSearch"
+                android:textColor="@color/search_text_color"
+                android:textColorHint="@color/search_hint_color" />
+
+            <!--<EditText-->
+            <!--android:id="@+id/search_et"-->
+            <!--android:layout_width="0.0dip"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_marginRight="16.0dip"-->
+            <!--android:layout_weight="1.0"-->
+            <!--android:background="@null"-->
+            <!--android:gravity="start|center"-->
+            <!--android:imeOptions="actionSearch"-->
+            <!--android:inputType="text"-->
+            <!--android:maxLines="1"-->
+            <!--android:textColor="@color/color2C"-->
+            <!--android:textColorHint="@color/color4C"-->
+            <!--android:textSize="16.0sp" />-->
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <fragment
+        android:id="@+id/search_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.gypsophila.trygank.business.gank.view.GankListFragment"
+        tools:layout="@layout/fragment_common_list"
+        />
+
+</LinearLayout>

@@ -8,11 +8,24 @@
     android:fitsSystemWindows="true"
     tools:context=".business.main.view.MainActivity">
 
+    <!--issue https://github.com/laobie/StatusBarUtil/issues/5-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/toolbar" />
+
+        </android.support.design.widget.AppBarLayout>
+
 
         <FrameLayout
             android:id="@+id/id_content_container"
@@ -21,6 +34,8 @@
             android:elevation="5dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
+
+    <!--</LinearLayout>-->
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"

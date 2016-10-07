@@ -4,7 +4,9 @@ import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.GankJsonUtils;
+import com.gypsophila.trygank.db.GankDataBaseManager;
 import com.gypsophila.trygank.engine.RemoteService;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -33,6 +35,15 @@ public class GankBusinessImpl implements IGankBusiness {
 
             }
         };
-        RemoteService.getInstance().invoke(activity,url,parameters,callback);
+        RemoteService.getInstance().invoke(activity, url, parameters, callback);
+    }
+
+    @Override
+    public void loadBeansFromDataBase(BaseActivity activity, final GankLoadListener listener) {
+        List<GankBean> gankBeanList = GankDataBaseManager.getGankList(activity);
+        if (gankBeanList != null) {
+            listener.onSuccess(gankBeanList);
+        } else {
+        }
     }
 }

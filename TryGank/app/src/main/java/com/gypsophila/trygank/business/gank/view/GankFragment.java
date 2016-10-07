@@ -64,6 +64,7 @@ public class GankFragment extends Fragment {
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_front_end)), getString(R.string.gank_front_end));
 //        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_video)), getString(R.string.gank_video));
 //        mAdapter.addFragment(GankListFragment.newInstance(), getString(R.string.gank_app));
+        viewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
         viewPager.setAdapter(mAdapter);
     }
 

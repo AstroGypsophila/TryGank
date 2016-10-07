@@ -11,4 +11,10 @@ public interface IMainView {
     void switchToNews();
 
     void switchToGank();
+
+    void switchToSearch();
+
+    void switchToNotification();
+
+    void switchToFavorite();
 }

@@ -16,4 +16,5 @@ public interface IGankPresenter {
 
     void loadGank(Context ctx, String type, int pageIndex, List<RequestParameter> params);
 
+    void loadGankFromDataBase(Context ctx);
 }
