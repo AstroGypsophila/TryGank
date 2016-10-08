@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankAdapter;
@@ -39,6 +40,7 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
     private Context mContext;
     private int mPageIndex;
     private List<GankBean> mData;
+    private TextView mEmptyView;
 
     public static GankListFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -65,6 +67,7 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
                 R.color.colorPrimaryDark);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mEmptyView = (TextView) view.findViewById(R.id.empty_view);
         mAdapter = new GankAdapter(mContext);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -84,6 +87,11 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
         //收藏不需要footerview
         if (!TYPE_FAVORITE.equals(mType)) {
             mAdapter.isShowFooter(true);
+        } else {
+            if (gankBeanList != null && gankBeanList.size() <= 0) {
+                mEmptyView.setVisibility(View.VISIBLE);
+                mSwipeRefreshLayout.setVisibility(View.GONE);
+            }
         }
         if (mData == null) {
             mData = new ArrayList<>();

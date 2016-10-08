@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gypsophila.trygank.business.gank.model.GankBean;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,16 +48,13 @@ public class GankDataBaseManager {
     }
 
     public static List<GankBean> getGankList(Context ctx) {
-        List<GankBean> gankBeanList = null;
+        List<GankBean> gankBeanList = new ArrayList<>();
         SQLiteDatabase db = null;
         Cursor cursor = null;
         try {
             GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
             db = helper.getReadableDatabase();
             cursor = db.query(TABLE_NAME, null, null, null, null, null, "_id desc");
-            if (cursor.getCount() > 0) {
-                gankBeanList = new ArrayList<>();
-            }
             while (cursor.moveToNext()) {
                 GankBean gankBean = new GankBean();
                 gankBean.id = cursor.getString(cursor.getColumnIndex(GANKID));
@@ -68,12 +64,6 @@ public class GankDataBaseManager {
                 gankBean.type = cursor.getString(cursor.getColumnIndex(GANKTYPE));
                 gankBean.publishTime = cursor.getString(cursor.getColumnIndex(GANKTIME));
                 gankBeanList.add(gankBean);
-            }
-            if (gankBeanList != null) {
-                Logger.t("cj_data").w(gankBeanList.size() + "");
-            } else {
-                Logger.t("cj_data").w("null");
-
             }
         } catch (Exception e) {
             e.printStackTrace();

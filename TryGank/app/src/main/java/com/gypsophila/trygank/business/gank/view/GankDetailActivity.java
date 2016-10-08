@@ -38,6 +38,7 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
     private Context mContext;
     private GankBean mGankBean;
     private boolean mCurrentStatus = false;
+    private boolean mInitStatus = false;
 
     public static void openWebView(Context ctx, GankBean gankBean) {
         Intent intent = new Intent(ctx, GankDetailActivity.class);
@@ -128,6 +129,7 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
     @Override
     public void initFavorite(GankBean gankBean) {
         if (gankBean != null) {
+            mInitStatus = true;
             mCurrentStatus = true;
         }
     }
@@ -137,7 +139,7 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem item = menu.findItem(R.id.action_favorite);
-        if (mCurrentStatus) {
+        if (mInitStatus) {
             item.setIcon(R.drawable.ic_favorite_white);
         }
         return true;
@@ -145,10 +147,12 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
 
     @Override
     protected void onDestroy() {
-        if (mCurrentStatus) {
-            int result = mGankDetailPresenter.addGank(mContext, mGankBean);
-        } else {
-            int result = mGankDetailPresenter.delteGank(mContext, mGankBean.id);
+        if (mInitStatus != mCurrentStatus) {
+            if (mCurrentStatus) {
+                int result = mGankDetailPresenter.addGank(mContext, mGankBean);
+            } else {
+                int result = mGankDetailPresenter.delteGank(mContext, mGankBean.id);
+            }
         }
         super.onDestroy();
     }
