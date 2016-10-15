@@ -45,7 +45,7 @@ public class GankFragment extends Fragment {
 //        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_today));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_android));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_ios));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_welfare));
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_welfare));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_front_end));
 //        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_video));
 //        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_app));
@@ -60,7 +60,7 @@ public class GankFragment extends Fragment {
 //        mAdapter.addFragment(GankListFragment.newInstance(), getString(R.string.gank_today));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_android)), getString(R.string.gank_android));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_ios)), getString(R.string.gank_ios));
-//        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_welfare)), getString(R.string.gank_welfare));
+        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_welfare)), getString(R.string.gank_welfare));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_front_end)), getString(R.string.gank_front_end));
 //        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_video)), getString(R.string.gank_video));
 //        mAdapter.addFragment(GankListFragment.newInstance(), getString(R.string.gank_app));

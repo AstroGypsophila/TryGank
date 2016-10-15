@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
@@ -22,18 +25,21 @@ import java.util.List;
  */
 public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_FOOTER = 1;
+    public static final int TYPE_ITEM = 0;
+    public static final int TYPE_FOOTER = 1;
+    public static final int TYPE_PHOTO = 2;
 
     private boolean mIsShowFooter = false;
     private LayoutInflater mInflater;
     private List<GankBean> mGankBeans;
     private Context mContext;
+    private int mType;
 
-    public GankAdapter(Context ctx) {
+    public GankAdapter(Context ctx, int type) {
         mContext = ctx;
         mInflater = LayoutInflater.from(mContext);
         mGankBeans = new ArrayList<>();
+        mType = type;
     }
 
     public void setData(List<GankBean> gankBeanList) {
@@ -43,7 +49,7 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_gank, parent, false);
+            View view = mInflater.inflate(R.layout.recycler_item_gank, parent, false);
             GankViewHolder holder = new GankViewHolder(view);
             return holder;
         } else if (viewType == TYPE_FOOTER) {
@@ -51,6 +57,10 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             footer.setLayoutParams(params);
             return new GankAdapter.FooterViewHolder(footer);
+        } else if (viewType == TYPE_PHOTO) {
+            View view = mInflater.inflate(R.layout.recycler_item_photo_card, parent, false);
+            PhotoViewHolder holder = new PhotoViewHolder(view);
+            return holder;
         }
         return null;
     }
@@ -63,6 +73,11 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             gankViewHolder.gankTitle.setText(gankBean.desc);
             gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
             gankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
+        } else if (holder instanceof PhotoViewHolder) {
+            PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
+            GankBean gankBean = mGankBeans.get(position);
+            photoViewHolder.mDescTv.setText(gankBean.desc);
+            ImageLoaderUtils.loadImage(mContext, photoViewHolder.mWelfareImage, gankBean.url);
         }
 
     }
@@ -70,12 +85,12 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (!mIsShowFooter) {
-            return TYPE_ITEM;
+            return mType == TYPE_ITEM ? TYPE_ITEM : TYPE_PHOTO;
         }
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
         } else {
-            return TYPE_ITEM;
+            return mType == TYPE_ITEM ? TYPE_ITEM : TYPE_PHOTO;
         }
     }
 
@@ -113,6 +128,25 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
         }
     }
+
+    public class PhotoViewHolder extends RecyclerView.ViewHolder {
+        public ImageView mWelfareImage;
+        public TextView mDescTv;
+
+        public PhotoViewHolder(View itemView) {
+            super(itemView);
+            mWelfareImage = (ImageView) itemView.findViewById(R.id.welfare_image);
+            mDescTv = (TextView) itemView.findViewById(R.id.welfare_desc);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Toast.makeText(mContext, "u click " + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 
     class FooterViewHolder extends RecyclerView.ViewHolder {
         public FooterViewHolder(View view) {

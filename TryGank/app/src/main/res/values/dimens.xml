@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="search_edit_bg">48.0dip</dimen>
+    <dimen name="photo_card_height">240dp</dimen>
 </resources>

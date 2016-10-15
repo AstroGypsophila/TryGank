@@ -31,7 +31,7 @@
     <string name="nav_gank">gank</string>
     <string name="menu_favorite">收藏</string>
     <string name="menu_share">分享</string>
-    <string name="empty_tip">暂无数据，快去收藏吧~</string>
+    <string name="empty_tip">暂无数据</string>
 
     <!--Search-->
     <string name="search_et_hint">搜索gank内容</string>

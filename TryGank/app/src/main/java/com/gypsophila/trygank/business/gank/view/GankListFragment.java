@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankAdapter;
+import com.gypsophila.trygank.business.gank.GankPhotoAdapter;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
@@ -41,6 +43,7 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
     private int mPageIndex;
     private List<GankBean> mData;
     private TextView mEmptyView;
+    private int itemType;
 
     public static GankListFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -68,8 +71,14 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mEmptyView = (TextView) view.findViewById(R.id.empty_view);
-        mAdapter = new GankAdapter(mContext);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        if (mType.equals(mContext.getString(R.string.gank_welfare))) {
+            itemType = GankAdapter.TYPE_PHOTO;
+            mLayoutManager = new GridLayoutManager(mContext, 2);
+        } else {
+            itemType = GankAdapter.TYPE_ITEM;
+            mLayoutManager = new LinearLayoutManager(getActivity());
+        }
+        mAdapter = new GankAdapter(mContext, itemType);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         mRecyclerView.setAdapter(mAdapter);

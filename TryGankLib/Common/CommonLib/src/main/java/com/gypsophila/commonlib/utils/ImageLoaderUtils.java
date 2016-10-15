@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 /**
  * Description :
@@ -18,6 +19,7 @@ public class ImageLoaderUtils {
         if (imageView != null && !TextUtils.isEmpty(imageUrl)) {
             Glide.with(context)
                     .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(imageView);
         }
     }

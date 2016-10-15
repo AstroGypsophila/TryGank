@@ -17,4 +17,5 @@
     <color name="gank_divider_line">#EBEBEB</color>
     <color name="search_hint_color">#ffadadad</color>
     <color name="search_text_color">#ff474747</color>
+    <color name="gank_welfare_text_color">#ff474747</color>
 </resources>
