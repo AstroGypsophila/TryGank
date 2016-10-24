@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankAdapter;
-import com.gypsophila.trygank.business.gank.GankPhotoAdapter;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
@@ -29,7 +28,8 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/29
  */
-public class GankListFragment extends Fragment implements IGankView, SwipeRefreshLayout.OnRefreshListener {
+public class GankListFragment extends Fragment implements IGankView,
+        SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TYPE_FAVORITE = "favorite";
 
@@ -63,7 +63,8 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_common_list, null);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -74,6 +75,18 @@ public class GankListFragment extends Fragment implements IGankView, SwipeRefres
         if (mType.equals(mContext.getString(R.string.gank_welfare))) {
             itemType = GankAdapter.TYPE_PHOTO;
             mLayoutManager = new GridLayoutManager(mContext, 2);
+            ((GridLayoutManager) mLayoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int type = mRecyclerView.getAdapter().getItemViewType(position);
+                    if (type == GankAdapter.TYPE_FOOTER) {
+                        //处理footerview只占一项位置
+                        return ((GridLayoutManager) mLayoutManager).getSpanCount();
+                    } else {
+                        return 1;
+                    }
+                }
+            });
         } else {
             itemType = GankAdapter.TYPE_ITEM;
             mLayoutManager = new LinearLayoutManager(getActivity());

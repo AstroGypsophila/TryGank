@@ -48,7 +48,8 @@ public class GankFragment extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_welfare));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_front_end));
 //        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_video));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_app));
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_app));
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_extra));
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(mViewPager);
 
@@ -63,7 +64,8 @@ public class GankFragment extends Fragment {
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_welfare)), getString(R.string.gank_welfare));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_front_end)), getString(R.string.gank_front_end));
 //        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_video)), getString(R.string.gank_video));
-//        mAdapter.addFragment(GankListFragment.newInstance(), getString(R.string.gank_app));
+        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_app)), getString(R.string.gank_app));
+        mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_extra)), getString(R.string.gank_extra));
         viewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
         viewPager.setAdapter(mAdapter);
     }

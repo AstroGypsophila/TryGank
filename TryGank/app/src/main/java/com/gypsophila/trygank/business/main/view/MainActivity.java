@@ -17,6 +17,7 @@ import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
 import com.gypsophila.trygank.business.gank.view.GankFragment;
 import com.gypsophila.trygank.business.gank.view.GankListFragment;
+import com.gypsophila.trygank.business.gank.view.SearchActivity;
 import com.gypsophila.trygank.business.main.presenter.IMainPresenter;
 import com.gypsophila.trygank.business.main.presenter.MainPresenterImpl;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
@@ -50,7 +51,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     private void initView() {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,R.string.open, R.string.close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
@@ -131,7 +132,8 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     @Override
     public void switchToFavorite() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.id_content_container, GankListFragment.newInstance(GankListFragment.TYPE_FAVORITE))
+                .replace(R.id.id_content_container,
+                        GankListFragment.newInstance(GankListFragment.TYPE_FAVORITE))
                 .commit();
     }
 }

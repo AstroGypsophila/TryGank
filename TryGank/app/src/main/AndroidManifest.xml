@@ -27,7 +27,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
-            android:name=".business.main.view.SearchActivity"
+            android:name=".business.gank.view.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity

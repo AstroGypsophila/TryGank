@@ -8,9 +8,9 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/4
  */
-public interface GankLoadListener {
+public interface GankLoadListener<T> {
 
-    void onSuccess(List<GankBean> gankBeanList);
+    void onSuccess(List<T> beanList);
 
     void onFailed(String errorMessage);
 }

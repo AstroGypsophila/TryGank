@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <LinearLayout
@@ -19,7 +17,6 @@
             android:layout_margin="8dip"
             android:background="@drawable/search_edit_bg"
             android:gravity="center_vertical"
-            android:fitsSystemWindows="true"
             android:orientation="horizontal">
 
             <ImageView
@@ -34,10 +31,12 @@
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
                 android:background="@null"
                 android:hint="@string/search_et_hint"
-                android:maxLines="1"
                 android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
                 android:textColor="@color/search_text_color"
                 android:textColorHint="@color/search_hint_color" />
 
@@ -49,21 +48,18 @@
             <!--android:layout_weight="1.0"-->
             <!--android:background="@null"-->
             <!--android:gravity="start|center"-->
+            <!--以下三个属性才能使得键盘换行改为搜索-->
             <!--android:imeOptions="actionSearch"-->
             <!--android:inputType="text"-->
             <!--android:maxLines="1"-->
-            <!--android:textColor="@color/color2C"-->
-            <!--android:textColorHint="@color/color4C"-->
-            <!--android:textSize="16.0sp" />-->
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <fragment
-        android:id="@+id/search_list"
+    <FrameLayout
+        android:id="@+id/search_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.gypsophila.trygank.business.gank.view.GankListFragment"
-        tools:layout="@layout/fragment_common_list"
-        />
+        android:elevation="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -14,7 +14,6 @@ import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,27 +22,24 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/4
  */
-public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GankAdapter extends AbstractRecyclerAdapter {
 
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
     public static final int TYPE_PHOTO = 2;
 
     private boolean mIsShowFooter = false;
-    private LayoutInflater mInflater;
-    private List<GankBean> mGankBeans;
-    private Context mContext;
     private int mType;
 
     public GankAdapter(Context ctx, int type) {
+        super(ctx);
         mContext = ctx;
         mInflater = LayoutInflater.from(mContext);
-        mGankBeans = new ArrayList<>();
         mType = type;
     }
 
     public void setData(List<GankBean> gankBeanList) {
-        mGankBeans = gankBeanList;
+        mBeanList = gankBeanList;
     }
 
     @Override
@@ -54,7 +50,8 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return holder;
         } else if (viewType == TYPE_FOOTER) {
             View footer = mInflater.inflate(R.layout.footer_layout, null);
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             footer.setLayoutParams(params);
             return new GankAdapter.FooterViewHolder(footer);
         } else if (viewType == TYPE_PHOTO) {
@@ -69,13 +66,13 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof GankViewHolder) {
             GankViewHolder gankViewHolder = (GankViewHolder) holder;
-            GankBean gankBean = mGankBeans.get(position);
+            GankBean gankBean = (GankBean) mBeanList.get(position);
             gankViewHolder.gankTitle.setText(gankBean.desc);
             gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
             gankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
         } else if (holder instanceof PhotoViewHolder) {
             PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
-            GankBean gankBean = mGankBeans.get(position);
+            GankBean gankBean = (GankBean) mBeanList.get(position);
             photoViewHolder.mDescTv.setText(gankBean.desc);
             ImageLoaderUtils.loadImage(mContext, photoViewHolder.mWelfareImage, gankBean.url);
         }
@@ -100,12 +97,8 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (mGankBeans == null) return 0;
-        return mGankBeans.size() + (mIsShowFooter ? 1 : 0);
-    }
-
-    public GankBean getItem(int position) {
-        return mGankBeans == null ? null : mGankBeans.get(position);
+        if (mBeanList == null) return 0;
+        return mBeanList.size() + (mIsShowFooter ? 1 : 0);
     }
 
     public class GankViewHolder extends RecyclerView.ViewHolder {
@@ -122,7 +115,7 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    GankBean gankBean = mGankBeans.get(position);
+                    GankBean gankBean = (GankBean) mBeanList.get(position);
                     GankDetailActivity.openWebView(mContext, gankBean);
                 }
             });

@@ -10,7 +10,6 @@ import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
 import com.gypsophila.trygank.business.gank.view.IGankView;
 import com.gypsophila.trygank.engine.AppConstants;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/5
  */
-public class GankPresenterImpl implements IGankPresenter, GankLoadListener {
+public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankBean> {
 
     private IGankView mGankView;
     private IGankBusiness mGankBusiness;
