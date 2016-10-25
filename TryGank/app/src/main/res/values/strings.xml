@@ -30,9 +30,12 @@
     <string name="gank_extra">拓展资源</string>
     <string name="gank_via">via %1$s</string>
     <string name="nav_gank">gank</string>
+    <string name="empty_tip">暂无数据</string>
+
+    <!--menu-->
     <string name="menu_favorite">收藏</string>
     <string name="menu_share">分享</string>
-    <string name="empty_tip">暂无数据</string>
+    <string name="menu_save">保存</string>
 
     <!--Search-->
     <string name="search_et_hint">搜索gank内容</string>

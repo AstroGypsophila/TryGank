@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CommonLib</string>
+    <string name="app_name">TryGank</string>
     <string name="network_error">网络异常</string>
 </resources>

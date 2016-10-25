@@ -33,6 +33,9 @@
         <activity
             android:name=".business.gank.view.GankDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.gank.view.GankPictureActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

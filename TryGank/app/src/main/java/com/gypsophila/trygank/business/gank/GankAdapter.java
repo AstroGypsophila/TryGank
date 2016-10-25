@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
+import com.gypsophila.trygank.business.gank.view.GankPictureActivity;
 
 import java.util.List;
 
@@ -134,7 +134,8 @@ public class GankAdapter extends AbstractRecyclerAdapter {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    Toast.makeText(mContext, "u click " + position, Toast.LENGTH_SHORT).show();
+                    GankBean gankBean = (GankBean) mBeanList.get(position);
+                    GankPictureActivity.openPictureActivity(mContext, gankBean.url, gankBean.desc);
                 }
             });
         }

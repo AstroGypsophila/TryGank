@@ -21,7 +21,6 @@
             android:layout_width="86dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:transitionName="@string/transition_news_img"
             android:scaleType="centerCrop" />
 
         <LinearLayout
