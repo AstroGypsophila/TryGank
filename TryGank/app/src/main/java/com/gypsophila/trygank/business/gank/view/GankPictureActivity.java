@@ -78,25 +78,20 @@ public class GankPictureActivity extends SwipeBackActivity {
                 if (id == R.id.picture_save) {
                     ImageLoaderUtils.downloadImage(mContext, mImgUrl, mImgTitle);
                 } else if (id == R.id.picture_share) {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_SEND);
-                    intent.setType("Text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.author_github));
-                    startActivity(Intent.createChooser(intent, getString(R.string.share_send_to)));
-//                    File appDir = new File(Environment.getExternalStorageDirectory(),
-//                            getString(R.string.app_name));
-//                    if (appDir.exists()) {
-//                        String fileName = mImgTitle + ".jpg";
-//                        File file = new File(appDir, fileName);
-//                        if (file.exists()) {
-//                            Uri uri = Uri.fromFile(file);
-//                            sharePicture(uri);
-//                        } else {
-//                            downloadImage();
-//                        }
-//                    } else {
-//                        downloadImage();
-//                    }
+                    File appDir = new File(Environment.getExternalStorageDirectory(),
+                            getString(R.string.app_name));
+                    if (appDir.exists()) {
+                        String fileName = mImgTitle + ".jpg";
+                        File file = new File(appDir, fileName);
+                        if (file.exists()) {
+                            Uri uri = Uri.fromFile(file);
+                            sharePicture(uri);
+                        } else {
+                            downloadImage();
+                        }
+                    } else {
+                        downloadImage();
+                    }
                 }
 
                 return true;
