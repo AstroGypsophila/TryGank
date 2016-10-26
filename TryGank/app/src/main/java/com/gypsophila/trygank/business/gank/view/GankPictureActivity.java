@@ -2,9 +2,7 @@ package com.gypsophila.trygank.business.gank.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +11,6 @@ import android.widget.ImageView;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
-
-import java.io.File;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -29,6 +25,7 @@ public class GankPictureActivity extends SwipeBackActivity {
 
     public static final String IMG_URL = "IMG_URL";
     public static final String IMG_TITLE = "IMG_TITLE";
+    public static final String TRANSIT_PIC = "TRANSIT_PIC";
 
     private String mImgUrl;
     private String mImgTitle;
@@ -76,29 +73,9 @@ public class GankPictureActivity extends SwipeBackActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.picture_save) {
-                    ImageLoaderUtils.downloadImage(mContext, mImgUrl, mImgTitle);
+                    ImageLoaderUtils.downloadImage(GankPictureActivity.this, mImgUrl, mImgTitle);
                 } else if (id == R.id.picture_share) {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_SEND);
-                    intent.setType("Text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.author_github));
-                    startActivity(Intent.createChooser(intent, getString(R.string.share_send_to)));
-//                    File appDir = new File(Environment.getExternalStorageDirectory(),
-//                            getString(R.string.app_name));
-//                    if (appDir.exists()) {
-//                        String fileName = mImgTitle + ".jpg";
-//                        File file = new File(appDir, fileName);
-//                        if (file.exists()) {
-//                            Uri uri = Uri.fromFile(file);
-//                            sharePicture(uri);
-//                        } else {
-//                            downloadImage();
-//                        }
-//                    } else {
-//                        downloadImage();
-//                    }
                 }
-
                 return true;
             }
         });
@@ -113,25 +90,5 @@ public class GankPictureActivity extends SwipeBackActivity {
         return true;
     }
 
-    private void sharePicture(Uri uri) {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_send_to)));
-    }
-
-    private void downloadImage() {
-        ImageLoaderUtils.downloadImage(mContext, mImgUrl, mImgTitle, new ImageLoaderUtils.DownloadImageListener() {
-            @Override
-            public void loadSuccess(Uri uri) {
-                sharePicture(uri);
-            }
-
-            @Override
-            public void loadFailed(Exception e) {
-
-            }
-        });
-    }
 
 }

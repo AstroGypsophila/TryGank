@@ -31,8 +31,6 @@
     <string name="gank_via">via %1$s</string>
     <string name="nav_gank">gank</string>
     <string name="empty_tip">暂无数据</string>
-    <string name="share_send_to">分享至</string>
-    <string name="author_github">https://github.com/AstroGypsophila</string>
 
     <!--menu-->
     <string name="menu_favorite">收藏</string>
