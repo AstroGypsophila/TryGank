@@ -16,6 +16,7 @@
     <style name="AppTheme.NoActionBar.Translucent">
         <!--设置window透明，swipeback时候模拟器才可以看到前个activity-->
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
 </resources>

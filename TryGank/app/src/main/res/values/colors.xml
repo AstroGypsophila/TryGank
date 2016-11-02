@@ -18,4 +18,7 @@
     <color name="search_hint_color">#ffadadad</color>
     <color name="search_text_color">#ff474747</color>
     <color name="gank_welfare_text_color">#ff474747</color>
+    <!--common-->
+    <color name="common_black">#000000</color>
+    <color name="common_write">#ffffff</color>
 </resources>

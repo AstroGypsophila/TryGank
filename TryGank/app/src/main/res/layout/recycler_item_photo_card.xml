@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/navigation_header_bg" />
+            android:src="@mipmap/navigation_header_bg" />
 
         <TextView
             android:id="@+id/welfare_desc"

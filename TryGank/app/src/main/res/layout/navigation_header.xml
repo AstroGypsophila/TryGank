@@ -9,7 +9,7 @@
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="192dp"
-        android:background="@drawable/navigation_header_bg">
+        android:background="@mipmap/navigation_header_bg">
 
         <TextView
             android:id="@+id/user_nickname"
@@ -26,9 +26,11 @@
             android:id="@+id/profile_image"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_above="@id/user_nickname"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_account_circle_white" />
+            android:layout_alignLeft="@id/user_nickname"
+            android:src="@mipmap/deal"
+            android:layout_above="@+id/user_nickname"
+            android:elevation="16dp"
+            android:layout_alignStart="@+id/user_nickname" />
 
 
     </RelativeLayout>

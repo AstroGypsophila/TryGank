@@ -101,9 +101,9 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
             if (id == R.id.action_favorite) {
                 mCurrentStatus = !mCurrentStatus;
                 if (mCurrentStatus) {
-                    item.setIcon(R.drawable.ic_favorite_white);
+                    item.setIcon(R.mipmap.ic_star_white);
                 } else {
-                    item.setIcon(R.drawable.ic_favorite_bord);
+                    item.setIcon(R.mipmap.ic_star_border);
                 }
             } else if (id == R.id.action_share) {
 
@@ -140,7 +140,7 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
         super.onPrepareOptionsMenu(menu);
         MenuItem item = menu.findItem(R.id.action_favorite);
         if (mInitStatus) {
-            item.setIcon(R.drawable.ic_favorite_white);
+            item.setIcon(R.mipmap.ic_star_white);
         }
         return true;
     }

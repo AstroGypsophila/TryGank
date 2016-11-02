@@ -17,4 +17,6 @@ public interface IMainView {
     void switchToNotification();
 
     void switchToFavorite();
+
+    void switchToToday();
 }

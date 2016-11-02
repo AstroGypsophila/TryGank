@@ -18,6 +18,7 @@ import com.gypsophila.trygank.business.gank.GankAdapter;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +108,8 @@ public class GankListFragment extends Fragment implements IGankView,
     @Override
     public void addNews(List<GankBean> gankBeanList) {
         //收藏不需要footerview
-        if (!TYPE_FAVORITE.equals(mType)) {
-            mAdapter.isShowFooter(true);
+        if (TYPE_FAVORITE.equals(mType)) {
+            mAdapter.isShowFooter(false);
         } else {
             if (gankBeanList != null && gankBeanList.size() <= 0) {
                 mEmptyView.setVisibility(View.VISIBLE);

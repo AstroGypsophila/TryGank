@@ -3,17 +3,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/navigation1"
+            android:id="@+id/item_gank"
             android:checked="true"
-            android:icon="@drawable/ic_mood_black"
-            android:title="@string/nav_gank" />
+            android:icon="@mipmap/ic_mood_white"
+            android:title="@string/nav_menu_gank" />
+        <item
+            android:id="@+id/today"
+            android:icon="@mipmap/ic_today"
+            android:title="今天" />
         <item
             android:id="@+id/navigation2"
-            android:icon="@drawable/ic_search"
+            android:icon="@mipmap/ic_search"
             android:title="@string/nav_netease_news" />
         <item
             android:id="@+id/favorite"
-            android:icon="@drawable/ic_favorite_white"
-            android:title="收藏" />
+            android:icon="@mipmap/ic_star_white"
+            android:title="@string/nav_menu_favorite" />
+        <item
+            android:id="@+id/palette"
+            android:icon="@mipmap/ic_palette_white"
+            android:title="@string/nav_menu_palette" />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@mipmap/ic_feedback_white"
+            android:title="@string/nav_menu_feedback" />
     </group>
 </menu>

@@ -30,7 +30,7 @@
     </style>
 
     <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_menu_more_overflow</item>
+        <item name="android:src">@mipmap/ic_menu_more_overflow</item>
     </style>
 
     <style name="AppTheme.ToolBar.Custom" parent="AppTheme">

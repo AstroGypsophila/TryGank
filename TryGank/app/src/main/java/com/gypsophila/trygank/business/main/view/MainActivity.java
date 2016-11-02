@@ -8,24 +8,37 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.gypsophila.commonlib.system.SystemConst;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
 import com.gypsophila.trygank.business.gank.view.GankFragment;
 import com.gypsophila.trygank.business.gank.view.GankListFragment;
 import com.gypsophila.trygank.business.gank.view.SearchActivity;
+import com.gypsophila.trygank.business.gank.view.TodayFragment;
+import com.gypsophila.trygank.business.gank.view.UserInfoActivity;
 import com.gypsophila.trygank.business.main.presenter.IMainPresenter;
 import com.gypsophila.trygank.business.main.presenter.MainPresenterImpl;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Gypsophila on 2016/8/16.
  */
 public class MainActivity extends AppBaseActivity implements IMainView {
+
+    /**
+     * 再按一次状态等待时间（ms）
+     */
+    private static final long QUIT_AWAIT_THRESHOLD = 2 * SystemConst.SECOND;
+    private long mQuitPressedTime = 0;
 
     private Toolbar mToolbar;
     private Context mContext;
@@ -73,6 +86,15 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 item.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
+            }
+        });
+        View headerLayout = mNavigationView.getHeaderView(0);
+        CircleImageView circleImageView = (CircleImageView) headerLayout.findViewById(R.id.profile_image);
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startUserInfoActivity();
+                mDrawerLayout.closeDrawers();
             }
         });
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -135,5 +157,41 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 .replace(R.id.id_content_container,
                         GankListFragment.newInstance(GankListFragment.TYPE_FAVORITE))
                 .commit();
+    }
+
+    @Override
+    public void switchToToday() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.id_content_container, TodayFragment.newIntance(), TodayFragment.TAG)
+                .commit();
+    }
+
+    private void startUserInfoActivity() {
+        Intent intent = new Intent(this, UserInfoActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isQuitAwait()) {
+                quit();
+            } else {
+                mQuitPressedTime = System.currentTimeMillis();
+                String toastTip = getString(R.string.quit_toast);
+                Toast.makeText(mContext, toastTip, Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private boolean isQuitAwait() {
+        return (System.currentTimeMillis() - mQuitPressedTime) < QUIT_AWAIT_THRESHOLD;
+    }
+
+    private void quit() {
+        finish();
     }
 }

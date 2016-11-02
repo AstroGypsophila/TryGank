@@ -20,8 +20,11 @@ public class MainPresenterImpl implements IMainPresenter {
     @Override
     public void switchNavigation(int id) {
         switch (id) {
-            case R.id.navigation1:
+            case R.id.item_gank:
                 mMainView.switchToGank();
+                break;
+            case R.id.today:
+                mMainView.switchToToday();
                 break;
             case R.id.navigation2:
                 mMainView.switchToNews();

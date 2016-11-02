@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/action_favorite"
-        android:icon="@drawable/ic_favorite_bord"
+        android:icon="@mipmap/ic_star_border"
         android:title="@string/menu_favorite"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/ic_share_white"
+        android:icon="@mipmap/ic_share_white"
         android:title="@string/menu_share"
         app:showAsAction="ifRoom" />
 </menu>

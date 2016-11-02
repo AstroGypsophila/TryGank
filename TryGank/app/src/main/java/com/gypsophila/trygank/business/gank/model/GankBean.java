@@ -17,6 +17,7 @@ public class GankBean implements Serializable {
     @SerializedName("createdAt")
     public String createTime;
     public String desc;
+    public String[] images;
     @SerializedName("publishedAt")
     public String publishTime;
     public String source;

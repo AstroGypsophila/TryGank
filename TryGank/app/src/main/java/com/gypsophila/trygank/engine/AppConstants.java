@@ -1,5 +1,7 @@
 package com.gypsophila.trygank.engine;
 
+import android.os.Environment;
+
 public class AppConstants {
 
     //http://c.m.163.com/nc/article/headline/T1348647909107/0-20.html
@@ -54,4 +56,7 @@ public class AppConstants {
     public static final String GANK_TYPE_ANDROID = "Android";
     public static final String GANK_TYPE_FRONT_END = "前端";
     public static final String GANK_TYPE_VIDEO = "休息视频";
+
+    public static String BASE_DIR = Environment.getExternalStorageDirectory() + "/trygank";
+    public static String TMP_FILE = BASE_DIR + "/temp/";
 }

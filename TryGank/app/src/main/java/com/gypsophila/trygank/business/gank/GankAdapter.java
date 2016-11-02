@@ -27,8 +27,9 @@ public class GankAdapter extends AbstractRecyclerAdapter {
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
     public static final int TYPE_PHOTO = 2;
+    public static final int TYPE_EXTRA_IMAGE = 3;
 
-    private boolean mIsShowFooter = false;
+    private boolean mIsShowFooter = true;
     private int mType;
 
     public GankAdapter(Context ctx, int type) {
@@ -58,12 +59,16 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             View view = mInflater.inflate(R.layout.recycler_item_photo_card, parent, false);
             PhotoViewHolder holder = new PhotoViewHolder(view);
             return holder;
+        } else if (viewType == TYPE_EXTRA_IMAGE) {
+            View view = mInflater.inflate(R.layout.recycler_image_item_gank, null);
+            ImageGankViewHolder holder = new ImageGankViewHolder(view);
+            return holder;
         }
         return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof GankViewHolder) {
             GankViewHolder gankViewHolder = (GankViewHolder) holder;
             GankBean gankBean = (GankBean) mBeanList.get(position);
@@ -75,6 +80,21 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             GankBean gankBean = (GankBean) mBeanList.get(position);
             photoViewHolder.mDescTv.setText(gankBean.desc);
             ImageLoaderUtils.loadImage(mContext, photoViewHolder.mWelfareImage, gankBean.url);
+        } else if (holder instanceof ImageGankViewHolder) {
+            final int currentPos = position;
+            ImageGankViewHolder imageGankViewHolder = (ImageGankViewHolder) holder;
+            GankBean gankBean = (GankBean) mBeanList.get(position);
+            imageGankViewHolder.gankTitle.setText(gankBean.desc);
+            imageGankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
+            imageGankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
+            ImageLoaderUtils.loadImage(mContext, imageGankViewHolder.imageView, gankBean.images[0]);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GankBean gankBean = (GankBean) mBeanList.get(currentPos);
+                    GankDetailActivity.openWebView(mContext, gankBean);
+                }
+            });
         }
 
     }
@@ -87,7 +107,12 @@ public class GankAdapter extends AbstractRecyclerAdapter {
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
         } else {
-            return mType == TYPE_ITEM ? TYPE_ITEM : TYPE_PHOTO;
+            GankBean gankBean = (GankBean) mBeanList.get(position);
+            if (gankBean.images != null && gankBean.images.length >= 1) {
+                return TYPE_EXTRA_IMAGE;
+            } else {
+                return mType == TYPE_ITEM ? TYPE_ITEM : TYPE_PHOTO;
+            }
         }
     }
 
@@ -140,6 +165,22 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             });
         }
     }
+
+    public class ImageGankViewHolder extends RecyclerView.ViewHolder {
+        public final ImageView imageView;
+        public final TextView gankTitle;
+        public final TextView gankVia;
+        public final TextView gankTime;
+
+        public ImageGankViewHolder(View itemView) {
+            super(itemView);
+            imageView = (ImageView) itemView.findViewById(R.id.extra_img);
+            gankTitle = (TextView) itemView.findViewById(R.id.title);
+            gankVia = (TextView) itemView.findViewById(R.id.via);
+            gankTime = (TextView) itemView.findViewById(R.id.publish_time);
+        }
+    }
+
 
 
     class FooterViewHolder extends RecyclerView.ViewHolder {
