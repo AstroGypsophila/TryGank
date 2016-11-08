@@ -20,7 +20,6 @@
     <string name="load_data_failed">加载数据失败</string>
     <string name="nav_netease_news">网易新闻</string>
     <!--gank-->
-    <string name="gank_today">今天</string>
     <string name="gank_android">Android</string>
     <string name="gank_ios">iOS</string>
     <string name="gank_welfare">福利</string>
@@ -41,6 +40,7 @@
 
     <!--main nav menu-->
     <string name="nav_menu_gank">Gank</string>
+    <string name="nav_menu_today">今日力推</string>
     <string name="nav_menu_favorite">我的收藏</string>
     <string name="nav_menu_palette">主题切换</string>
     <string name="nav_menu_feedback">反馈</string>

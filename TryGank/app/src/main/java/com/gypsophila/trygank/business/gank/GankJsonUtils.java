@@ -1,6 +1,7 @@
 package com.gypsophila.trygank.business.gank;
 
 import com.google.gson.Gson;
+import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
 import com.gypsophila.trygank.business.gank.model.GankPlusBean;
 import com.gypsophila.trygank.business.gank.model.SearchPlusBean;
 
@@ -21,6 +22,12 @@ public class GankJsonUtils {
     public static GankPlusBean readJsonGankPlusBean(String strJson) {
         Gson gson = new Gson();
         GankPlusBean bean = gson.fromJson(strJson, GankPlusBean.class);
+        return bean;
+    }
+
+    public static GankIOPlusBean readJsonGankIOPlusBean(String strJson) {
+        Gson gson = new Gson();
+        GankIOPlusBean bean = gson.fromJson(strJson, GankIOPlusBean.class);
         return bean;
     }
 

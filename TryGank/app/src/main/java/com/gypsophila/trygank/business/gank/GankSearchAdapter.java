@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.model.SearchBean;
+import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 
 import java.util.List;
 
@@ -19,12 +20,13 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/23
  */
-public class GankSearchAdapter extends AbstractRecyclerAdapter {
+public class GankSearchAdapter extends AbstractRecyclerAdapter<SearchBean> {
+
+    public static final int TYPE_ITEM = 0;
+    public static final int TYPE_FOOTER = 1;
 
     public GankSearchAdapter(Context ctx) {
         super(ctx);
-        mContext = ctx;
-        mInflater = LayoutInflater.from(mContext);
     }
 
     public void setData(List<SearchBean> searchBeanList) {
@@ -38,21 +40,34 @@ public class GankSearchAdapter extends AbstractRecyclerAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recycler_item_gank, parent, false);
-        return new SearchViewHolder(view);
+        if (viewType == TYPE_FOOTER) {
+            View view = mInflater.inflate(R.layout.footer_layout, null);
+            return new FooterViewHolder(view);
+        } else {
+            View view = mInflater.inflate(R.layout.recycler_item_gank, parent, false);
+            return new SearchViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((TypeAbstractViewHolder) holder).bindHolder((SearchBean) mBeanList.get(position));
+        ((TypeAbstractViewHolder) holder).bindHolder(mBeanList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mBeanList == null ? 0 : mBeanList.size();
+        if (mBeanList == null) return 0;
+        return mBeanList.size() + (isShowFooter ? 1 : 0);
     }
 
-    class SearchViewHolder extends TypeAbstractViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        return isShowFooter ? TYPE_FOOTER : TYPE_ITEM;
+    }
+
+
+
+    class SearchViewHolder extends TypeAbstractViewHolder<SearchBean> {
         public final TextView gankTitle;
         public final TextView gankVia;
         public final TextView gankTime;
@@ -66,7 +81,11 @@ public class GankSearchAdapter extends AbstractRecyclerAdapter {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    Toast.makeText(mContext, "u click " + position, Toast.LENGTH_SHORT).show();
+                    GankBean bean = new GankBean();
+                    SearchBean searchBean = mBeanList.get(position);
+                    bean.id = searchBean.id;
+                    bean.url = searchBean.url;
+                    GankDetailActivity.openWebView(mContext, bean);
                 }
             });
         }
@@ -76,6 +95,12 @@ public class GankSearchAdapter extends AbstractRecyclerAdapter {
             gankTitle.setText(searchBean.desc);
             gankTime.setText(searchBean.publishTime);
             gankVia.setText(searchBean.who);
+        }
+    }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+        public FooterViewHolder(View view) {
+            super(view);
         }
     }
 

@@ -6,7 +6,6 @@ import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.GankJsonUtils;
 import com.gypsophila.trygank.db.GankDataBaseManager;
 import com.gypsophila.trygank.engine.RemoteService;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 

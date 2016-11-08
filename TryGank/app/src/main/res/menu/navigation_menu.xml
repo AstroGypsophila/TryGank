@@ -10,7 +10,7 @@
         <item
             android:id="@+id/today"
             android:icon="@mipmap/ic_today"
-            android:title="今天" />
+            android:title="@string/nav_menu_today" />
         <item
             android:id="@+id/navigation2"
             android:icon="@mipmap/ic_search"

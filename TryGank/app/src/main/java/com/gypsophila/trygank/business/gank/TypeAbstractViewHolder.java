@@ -11,13 +11,13 @@ import com.gypsophila.trygank.business.gank.model.SearchBean;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/23
  */
-public abstract class TypeAbstractViewHolder extends RecyclerView.ViewHolder {
+public abstract class TypeAbstractViewHolder<T> extends RecyclerView.ViewHolder {
 
 
     public TypeAbstractViewHolder(View itemView) {
         super(itemView);
     }
 
-    public abstract void bindHolder(SearchBean searchBean);
+    public abstract void bindHolder(T bean);
 
 }

@@ -39,6 +39,11 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Re
 
     }
 
+    public void isShowFooter(boolean isShowFooter) {
+        this.isShowFooter = isShowFooter;
+    }
+
+
     @Override
     public int getItemCount() {
         return 0;
