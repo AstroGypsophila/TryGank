@@ -63,7 +63,15 @@ public class TodayFragment extends Fragment implements ITodayView {
 
     @Override
     public void showProgress() {
-        mSwipeRefreshLayout.setRefreshing(true);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    mSwipeRefreshLayout.setEnabled(false);
+                }
+            });
+        }
     }
 
     @Override
@@ -75,7 +83,16 @@ public class TodayFragment extends Fragment implements ITodayView {
 
     @Override
     public void hideProgress() {
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSwipeRefreshLayout.setRefreshing(false);
+
+                }
+            });
+        }
+
     }
 
     @Override
