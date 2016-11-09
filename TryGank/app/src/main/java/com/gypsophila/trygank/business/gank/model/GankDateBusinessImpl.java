@@ -5,9 +5,7 @@ import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.GankJsonUtils;
 import com.gypsophila.trygank.engine.RemoteService;
-import com.orhanobut.logger.Logger;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,7 +20,7 @@ public class GankDateBusinessImpl implements IGankDateBusiness {
     public void loadGankDateBean(BaseActivity activity,
                                  String url,
                                  List<RequestParameter> parameters,
-                                 final GankDateLoadListener listener) {
+                                 final GankTodayLoadListener listener) {
         RequestCallback callback = new RequestCallback() {
             @Override
             public void onSuccess(String content) {
@@ -39,6 +37,23 @@ public class GankDateBusinessImpl implements IGankDateBusiness {
         };
         RemoteService.getInstance().invoke(activity, url, parameters, callback);
 
+    }
+
+    @Override
+    public void loadDateData(BaseActivity activity, String url, List<RequestParameter> parameters, final GankDateLoadListener listener) {
+        RequestCallback callback = new RequestCallback() {
+            @Override
+            public void onSuccess(String content) {
+                GankDatePlusBean bean = GankJsonUtils.readJsonGankDatePlusBean(content);
+                listener.onSuccess(bean);
+            }
+
+            @Override
+            public void onFail(String errorMessage) {
+
+            }
+        };
+        RemoteService.getInstance().invoke(activity, url, parameters, callback);
     }
 
 //    private void parseHtmlContent(GankIOBean bean) {

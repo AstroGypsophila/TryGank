@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface IGankDateBusiness {
 
-    void loadGankDateBean(BaseActivity activity, String url, List<RequestParameter> parameters, GankDateLoadListener listener);
+    void loadGankDateBean(BaseActivity activity, String url, List<RequestParameter> parameters, GankTodayLoadListener listener);
+
+    void loadDateData(BaseActivity activity, String url, List<RequestParameter> parameters, GankDateLoadListener listener);
 
 }

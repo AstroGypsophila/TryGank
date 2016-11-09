@@ -1,4 +1,4 @@
-include ':app', ':irecycler'
+include ':app'
 include ':CommonLib';
 include ':SwipeBack';
 project(':CommonLib').projectDir = new File('../TryGankLib/Common/CommonLib')

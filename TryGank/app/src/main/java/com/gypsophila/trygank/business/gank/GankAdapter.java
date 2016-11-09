@@ -139,9 +139,12 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    GankBean gankBean = (GankBean) mBeanList.get(position);
-                    GankDetailActivity.openWebView(mContext, gankBean);
+                    if (mBeanList != null && mBeanList.size() >= 1) {
+                        int position = getAdapterPosition();
+                        GankBean gankBean = (GankBean) mBeanList.get(position);
+                        GankDetailActivity.openWebView(mContext, gankBean);
+                    }
+
                 }
             });
         }
@@ -158,9 +161,11 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    GankBean gankBean = (GankBean) mBeanList.get(position);
-                    GankPictureActivity.openPictureActivity(mContext, gankBean.url, gankBean.desc);
+                    if (mBeanList != null && mBeanList.size() >= 1) {
+                        int position = getAdapterPosition();
+                        GankBean gankBean = (GankBean) mBeanList.get(position);
+                        GankPictureActivity.openPictureActivity(mContext, gankBean.url, gankBean.desc);
+                    }
                 }
             });
         }

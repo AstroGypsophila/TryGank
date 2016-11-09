@@ -37,6 +37,11 @@ public class AppConstants {
     public static final String NEWS_DETAIL_END_URL = "/full.html";
 
     public static final String GANK_HOST = "http://gank.io/api/";
+
+    public static final String GANK_HISTORY = GANK_HOST + "day/history";
+
+    public static final String GANK_DAY = GANK_HOST + "day/";
+
     //http://gank.io/api/search/query/listview/category/Android/count/10/page/1
     //http://gank.io/api/history/content/day/2016/05/11
     /**

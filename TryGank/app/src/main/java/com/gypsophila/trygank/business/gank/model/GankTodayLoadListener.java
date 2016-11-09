@@ -4,11 +4,11 @@ package com.gypsophila.trygank.business.gank.model;
  * Description :
  * Author : AstroGypsophila
  * Github  : https://github.com/AstroGypsophila
- * Date   : 2016/11/10
+ * Date   : 2016/10/4
  */
-public interface GankDateLoadListener {
+public interface GankTodayLoadListener {
 
-    void onSuccess(GankDatePlusBean bean);
+    void onSuccess(GankIOPlusBean bean);
 
     void onFailed(String errorMessage);
 }
