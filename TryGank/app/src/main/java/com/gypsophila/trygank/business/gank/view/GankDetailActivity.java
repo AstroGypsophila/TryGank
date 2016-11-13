@@ -9,9 +9,11 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
@@ -31,9 +33,9 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  */
 public class GankDetailActivity extends SwipeBackActivity implements IGankDetail {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private WebView mWebView;
     private Toolbar mToolbar;
+    private ProgressBar mProgressBar;
     private IGankDetailPresenter mGankDetailPresenter;
     private Context mContext;
     private GankBean mGankBean;
@@ -65,10 +67,11 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
 
     private void initViews() {
         initToolbar();
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
         mWebView = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -156,4 +159,25 @@ public class GankDetailActivity extends SwipeBackActivity implements IGankDetail
         }
         super.onDestroy();
     }
+
+    private class ChromeClient extends WebChromeClient {
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            mProgressBar.setProgress(newProgress);
+            if (newProgress == 100) {
+                mProgressBar.setVisibility(View.GONE);
+            } else {
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            setTitle(title);
+        }
+    }
+
 }
