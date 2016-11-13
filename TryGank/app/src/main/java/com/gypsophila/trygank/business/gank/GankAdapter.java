@@ -13,6 +13,7 @@ import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.business.gank.view.GankPictureActivity;
+import com.gypsophila.trygank.utils.DateUtil;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             GankBean gankBean = (GankBean) mBeanList.get(position);
             gankViewHolder.gankTitle.setText(gankBean.desc);
             gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
-            gankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
+            gankViewHolder.gankTime.setText(DateUtil.DateToString(gankBean.publishTime));
         } else if (holder instanceof PhotoViewHolder) {
             PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
             GankBean gankBean = (GankBean) mBeanList.get(position);
@@ -86,7 +87,7 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             GankBean gankBean = (GankBean) mBeanList.get(position);
             imageGankViewHolder.gankTitle.setText(gankBean.desc);
             imageGankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
-            imageGankViewHolder.gankTime.setText(gankBean.publishTime.substring(0, 10));
+            imageGankViewHolder.gankTime.setText(DateUtil.DateToString(gankBean.publishTime));
             ImageLoaderUtils.loadImage(mContext, imageGankViewHolder.imageView, gankBean.images[0]);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,7 +186,6 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             gankTime = (TextView) itemView.findViewById(R.id.publish_time);
         }
     }
-
 
 
     class FooterViewHolder extends RecyclerView.ViewHolder {

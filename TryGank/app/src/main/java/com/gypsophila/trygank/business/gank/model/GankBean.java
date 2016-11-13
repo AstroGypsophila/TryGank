@@ -3,6 +3,7 @@ package com.gypsophila.trygank.business.gank.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description :
@@ -15,11 +16,11 @@ public class GankBean implements Serializable {
     @SerializedName("_id")
     public String id;
     @SerializedName("createdAt")
-    public String createTime;
+    public Date createTime;
     public String desc;
     public String[] images;
     @SerializedName("publishedAt")
-    public String publishTime;
+    public Date publishTime;
     public String source;
     public String type;
     public String url;

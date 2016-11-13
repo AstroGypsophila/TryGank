@@ -17,7 +17,6 @@ import com.gypsophila.trygank.R;
 import java.io.File;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Description :
@@ -34,7 +33,6 @@ public class GankPictureActivity extends SwipeBackActivity {
     private String mImgTitle;
     private ImageView mImageView;
     private Toolbar mToolbar;
-    private PhotoViewAttacher mPhotoAttacher;
 
     private Context mContext;
 

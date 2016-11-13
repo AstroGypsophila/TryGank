@@ -18,7 +18,6 @@ import com.gypsophila.trygank.business.gank.GankAdapter;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

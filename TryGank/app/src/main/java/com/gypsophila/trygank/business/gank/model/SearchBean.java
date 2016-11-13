@@ -3,6 +3,7 @@ package com.gypsophila.trygank.business.gank.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description :
@@ -19,7 +20,7 @@ public class SearchBean implements Serializable {
     @SerializedName("ganhuo_id")
     public String id;
     @SerializedName("publishedAt")
-    public String publishTime;
+    public Date publishTime;
     public String readability;
     public String type;
     public String url;

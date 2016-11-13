@@ -11,6 +11,7 @@ import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.model.SearchBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
+import com.gypsophila.trygank.utils.DateUtil;
 
 import java.util.List;
 
@@ -85,6 +86,10 @@ public class GankSearchAdapter extends AbstractRecyclerAdapter<SearchBean> {
                     SearchBean searchBean = mBeanList.get(position);
                     bean.id = searchBean.id;
                     bean.url = searchBean.url;
+                    bean.publishTime = searchBean.publishTime;
+                    bean.desc = searchBean.desc;
+                    bean.who = searchBean.who;
+                    bean.type = searchBean.type;
                     GankDetailActivity.openWebView(mContext, bean);
                 }
             });
@@ -93,7 +98,7 @@ public class GankSearchAdapter extends AbstractRecyclerAdapter<SearchBean> {
         @Override
         public void bindHolder(SearchBean searchBean) {
             gankTitle.setText(searchBean.desc);
-            gankTime.setText(searchBean.publishTime);
+            gankTime.setText(DateUtil.DateToString(searchBean.publishTime));
             gankVia.setText(searchBean.who);
         }
     }

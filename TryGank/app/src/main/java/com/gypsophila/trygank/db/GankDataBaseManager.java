@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.utils.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +39,7 @@ public class GankDataBaseManager {
         values.put(GANKURL, gankBean.url);
         values.put(GANKWHO, gankBean.who);
         values.put(GANKTYPE, gankBean.type);
-        values.put(GANKTIME, gankBean.publishTime);
+        values.put(GANKTIME, DateUtil.DateToString(gankBean.publishTime));
 
         String[] whereArgs = new String[]{gankBean.id};
         re = db.update(TABLE_NAME, values, GANKID + "=?", whereArgs);
@@ -62,7 +64,8 @@ public class GankDataBaseManager {
                 gankBean.url = cursor.getString(cursor.getColumnIndex(GANKURL));
                 gankBean.who = cursor.getString(cursor.getColumnIndex(GANKWHO));
                 gankBean.type = cursor.getString(cursor.getColumnIndex(GANKTYPE));
-                gankBean.publishTime = cursor.getString(cursor.getColumnIndex(GANKTIME));
+                Date date = DateUtil.StringToDate(cursor.getString(cursor.getColumnIndex(GANKTIME)));
+                gankBean.publishTime = date;
                 gankBeanList.add(gankBean);
             }
         } catch (Exception e) {
@@ -96,7 +99,8 @@ public class GankDataBaseManager {
                 gankBean.url = cursor.getString(cursor.getColumnIndex(GANKURL));
                 gankBean.who = cursor.getString(cursor.getColumnIndex(GANKWHO));
                 gankBean.type = cursor.getString(cursor.getColumnIndex(GANKTYPE));
-                gankBean.publishTime = cursor.getString(cursor.getColumnIndex(GANKTIME));
+                Date date = DateUtil.StringToDate(cursor.getString(cursor.getColumnIndex(GANKTIME)));
+                gankBean.publishTime = date;
             }
         } catch (Exception e) {
             e.printStackTrace();
