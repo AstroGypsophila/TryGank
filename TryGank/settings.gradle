@@ -1,6 +1,8 @@
-include ':app'
+include ':app', ':ResModule'
 include ':CommonLib';
 include ':SwipeBack';
 project(':CommonLib').projectDir = new File('../TryGankLib/Common/CommonLib')
 include ':SwipeBack';
 project(':SwipeBack').projectDir = new File('../TryGankLib/Common/SwipeBack')
+include ':ResModule';
+project(':ResModule').projectDir = new File('../TryGankLib/Common/ResModule')

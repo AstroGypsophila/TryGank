@@ -6,6 +6,8 @@ repositories {
 
 dependencies {
     compile project(':CommonLib')
+    compile project(':ResModule')
+
 }
 
 android {
