@@ -50,9 +50,9 @@ android {
 
         release {
             signingConfig signingConfigs.release
-            minifyEnabled true  //设为false即可断点调试
-            shrinkResources true  //自动移除不用资源
-            debuggable false //设为true
+            minifyEnabled false  //设为false即可断点调试
+            shrinkResources false  //自动移除不用资源
+            debuggable true //设为true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -65,12 +65,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
     compile 'org.jsoup:jsoup:1.10.1'
-    compile 'org.sufficientlysecure:html-textview:2.0'
-    compile project(':CommonLib')
     compile project(':SwipeBack')
 }

@@ -19,7 +19,6 @@ import com.gypsophila.trygank.business.gank.model.SearchBean;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
 import com.gypsophila.trygank.business.gank.presenter.SearchPresenterImpl;
 import com.gypsophila.trygank.systemevent.FinishInputEvent;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -133,7 +132,7 @@ public class SearchListFragment extends Fragment implements ISearchView, SwipeRe
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(FinishInputEvent event) {
+    public void onFinishInput(FinishInputEvent event) {
         mKeyWord = event.mKeyWord;
         onRefresh();
     }

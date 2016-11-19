@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
+import com.gypsophila.trygank.utils.ThemeUtil;
 
 /**
  * Created by Gypsophila on 2016/8/1.
@@ -13,6 +14,12 @@ import com.gypsophila.commonlib.net.RequestCallback;
 public abstract class AppBaseActivity extends BaseActivity {
 
     protected ProgressDialog dialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtil.changTheme(this, ThemeUtil.getCurrentTheme(this));
+        super.onCreate(savedInstanceState);
+    }
 
     public abstract class AbstractRequestCallback implements RequestCallback {
 

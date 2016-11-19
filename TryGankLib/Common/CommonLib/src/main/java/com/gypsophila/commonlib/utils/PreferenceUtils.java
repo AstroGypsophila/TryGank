@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.utils;
+package com.gypsophila.commonlib.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,7 +33,7 @@ public class PreferenceUtils {
     }
 
     public static void putInteger(Context ctx, String key, int value) {
-        getSharedPreferences(ctx).edit().putInt(key, value);
+        getSharedPreferences(ctx).edit().putInt(key, value).commit();
     }
 
     public static boolean getBoolean(Context ctx, String key, boolean defValue) {

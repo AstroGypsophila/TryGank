@@ -49,9 +49,6 @@
 # 保持测试相关的代码
 -dontnote junit.framework.**
 -dontnote junit.runner.**
--dontwarn android.test.**
--dontwarn android.support.test.**
--dontwarn org.junit.**
 
 # Keep the support library
 -keep class android.support.** {*;}
@@ -82,8 +79,15 @@
 }
 
 # keep EventBus
+-keepattributes *Annotation*
 -keepclassmembers class ** {
-    public void onEvent*(**);
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
 }
 
 -keep public class * extends android.app.Activity

@@ -13,10 +13,10 @@ import android.widget.ImageView;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
 
 import java.io.File;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Description :
@@ -24,7 +24,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/25
  */
-public class GankPictureActivity extends SwipeBackActivity {
+public class GankPictureActivity extends AppSwipeBackActivitiy {
 
     public static final String IMG_URL = "IMG_URL";
     public static final String IMG_TITLE = "IMG_TITLE";

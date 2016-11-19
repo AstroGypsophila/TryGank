@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -12,17 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
 import com.gypsophila.trygank.listener.SearchTextWatcher;
 import com.gypsophila.trygank.systemevent.FinishInputEvent;
-import com.gypsophila.trygank.systemevent.InputMethodEvent;
 import com.gypsophila.trygank.utils.ToolsUtil;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Description :
@@ -30,7 +28,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/6
  */
-public class SearchActivity extends SwipeBackActivity {
+public class SearchActivity extends AppSwipeBackActivitiy {
 
     private ImageView mBackIv;
     private EditText mSearchEt;
@@ -53,6 +51,12 @@ public class SearchActivity extends SwipeBackActivity {
         mSwipeBackLayout.setEdgeSize(ToolsUtil.getWidthInPx(this));
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mBackIv = (ImageView) findViewById(R.id.back_iv);
+        mBackIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mSearchEt = (EditText) findViewById(R.id.search_et);
         if (mInputManager != null) {
             mSearchEt.requestFocus();
@@ -84,24 +88,5 @@ public class SearchActivity extends SwipeBackActivity {
                 .add(R.id.search_content, SearchListFragment.newInstance(), SearchListFragment.TAG)
                 .commit();
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(InputMethodEvent event) {
-        if (mInputManager != null) {
-            mInputManager.hideSoftInputFromWindow(mSearchEt.getWindowToken(), 0);
-        }
     }
 }

@@ -1,23 +1,33 @@
 package com.gypsophila.trygank.business.main.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.gypsophila.commonlib.system.SystemConst;
+import com.gypsophila.commonlib.utils.PreferenceUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
+import com.gypsophila.trygank.business.gank.ColorsListAdapter;
 import com.gypsophila.trygank.business.gank.view.GankFragment;
 import com.gypsophila.trygank.business.gank.view.GankListFragment;
 import com.gypsophila.trygank.business.gank.view.SearchActivity;
@@ -26,8 +36,18 @@ import com.gypsophila.trygank.business.gank.view.UserInfoActivity;
 import com.gypsophila.trygank.business.main.presenter.IMainPresenter;
 import com.gypsophila.trygank.business.main.presenter.MainPresenterImpl;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
+import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.systemevent.ChangeTheme;
+import com.gypsophila.trygank.utils.ThemeUtil;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Arrays;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by Gypsophila on 2016/8/16.
@@ -81,6 +101,11 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                if (item.getItemId() == R.id.palette) {
+                    changTheme();
+                    mDrawerLayout.closeDrawers();
+                    return true;
+                }
                 mMainPresenter.switchNavigation(item.getItemId());
                 mToolbar.setTitle(item.getTitle());
                 item.setChecked(true);
@@ -117,6 +142,78 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 return true;
             }
         });
+    }
+
+    private void changTheme() {
+        showThemeDialog();
+//        setTheme(R.style.RedTheme);
+//        PreferenceUtils.putInteger(mContext, "theme_id", 1);
+//        mToolbar.setBackgroundColor(getResources().getColor(R.color.common_s));
+//        EventBus.getDefault().post(new ChangeTheme());
+//        setStatusColor();
+    }
+
+    int currenttheme =0;
+    int selectedThmem = 0;
+
+    private void showThemeDialog() {
+        currenttheme = PreferenceUtils.getInteger(mContext, "theme_id",0);
+        selectedThmem = PreferenceUtils.getInteger(mContext, "theme_id",0);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("更换主题");
+        Integer[] res = new Integer[]{R.drawable.theme_s_circle, R.drawable.theme_red_circle, R.drawable.theme_indigo_circle,
+                R.drawable.theme_s_circle, R.drawable.theme_s_circle, R.drawable.theme_s_circle,
+                R.drawable.theme_s_circle, R.drawable.theme_s_circle, R.drawable.theme_s_circle,
+                R.drawable.theme_s_circle, R.drawable.theme_s_circle,R.drawable.theme_s_circle};
+        List<Integer> list = Arrays.asList(res);
+        ColorsListAdapter adapter = new ColorsListAdapter(this, list);
+//        adapter.setCheckItem(ThemeUtils.getCurrentTheme(getActivity()).getIntValue());
+        GridView gridView = (GridView) LayoutInflater.from(this).inflate(R.layout.colors_panel_layout, null);
+        gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        gridView.setCacheColorHint(0);
+        gridView.setAdapter(adapter);
+        builder.setView(gridView);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                PreferenceUtils.putInteger(mContext, AppConstants.THEME_VALUE, selectedThmem);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog dialog = builder.show();
+        gridView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ThemeUtil.changTheme(MainActivity.this, ThemeUtil.Theme.mapValueToTheme(position));
+                        Resources.Theme theme = getTheme();
+                        TypedValue colorPrimary = new TypedValue();
+                        TypedValue colorPrimaryDark = new TypedValue();
+                        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
+                        theme.resolveAttribute(R.attr.colorPrimaryDark, colorPrimaryDark, true);
+
+                        mToolbar.setBackgroundColor(getResources().getColor(colorPrimary.resourceId));
+                        EventBus.getDefault().post(new ChangeTheme(colorPrimary.resourceId));
+                        setStatusColor(colorPrimaryDark.resourceId);
+                        selectedThmem = position;
+                    }
+                }
+        );
+    }
+
+    private void setStatusColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(mContext.getResources().getColor(color));
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     //设置toolbar菜单

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
 import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.utils.ToolsUtil;
 
@@ -38,7 +39,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/28
  */
-public class UserInfoActivity extends SwipeBackActivity {
+public class UserInfoActivity extends AppSwipeBackActivitiy {
 
     /**
      * 头像大小

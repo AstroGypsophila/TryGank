@@ -64,4 +64,6 @@ public class AppConstants {
 
     public static String BASE_DIR = Environment.getExternalStorageDirectory() + "/trygank";
     public static String TMP_FILE = BASE_DIR + "/temp/";
+
+    public static String THEME_VALUE = "THEME_VALUE";
 }

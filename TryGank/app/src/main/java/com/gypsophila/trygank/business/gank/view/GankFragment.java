@@ -12,6 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.systemevent.ChangeTheme;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +48,6 @@ public class GankFragment extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
 
         setUpViewPager(mViewPager);
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_today));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_android));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_ios));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.gank_welfare));
@@ -58,7 +63,6 @@ public class GankFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager) {
         MyFragmentAdapter mAdapter = new MyFragmentAdapter(getChildFragmentManager());
-//        mAdapter.addFragment(GankListFragment.newInstance(), getString(R.string.gank_today));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_android)), getString(R.string.gank_android));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_ios)), getString(R.string.gank_ios));
         mAdapter.addFragment(GankListFragment.newInstance(getString(R.string.gank_welfare)), getString(R.string.gank_welfare));
@@ -97,6 +101,24 @@ public class GankFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mTitles.get(position);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ChangeTheme event) {
+        Logger.t("cj_data").w("invoke");
+        mTabLayout.setBackgroundColor(getActivity().getResources().getColor(event.colorValue));
     }
 
 }
