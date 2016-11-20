@@ -38,8 +38,8 @@ public class ThemeUtil {
             case INDIGO:
                 style = R.style.IndigoTheme;
                 break;
-            case LIGHT_GREEN:
-                style = R.style.LightGreenTheme;
+            case GREEN:
+                style = R.style.GreenTheme;
                 break;
             case PINK:
                 style = R.style.PinkTheme;
@@ -50,8 +50,8 @@ public class ThemeUtil {
             case RED:
                 style = R.style.RedTheme;
                 break;
-            case YELLOW:
-                style = R.style.YellowTheme;
+            case LIME:
+                style = R.style.LimeTheme;
                 break;
             default:
                 break;
@@ -72,11 +72,11 @@ public class ThemeUtil {
         CYAN(4),
         GREY(5),
         INDIGO(6),
-        LIGHT_GREEN(7),
+        GREEN(7),
         PINK(8),
         PURPLE(9),
         RED(10),
-        YELLOW(11);
+        LIME(11);
         private int mValue;
 
         Theme(int value) {

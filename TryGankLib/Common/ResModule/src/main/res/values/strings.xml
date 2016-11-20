@@ -55,6 +55,9 @@
 
     <string name="quit_toast">再按一次返回键退出应用</string>
 
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="dialog_change_theme_title">更改主题</string>
 
 
 </resources>

@@ -22,12 +22,23 @@ public class ColorsListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Integer> mColorList;
+    private int mSelectPos;
 
-    public ColorsListAdapter(Context ctx, List<Integer> list) {
+    public ColorsListAdapter(Context ctx, List<Integer> list, int position) {
         mContext = ctx;
         mInflater = LayoutInflater.from(mContext);
         mColorList = list;
+        mSelectPos = position;
     }
+
+    public int getmSelectPos() {
+        return mSelectPos;
+    }
+
+    public void setmSelectPos(int mSelectPos) {
+        this.mSelectPos = mSelectPos;
+    }
+
     @Override
     public int getCount() {
         return mColorList == null ? 0 : mColorList.size();
@@ -55,6 +66,7 @@ public class ColorsListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.doneImage.setVisibility((mSelectPos == position) ? View.VISIBLE : View.GONE);
         holder.colorImage.setImageResource(getItem(position));
         return convertView;
     }

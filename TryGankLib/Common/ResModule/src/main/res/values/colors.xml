@@ -44,6 +44,7 @@
     <color name="amber_icons">#212121</color>
     <color name="amber_divider">#BDBDBD</color>
 
+
     <!--blue_green theme-->
     <color name="blue_primary">#2196F3</color>
     <color name="blue_primary_dark">#1976D2</color>
@@ -104,21 +105,21 @@
     <color name="indigo_icons">#FFFFFF</color>
     <color name="indigo_divider">#BDBDBD</color>
 
-    <!--light green-->
-    <color name="lightGreen_primary">#8BC34A</color>
-    <color name="lightGreen_primary_dark">#689F38</color>
-    <color name="lightGreen_primary_light">#DCEDC8</color>
-    <color name="lightGreen_accent">#CDDC39</color>
-    <color name="lightGreen_primary_text">#212121</color>
-    <color name="lightGreen_secondary_text">#757575</color>
-    <color name="lightGreen_icons">#212121</color>
-    <color name="lightGreen_divider">#BDBDBD</color>
+    <!--green-->
+    <color name="green_primary">#679F34</color>
+    <color name="green_primary_dark">#527F2E</color>
+    <color name="green_primary_light">#DCEDC8</color>
+    <color name="green_accent">#689F38</color>
+    <color name="green_primary_text">#212121</color>
+    <color name="green_secondary_text">#757575</color>
+    <color name="green_icons">#212121</color>
+    <color name="green_divider">#BDBDBD</color>
 
-    <!--pink_purple-->
+    <!--pink_red-->
     <color name="pink_primary">#E91E63</color>
     <color name="pink_primary_dark">#C2185B</color>
     <color name="pink_primary_light">#F8BBD0</color>
-    <color name="pink_accent">#E040FB</color>
+    <color name="pink_accent">#FF5252</color>
     <color name="pink_primary_text">#212121</color>
     <color name="pink_secondary_text">#757575</color>
     <color name="pink_icons">#FFFFFF</color>
@@ -134,23 +135,24 @@
     <color name="purple_icons">#FFFFFF</color>
     <color name="purple_divider">#BDBDBD</color>
 
-    <!--red_amber-->
+    <!--red_deep orange-->
     <color name="red_primary">#F44336</color>
     <color name="red_primary_dark">#D32F2F</color>
     <color name="red_primary_light">#FFCDD2</color>
-    <color name="red_accent">#FFC107</color>
+    <color name="red_accent">#FF5722</color>
     <color name="red_primary_text">#212121</color>
     <color name="red_secondary_text">#757575</color>
     <color name="red_icons">#FFFFFF</color>
     <color name="red_divider">#BDBDBD</color>
 
-    <!--yellow_brown-->
-    <color name="yellow_primary">#FFEB3B</color>
-    <color name="yellow_primary_dark">#FBC02D</color>
-    <color name="yellow_primary_light">#FFF9C4</color>
-    <color name="yellow_accent">#795548</color>
-    <color name="yellow_primary_text">#212121</color>
-    <color name="yellow_secondary_text">#757575</color>
-    <color name="yellow_icons">#212121</color>
-    <color name="yellow_divider">#BDBDBD</color>
+    <!--lime_amber-->
+    <color name="lime_primary">#CDDC39</color>
+    <color name="lime_primary_dark">#AFB42B</color>
+    <color name="lime_primary_light">#F0F4C3</color>
+    <color name="lime_accent">#FFC107</color>
+    <color name="lime_primary_text">#212121</color>
+    <color name="lime_secondary_text">#757575</color>
+    <color name="lime_icons">#212121</color>
+    <color name="lime_divider">#BDBDBD</color>
+
 </resources>

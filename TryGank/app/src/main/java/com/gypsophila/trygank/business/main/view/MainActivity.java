@@ -39,7 +39,6 @@ import com.gypsophila.trygank.business.news.view.NewsFragment;
 import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.systemevent.ChangeTheme;
 import com.gypsophila.trygank.utils.ThemeUtil;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -98,11 +97,14 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //启用导航菜单
 //        mToolbar.setNavigationIcon(R.drawable.ic_drawer_home);
         mNavigationView = (NavigationView) findViewById(R.id.navigation);
+        //取消选中后的颜色变化
+        mNavigationView.setItemTextColor(null);
+        mNavigationView.setItemIconTintList(null);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 if (item.getItemId() == R.id.palette) {
-                    changTheme();
+                    showThemeDialog();
                     mDrawerLayout.closeDrawers();
                     return true;
                 }
@@ -144,64 +146,79 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         });
     }
 
-    private void changTheme() {
-        showThemeDialog();
-//        setTheme(R.style.RedTheme);
-//        PreferenceUtils.putInteger(mContext, "theme_id", 1);
-//        mToolbar.setBackgroundColor(getResources().getColor(R.color.common_s));
-//        EventBus.getDefault().post(new ChangeTheme());
-//        setStatusColor();
+    private void changTheme(int position) {
+        ThemeUtil.changTheme(MainActivity.this, ThemeUtil.Theme.mapValueToTheme(position));
+        Resources.Theme theme = getTheme();
+        TypedValue colorPrimary = new TypedValue();
+        TypedValue colorPrimaryDark = new TypedValue();
+        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
+        theme.resolveAttribute(R.attr.colorPrimaryDark, colorPrimaryDark, true);
+
+        mToolbar.setBackgroundColor(getResources().getColor(colorPrimary.resourceId));
+        EventBus.getDefault().post(new ChangeTheme(colorPrimary.resourceId));
+        setStatusColor(colorPrimaryDark.resourceId);
     }
 
-    int currenttheme =0;
-    int selectedThmem = 0;
+    int currentTheme = 0;
+    int selectedTheme = 0;
 
     private void showThemeDialog() {
-        currenttheme = PreferenceUtils.getInteger(mContext, "theme_id",0);
-        selectedThmem = PreferenceUtils.getInteger(mContext, "theme_id",0);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("更换主题");
-        Integer[] res = new Integer[]{R.drawable.theme_s_circle, R.drawable.theme_red_circle, R.drawable.theme_indigo_circle,
-                R.drawable.theme_s_circle, R.drawable.theme_s_circle, R.drawable.theme_s_circle,
-                R.drawable.theme_s_circle, R.drawable.theme_s_circle, R.drawable.theme_s_circle,
-                R.drawable.theme_s_circle, R.drawable.theme_s_circle,R.drawable.theme_s_circle};
+        currentTheme = PreferenceUtils.getInteger(mContext, AppConstants.THEME_VALUE, 0);
+        selectedTheme = PreferenceUtils.getInteger(mContext, AppConstants.THEME_VALUE, 0);
+
+        Integer[] res = new Integer[]{
+                R.drawable.theme_amber_circle, R.drawable.theme_blue_circle,
+                R.drawable.theme_bluegrey_circle, R.drawable.theme_brown_circle,
+                R.drawable.theme_cyan_circle, R.drawable.theme_grey_circle,
+                R.drawable.theme_indigo_circle, R.drawable.theme_green_circle,
+                R.drawable.theme_pink_circle, R.drawable.theme_purple_circle,
+                R.drawable.theme_red_circle, R.drawable.theme_lime_circle};
         List<Integer> list = Arrays.asList(res);
-        ColorsListAdapter adapter = new ColorsListAdapter(this, list);
-//        adapter.setCheckItem(ThemeUtils.getCurrentTheme(getActivity()).getIntValue());
+        final ColorsListAdapter adapter = new ColorsListAdapter(this, list, currentTheme);
         GridView gridView = (GridView) LayoutInflater.from(this).inflate(R.layout.colors_panel_layout, null);
         gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
         gridView.setCacheColorHint(0);
         gridView.setAdapter(adapter);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.dialog_change_theme_title));
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                changTheme(currentTheme);
+            }
+        });
         builder.setView(gridView);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                PreferenceUtils.putInteger(mContext, AppConstants.THEME_VALUE, selectedThmem);
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton(getResources().getString(R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        PreferenceUtils.putInteger(mContext, AppConstants.THEME_VALUE, selectedTheme);
+                    }
+                });
+        builder.setNegativeButton(getResources().getString(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        changTheme(currentTheme);
+                        dialog.dismiss();
+                    }
+                });
         final AlertDialog dialog = builder.show();
+
         gridView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ThemeUtil.changTheme(MainActivity.this, ThemeUtil.Theme.mapValueToTheme(position));
-                        Resources.Theme theme = getTheme();
-                        TypedValue colorPrimary = new TypedValue();
-                        TypedValue colorPrimaryDark = new TypedValue();
-                        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
-                        theme.resolveAttribute(R.attr.colorPrimaryDark, colorPrimaryDark, true);
+                        if (selectedTheme != position) {
+                            changTheme(position);
 
-                        mToolbar.setBackgroundColor(getResources().getColor(colorPrimary.resourceId));
-                        EventBus.getDefault().post(new ChangeTheme(colorPrimary.resourceId));
-                        setStatusColor(colorPrimaryDark.resourceId);
-                        selectedThmem = position;
+                            selectedTheme = position;
+                            adapter.setmSelectPos(selectedTheme);
+                            adapter.notifyDataSetChanged();
+                        }
+
                     }
                 }
         );

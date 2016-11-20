@@ -6,6 +6,6 @@
     <dimen name="search_edit_bg">48.0dip</dimen>
     <dimen name="photo_card_height">240dp</dimen>
 
-    <dimen name="md_simplelist_icon">40dp</dimen>
-    <dimen name="md_dialog_frame_margin">24dp</dimen>
+    <dimen name="md_simplelist_icon">45dp</dimen>
+    <dimen name="md_dialog_frame_margin">20dp</dimen>
 </resources>

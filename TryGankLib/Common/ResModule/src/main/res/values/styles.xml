@@ -55,10 +55,10 @@
         <item name="colorAccent">@color/indigo_accent</item>
     </style>
 
-    <style name="LightGreenTheme" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/lightGreen_primary</item>
-        <item name="colorPrimaryDark">@color/lightGreen_primary_dark</item>
-        <item name="colorAccent">@color/lightGreen_accent</item>
+    <style name="GreenTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryDark">@color/green_primary_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
     </style>
 
     <style name="PinkTheme" parent="AppTheme.NoActionBar">
@@ -79,10 +79,10 @@
         <item name="colorAccent">@color/red_accent</item>
     </style>
 
-    <style name="YellowTheme" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/yellow_primary</item>
-        <item name="colorPrimaryDark">@color/yellow_primary_dark</item>
-        <item name="colorAccent">@color/yellow_accent</item>
+    <style name="LimeTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime_primary</item>
+        <item name="colorPrimaryDark">@color/lime_primary_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
     </style>
 
     <style name="DefaultTheme" parent="AppTheme.NoActionBar">

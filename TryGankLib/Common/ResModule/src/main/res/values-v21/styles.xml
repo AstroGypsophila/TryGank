@@ -3,7 +3,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <!--v21使用状态栏透明，直接可以使得drawerlayout透过状态栏-->
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
         <!--<item name="android:windowContentTransitions">true</item>-->

@@ -7,13 +7,13 @@
         android:id="@+id/image_color"
         android:layout_width="@dimen/md_simplelist_icon"
         android:layout_height="@dimen/md_simplelist_icon"
-        android:background="@drawable/theme_s_circle"
         android:layout_gravity="center" />
 
     <ImageView
         android:id="@+id/image_done"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:src="@mipmap/ic_done_white" />
 </FrameLayout>
