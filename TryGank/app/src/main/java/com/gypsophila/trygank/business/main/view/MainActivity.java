@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gypsophila.commonlib.system.SystemConst;
@@ -103,7 +106,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                if (item.getItemId() == R.id.palette) {
+                if (item.getItemId() == R.id.menu_palette) {
                     showThemeDialog();
                     mDrawerLayout.closeDrawers();
                     return true;
@@ -146,7 +149,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         });
     }
 
-    private void changTheme(int position) {
+    private void changeTheme(int position) {
         ThemeUtil.changTheme(MainActivity.this, ThemeUtil.Theme.mapValueToTheme(position));
         Resources.Theme theme = getTheme();
         TypedValue colorPrimary = new TypedValue();
@@ -156,7 +159,9 @@ public class MainActivity extends AppBaseActivity implements IMainView {
 
         mToolbar.setBackgroundColor(getResources().getColor(colorPrimary.resourceId));
         EventBus.getDefault().post(new ChangeTheme(colorPrimary.resourceId));
-        setStatusColor(colorPrimaryDark.resourceId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setStatusColor(colorPrimaryDark.resourceId);
+        }
     }
 
     int currentTheme = 0;
@@ -185,7 +190,10 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                changTheme(currentTheme);
+                //未点
+                if (selectedTheme != currentTheme) {
+                    changeTheme(currentTheme);
+                }
             }
         });
         builder.setView(gridView);
@@ -201,7 +209,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        changTheme(currentTheme);
+                        changeTheme(currentTheme);
                         dialog.dismiss();
                     }
                 });
@@ -212,11 +220,17 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         if (selectedTheme != position) {
-                            changTheme(position);
+                            changeTheme(position);
 
                             selectedTheme = position;
                             adapter.setmSelectPos(selectedTheme);
                             adapter.notifyDataSetChanged();
+                            ImageView iv = (ImageView) view.findViewById(R.id.image_done);
+                            iv.setVisibility(View.VISIBLE);
+                            Drawable drawable = iv.getDrawable();
+                            if (drawable instanceof Animatable) {
+                                ((Animatable) drawable).start();
+                            }
                         }
 
                     }
@@ -292,7 +306,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 quit();
             } else {
                 mQuitPressedTime = System.currentTimeMillis();
-                String toastTip = getString(R.string.quit_toast);
+                String toastTip = getString(R.string.quit_toast) + getString(R.string.app_name);
                 Toast.makeText(mContext, toastTip, Toast.LENGTH_SHORT).show();
             }
             return true;

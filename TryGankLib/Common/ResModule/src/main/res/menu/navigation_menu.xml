@@ -5,32 +5,32 @@
         android:id="@+id/content"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item_gank"
+            android:id="@+id/menu_gank"
             android:checked="true"
-            android:icon="@mipmap/ic_mood_white"
+            android:icon="@drawable/ic_gank"
             android:title="@string/nav_menu_gank" />
         <item
-            android:id="@+id/today"
-            android:icon="@mipmap/ic_today"
+            android:id="@+id/menu_today"
+            android:icon="@drawable/ic_today_white"
             android:title="@string/nav_menu_today" />
         <item
-            android:id="@+id/navigation2"
-            android:icon="@mipmap/ic_search"
-            android:title="@string/nav_netease_news" />
+            android:id="@+id/menu_news"
+            android:icon="@drawable/ic_news"
+            android:title="@string/nav_news" />
         <item
-            android:id="@+id/favorite"
-            android:icon="@mipmap/ic_star_white"
+            android:id="@+id/menu_favorite"
+            android:icon="@drawable/ic_star_grey"
             android:title="@string/nav_menu_favorite" />
 
     </group>
     <group android:id="@+id/other">
         <item
-            android:id="@+id/palette"
-            android:icon="@mipmap/ic_palette_white"
+            android:id="@+id/menu_palette"
+            android:icon="@drawable/ic_palette"
             android:title="@string/nav_menu_palette" />
         <item
-            android:id="@+id/feedback"
-            android:icon="@mipmap/ic_feedback_white"
+            android:id="@+id/menu_feedback"
+            android:icon="@drawable/ic_feedback"
             android:title="@string/nav_menu_feedback" />
     </group>
 </menu>

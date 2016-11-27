@@ -103,9 +103,9 @@ public class GankDetailActivity extends AppSwipeBackActivitiy implements IGankDe
             if (id == R.id.action_favorite) {
                 mCurrentStatus = !mCurrentStatus;
                 if (mCurrentStatus) {
-                    item.setIcon(R.mipmap.ic_star_white);
+                    item.setIcon(R.drawable.ic_star_white);
                 } else {
-                    item.setIcon(R.mipmap.ic_star_border);
+                    item.setIcon(R.drawable.ic_star_border);
                 }
             } else if (id == R.id.action_share) {
 
@@ -142,7 +142,7 @@ public class GankDetailActivity extends AppSwipeBackActivitiy implements IGankDe
         super.onPrepareOptionsMenu(menu);
         MenuItem item = menu.findItem(R.id.action_favorite);
         if (mInitStatus) {
-            item.setIcon(R.mipmap.ic_star_white);
+            item.setIcon(R.drawable.ic_star_white);
         }
         return true;
     }

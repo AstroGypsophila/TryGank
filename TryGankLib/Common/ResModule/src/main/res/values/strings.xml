@@ -18,7 +18,7 @@
     <string name="cars">汽车</string>
     <string name="jokes">笑话</string>
     <string name="load_data_failed">加载数据失败</string>
-    <string name="nav_netease_news">网易新闻</string>
+    <string name="nav_news">时事新闻</string>
     <!--gank-->
     <string name="gank_android">Android</string>
     <string name="gank_ios">iOS</string>
@@ -53,7 +53,7 @@
     <string name="take_photo">照相</string>
     <string name="choose_from_gallery">从相册选择</string>
 
-    <string name="quit_toast">再按一次返回键退出应用</string>
+    <string name="quit_toast">再按一次返回键退出</string>
 
     <string name="ok">确定</string>
     <string name="cancel">取消</string>

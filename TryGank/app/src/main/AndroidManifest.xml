@@ -25,23 +25,23 @@
         </activity>
         <activity
             android:name=".business.news.view.NewsDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Translucent"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".business.gank.view.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
             android:name=".business.gank.view.GankDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
             android:name=".business.gank.view.GankPictureActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
             android:name=".business.gank.view.UserInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar.Translucent"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
     </application>
 

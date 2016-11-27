@@ -25,7 +25,7 @@
                 android:layout_height="25.0dip"
                 android:layout_marginLeft="12.0dip"
                 android:layout_marginRight="12.0dip"
-                android:src="@mipmap/ic_back_black" />
+                app:srcCompat="@drawable/ic_arrow_back_black" />
 
             <EditText
                 android:id="@+id/search_et"

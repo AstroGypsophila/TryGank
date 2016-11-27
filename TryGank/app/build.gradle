@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.gypsophila.trygank"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -50,9 +50,9 @@ android {
 
         release {
             signingConfig signingConfigs.release
-            minifyEnabled false  //设为false即可断点调试
-            shrinkResources false  //自动移除不用资源
-            debuggable true //设为true
+            minifyEnabled true  //设为false即可断点调试
+            shrinkResources true  //自动移除不用资源
+            debuggable false //设为true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

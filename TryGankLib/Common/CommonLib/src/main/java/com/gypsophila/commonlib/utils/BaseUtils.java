@@ -133,8 +133,8 @@ public class BaseUtils {
     public static long getSDSize() {
         final String path = Environment.getExternalStorageDirectory().getPath();
         final StatFs localStatFs = new StatFs(path);
-        final long blockSize = localStatFs.getBlockSizeLong();
-        return localStatFs.getAvailableBlocksLong() * blockSize;
+        final long blockSize = localStatFs.getBlockSize();
+        return localStatFs.getAvailableBlocks() * blockSize;
     }
 
     public static final void saveObject(String path, Object object) {
