@@ -2,7 +2,6 @@ package com.gypsophila.trygank.business.gank.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,9 +10,8 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/28
  */
-public class GankIOPlusBean implements Serializable {
+public class GankIOPlusBean extends GankBase {
 
-    public boolean error;
     public List<String> category;
     public Result results;
 

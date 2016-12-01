@@ -19,9 +19,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
+import com.gypsophila.trygank.base.AppSwipeBackActivity;
 import com.gypsophila.trygank.engine.AppConstants;
-import com.gypsophila.trygank.utils.ToolsUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -31,7 +30,6 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Description :
@@ -39,7 +37,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/28
  */
-public class UserInfoActivity extends AppSwipeBackActivitiy {
+public class UserInfoActivity extends AppSwipeBackActivity {
 
     /**
      * 头像大小

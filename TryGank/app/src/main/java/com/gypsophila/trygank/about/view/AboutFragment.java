@@ -12,7 +12,7 @@ import com.gypsophila.trygank.R;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/8/24
  */
 public class AboutFragment extends Fragment {

@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
+import com.gypsophila.trygank.base.AppSwipeBackActivity;
 import com.gypsophila.trygank.business.gank.model.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankDetailPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankDetailPresenter;
@@ -30,7 +30,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/6
  */
-public class GankDetailActivity extends AppSwipeBackActivitiy implements IGankDetail {
+public class GankDetailActivity extends AppSwipeBackActivity implements IGankDetail {
 
     private WebView mWebView;
     private Toolbar mToolbar;

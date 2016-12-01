@@ -10,10 +10,10 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/16
  */
-public abstract class AppSwipeBackActivitiy extends SwipeBackActivity {
+public abstract class AppSwipeBackActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

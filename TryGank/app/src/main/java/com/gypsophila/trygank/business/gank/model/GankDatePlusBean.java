@@ -1,6 +1,5 @@
 package com.gypsophila.trygank.business.gank.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,8 +8,7 @@ import java.util.List;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/11/9
  */
-public class GankDatePlusBean implements Serializable {
+public class GankDatePlusBean extends GankBase {
 
-    public boolean error;
     public List<String> results;
 }

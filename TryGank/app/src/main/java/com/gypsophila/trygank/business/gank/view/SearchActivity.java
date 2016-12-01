@@ -13,14 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.base.AppSwipeBackActivitiy;
+import com.gypsophila.trygank.base.AppSwipeBackActivity;
 import com.gypsophila.trygank.listener.SearchTextWatcher;
 import com.gypsophila.trygank.systemevent.FinishInputEvent;
-import com.gypsophila.trygank.utils.ToolsUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 /**
  * Description :
@@ -28,11 +26,10 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/10/6
  */
-public class SearchActivity extends AppSwipeBackActivitiy {
+public class SearchActivity extends AppSwipeBackActivity {
 
     private ImageView mBackIv;
     private EditText mSearchEt;
-    private SwipeBackLayout mSwipeBackLayout;
     private Context mContext;
     private InputMethodManager mInputManager;
     private TextWatcher mTextWatcher = new SearchTextWatcher();
@@ -47,9 +44,6 @@ public class SearchActivity extends AppSwipeBackActivitiy {
     }
 
     private void initViews() {
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeSize(ToolsUtil.getWidthInPx(this));
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mBackIv = (ImageView) findViewById(R.id.back_iv);
         mBackIv.setOnClickListener(new View.OnClickListener() {
             @Override
