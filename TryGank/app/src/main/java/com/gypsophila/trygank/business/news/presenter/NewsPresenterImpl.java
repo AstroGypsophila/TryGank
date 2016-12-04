@@ -9,14 +9,14 @@ import com.gypsophila.trygank.business.news.model.NewsBusinessImpl;
 import com.gypsophila.trygank.business.news.model.NewsLoadListener;
 import com.gypsophila.trygank.business.news.view.INewsView;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/8/27
  */
 public class NewsPresenterImpl implements INewsPresenter, NewsLoadListener {

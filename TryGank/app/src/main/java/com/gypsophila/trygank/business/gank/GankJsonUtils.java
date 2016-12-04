@@ -2,15 +2,15 @@ package com.gypsophila.trygank.business.gank;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.gypsophila.trygank.business.gank.model.GankDatePlusBean;
-import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
-import com.gypsophila.trygank.business.gank.model.GankPlusBean;
-import com.gypsophila.trygank.business.gank.model.SearchPlusBean;
+import com.gypsophila.trygank.entity.GankDatePlusBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
+import com.gypsophila.trygank.entity.GankPlusBean;
+import com.gypsophila.trygank.entity.SearchPlusBean;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/4
  */
 public class GankJsonUtils {

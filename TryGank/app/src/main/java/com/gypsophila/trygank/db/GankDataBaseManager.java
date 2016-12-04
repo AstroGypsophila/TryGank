@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.utils.DateUtil;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/7
  */
 public class GankDataBaseManager {

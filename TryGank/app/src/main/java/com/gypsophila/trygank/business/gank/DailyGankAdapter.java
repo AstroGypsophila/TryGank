@@ -9,15 +9,15 @@ import android.widget.TextView;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.business.gank.model.GankBean;
-import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
+import com.gypsophila.trygank.entity.GankBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.business.gank.view.GankPictureActivity;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/8
  */
 public class DailyGankAdapter extends AbstractRecyclerAdapter<GankBean> {

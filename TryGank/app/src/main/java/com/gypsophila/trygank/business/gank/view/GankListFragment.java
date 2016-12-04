@@ -9,13 +9,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankAdapter;
-import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
 
@@ -25,7 +28,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/9/29
  */
 public class GankListFragment extends Fragment implements IGankView,
@@ -44,6 +47,8 @@ public class GankListFragment extends Fragment implements IGankView,
     private List<GankBean> mData;
     private TextView mEmptyView;
     private int itemType;
+    private boolean isLoading = false;
+
 
     public static GankListFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -59,6 +64,9 @@ public class GankListFragment extends Fragment implements IGankView,
         mContext = getActivity();
         mType = getArguments().getString("type");
         mGankPresenter = new GankPresenterImpl(this);
+        if (TYPE_FAVORITE.equals(mType)) {
+            setHasOptionsMenu(true);
+        }
     }
 
     @Nullable
@@ -106,6 +114,9 @@ public class GankListFragment extends Fragment implements IGankView,
 
     @Override
     public void addNews(List<GankBean> gankBeanList) {
+        if (mPageIndex == 1 && mData != null) {
+            mData.clear();
+        }
         //收藏不需要footerview
         if (TYPE_FAVORITE.equals(mType)) {
             mAdapter.isShowFooter(false);
@@ -123,11 +134,13 @@ public class GankListFragment extends Fragment implements IGankView,
         if (gankBeanList == null || gankBeanList.size() <= 0) {
             mAdapter.isShowFooter(false);
         }
+        isLoading = false;
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void hideProgress() {
+        isLoading = false;
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
@@ -139,9 +152,6 @@ public class GankListFragment extends Fragment implements IGankView,
     @Override
     public void onRefresh() {
         mPageIndex = 1;
-        if (mData != null) {
-            mData.clear();
-        }
         if (TYPE_FAVORITE.equals(mType)) {
             mGankPresenter.loadGankFromDataBase(getActivity());
         } else {
@@ -159,7 +169,10 @@ public class GankListFragment extends Fragment implements IGankView,
 
             } else {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                        && lastVisibleItem + 1 == mAdapter.getItemCount()
+                        && !isLoading) {
+                    isLoading = true;
+                    mAdapter.isShowFooter(true);
                     mPageIndex++;
                     mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
                 }
@@ -174,4 +187,23 @@ public class GankListFragment extends Fragment implements IGankView,
         }
     };
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        if (TYPE_FAVORITE.equals(mType)) {
+            inflater.inflate(R.menu.base_toolbar_menu, menu);
+            MenuItem item = menu.findItem(R.id.action_notification);
+            item.setVisible(false);
+        }
+
+    }
+
+    public boolean getLoadingStatus() {
+        return isLoading;
+    }
+
+    public void setLoadingStatus(boolean isLoading) {
+        this.isLoading = isLoading;
+    }
 }

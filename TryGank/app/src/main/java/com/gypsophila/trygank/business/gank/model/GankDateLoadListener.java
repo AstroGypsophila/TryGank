@@ -1,9 +1,11 @@
 package com.gypsophila.trygank.business.gank.model;
 
+import com.gypsophila.trygank.entity.GankDatePlusBean;
+
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/10
  */
 public interface GankDateLoadListener {

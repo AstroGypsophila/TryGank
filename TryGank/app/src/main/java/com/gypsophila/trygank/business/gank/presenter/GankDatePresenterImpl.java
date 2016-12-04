@@ -6,19 +6,19 @@ import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.model.GankDateBusinessImpl;
 import com.gypsophila.trygank.business.gank.model.GankDateLoadListener;
-import com.gypsophila.trygank.business.gank.model.GankDatePlusBean;
-import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
+import com.gypsophila.trygank.entity.GankDatePlusBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
 import com.gypsophila.trygank.business.gank.model.GankTodayLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankDateBusiness;
 import com.gypsophila.trygank.business.gank.view.ITodayView;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/6
  */
 public class GankDatePresenterImpl implements IGankDatePresenter, GankTodayLoadListener {

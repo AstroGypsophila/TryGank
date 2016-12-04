@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.business.main.view;
+package com.gypsophila.trygank.business.main;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,16 +30,14 @@ import com.gypsophila.commonlib.system.SystemConst;
 import com.gypsophila.commonlib.utils.PreferenceUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
+import com.gypsophila.trygank.business.AppConstants;
 import com.gypsophila.trygank.business.gank.ColorsListAdapter;
 import com.gypsophila.trygank.business.gank.view.GankFragment;
 import com.gypsophila.trygank.business.gank.view.GankListFragment;
 import com.gypsophila.trygank.business.gank.view.SearchActivity;
 import com.gypsophila.trygank.business.gank.view.TodayFragment;
 import com.gypsophila.trygank.business.gank.view.UserInfoActivity;
-import com.gypsophila.trygank.business.main.presenter.IMainPresenter;
-import com.gypsophila.trygank.business.main.presenter.MainPresenterImpl;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
-import com.gypsophila.trygank.engine.AppConstants;
 import com.gypsophila.trygank.systemevent.ChangeTheme;
 import com.gypsophila.trygank.utils.ThemeUtil;
 
@@ -66,7 +64,6 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     private Context mContext;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private IMainPresenter mMainPresenter;
     private NavigationView mNavigationView;
 
     @Override
@@ -79,7 +76,6 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         mContext = this;
         initToolbar();
         initView();
-        mMainPresenter = new MainPresenterImpl(this);
         switchToGank();
     }
 
@@ -94,7 +90,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
 
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.inflateMenu(R.menu.base_toolbar_menu); //设置右上角的填充菜单
+//        mToolbar.inflateMenu(R.menu.base_toolbar_menu); //设置右上角的填充菜单
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //启用导航菜单
@@ -111,7 +107,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                     mDrawerLayout.closeDrawers();
                     return true;
                 }
-                mMainPresenter.switchNavigation(item.getItemId());
+                switchNavigation(item.getItemId());
                 mToolbar.setTitle(item.getTitle());
                 item.setChecked(true);
                 mDrawerLayout.closeDrawers();
@@ -251,6 +247,8 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.base_toolbar_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_filter);
+        item.setVisible(false);
         return true;
     }
 
@@ -321,5 +319,23 @@ public class MainActivity extends AppBaseActivity implements IMainView {
 
     private void quit() {
         finish();
+    }
+
+    @Override
+    public void switchNavigation(int id) {
+        switch (id) {
+            case R.id.menu_gank:
+                switchToGank();
+                break;
+            case R.id.menu_today:
+                switchToToday();
+                break;
+            case R.id.menu_news:
+                switchToNews();
+                break;
+            case R.id.menu_favorite:
+                switchToFavorite();
+                break;
+        }
     }
 }

@@ -5,14 +5,16 @@ import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.GankJsonUtils;
 import com.gypsophila.trygank.db.GankDataBaseManager;
-import com.gypsophila.trygank.engine.RemoteService;
+import com.gypsophila.trygank.business.RemoteService;
+import com.gypsophila.trygank.entity.GankBean;
+import com.gypsophila.trygank.entity.GankPlusBean;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/4
  */
 public class GankBusinessImpl implements IGankBusiness {

@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.about.view;
+package com.gypsophila.trygank.business.about;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankSearchAdapter;
-import com.gypsophila.trygank.business.gank.model.SearchBean;
+import com.gypsophila.trygank.entity.SearchBean;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
 import com.gypsophila.trygank.business.gank.presenter.SearchPresenterImpl;
 import com.gypsophila.trygank.systemevent.FinishInputEvent;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/23
  */
 public class SearchListFragment extends Fragment implements ISearchView, SwipeRefreshLayout.OnRefreshListener{

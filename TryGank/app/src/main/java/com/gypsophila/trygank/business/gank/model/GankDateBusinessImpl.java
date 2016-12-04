@@ -4,14 +4,16 @@ import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.GankJsonUtils;
-import com.gypsophila.trygank.engine.RemoteService;
+import com.gypsophila.trygank.business.RemoteService;
+import com.gypsophila.trygank.entity.GankDatePlusBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/6
  */
 public class GankDateBusinessImpl implements IGankDateBusiness {

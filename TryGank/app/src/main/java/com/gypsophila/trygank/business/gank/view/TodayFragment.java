@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.DailyGankAdapter;
-import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
 import com.gypsophila.trygank.business.gank.presenter.GankDatePresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankDatePresenter;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/1
  */
 public class TodayFragment extends Fragment implements ITodayView {

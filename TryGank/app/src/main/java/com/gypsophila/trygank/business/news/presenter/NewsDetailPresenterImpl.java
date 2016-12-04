@@ -5,7 +5,7 @@ import android.content.Context;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.news.model.NewsBusinessImpl;
 import com.gypsophila.trygank.business.news.model.NewsDetailLoadListener;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 import com.gypsophila.trygank.business.news.model.INewsBusiness;
 import com.gypsophila.trygank.business.news.model.NewsDetailBean;
 import com.gypsophila.trygank.business.news.view.INewsDetaiView;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/9/18
  */
 public class NewsDetailPresenterImpl implements INewsDetailPresenter, NewsDetailLoadListener {

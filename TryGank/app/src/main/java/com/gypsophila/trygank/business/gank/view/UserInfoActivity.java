@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppSwipeBackActivity;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -34,7 +34,7 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/28
  */
 public class UserInfoActivity extends AppSwipeBackActivity {

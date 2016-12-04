@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.business.gank.model;
+package com.gypsophila.trygank.entity;
 
 import java.io.Serializable;
 

@@ -1,13 +1,13 @@
 package com.gypsophila.trygank.business.gank.view;
 
-import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.entity.GankBean;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/9/28
  */
 public interface IGankView {

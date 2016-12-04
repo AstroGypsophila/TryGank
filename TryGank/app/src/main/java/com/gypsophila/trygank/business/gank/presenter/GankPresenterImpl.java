@@ -4,19 +4,19 @@ import android.content.Context;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
-import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.model.GankBusinessImpl;
 import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
 import com.gypsophila.trygank.business.gank.view.IGankView;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/5
  */
 public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankBean> {
@@ -31,6 +31,7 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankB
 
     @Override
     public void loadGank(Context ctx, String type, int pageIndex, List<RequestParameter> params) {
+
         if (pageIndex == 1) {
             mGankView.showProgress();
         }

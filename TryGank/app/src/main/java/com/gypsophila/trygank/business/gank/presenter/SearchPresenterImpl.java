@@ -6,17 +6,17 @@ import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
-import com.gypsophila.trygank.business.gank.model.SearchBean;
+import com.gypsophila.trygank.entity.SearchBean;
 import com.gypsophila.trygank.business.gank.model.SearchBusinessImpl;
 import com.gypsophila.trygank.business.gank.view.ISearchView;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 import java.util.List;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/23
  */
 public class SearchPresenterImpl implements IGankPresenter, GankLoadListener<SearchBean> {

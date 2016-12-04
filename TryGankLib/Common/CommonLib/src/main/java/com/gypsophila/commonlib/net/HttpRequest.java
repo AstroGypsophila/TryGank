@@ -119,17 +119,16 @@ public class HttpRequest implements Runnable {
 
             //发送请求
             mResponse = mHttpClient.execute(mRequest);
-            final int statusCode = mResponse.getStatusLine().getStatusCode();
-            if (statusCode == HttpStatus.SC_OK) {
-                final ByteArrayOutputStream content = new ByteArrayOutputStream();
-                mResponse.getEntity().writeTo(content);
-                final String strResponse = new String(content.toByteArray()).trim();
-                Logger.t("AstroGypsophila").w(strResponse);
+            if (mRequestCallback != null) {
+                final int statusCode = mResponse.getStatusLine().getStatusCode();
+                if (statusCode == HttpStatus.SC_OK) {
+                    final ByteArrayOutputStream content = new ByteArrayOutputStream();
+                    mResponse.getEntity().writeTo(content);
+                    final String strResponse = new String(content.toByteArray()).trim();
+                    Logger.t("AstroGypsophila").w(strResponse);
 
-//                strResponse = "{'isError':false,'errorType':0,'errorMessage':'','result':{'city':'北京','cityid':'101010100','temp':'17','WD':'西南风','WS':'2级','SD':'54%','WSE':'2','time':'23:15','isRadar':'1','Radar':'JC_RADAR_AZ9010_JB','njd':'暂无实况','qy':'1016'}}";
 
-                //设置回调函数
-                if (mRequestCallback != null) {
+                    //设置回调函数
 //                    final Response responseInJson = JSON.parseObject(strResponse, Response.class);
 //                    if (responseInJson.hasError()) {
 //                        handleNetworkError(responseInJson.getErrorMessage());
@@ -216,12 +215,15 @@ public class HttpRequest implements Runnable {
     }
 
     private void handleNetworkError(final String errorMessage) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                mRequestCallback.onFail(errorMessage);
-            }
-        });
+        if (mRequestCallback!=null) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mRequestCallback.onFail(errorMessage);
+                }
+            });
+        }
+
     }
 
     public static String inputStreamToString(final InputStream is) throws IOException {

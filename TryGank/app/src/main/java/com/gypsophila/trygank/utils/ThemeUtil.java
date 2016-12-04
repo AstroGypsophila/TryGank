@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.gypsophila.commonlib.utils.PreferenceUtils;
 import com.gypsophila.resmodule.R;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 
 /**
  * created by lguipeng

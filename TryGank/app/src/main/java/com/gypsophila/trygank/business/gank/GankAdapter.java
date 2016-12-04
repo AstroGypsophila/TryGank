@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.business.gank.model.GankBean;
+import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.business.gank.view.GankPictureActivity;
 import com.gypsophila.trygank.utils.DateUtil;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/4
  */
 public class GankAdapter extends AbstractRecyclerAdapter {

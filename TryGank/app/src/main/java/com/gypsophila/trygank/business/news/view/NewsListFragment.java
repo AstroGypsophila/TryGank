@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.news.presenter.INewsPresenter;
-import com.gypsophila.trygank.engine.AppConstants;
+import com.gypsophila.trygank.business.AppConstants;
 import com.gypsophila.trygank.business.news.NewsAdapter;
 import com.gypsophila.trygank.business.news.model.NewsBean;
 import com.gypsophila.trygank.business.news.presenter.NewsPresenterImpl;
@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/8/24
  */
 public class NewsListFragment extends Fragment implements INewsView, SwipeRefreshLayout.OnRefreshListener {

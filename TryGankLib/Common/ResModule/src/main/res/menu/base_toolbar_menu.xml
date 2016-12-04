@@ -17,6 +17,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter_list"
+        android:title="@string/menu_filter"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_item1"
         android:title="@string/item_01"
         app:showAsAction="never" />

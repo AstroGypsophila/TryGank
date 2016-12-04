@@ -1,11 +1,11 @@
 package com.gypsophila.trygank.business.gank.view;
 
-import com.gypsophila.trygank.business.gank.model.GankIOPlusBean;
+import com.gypsophila.trygank.entity.GankIOPlusBean;
 
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/6
  */
 public interface ITodayView {

@@ -6,8 +6,8 @@ import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
 import com.gypsophila.commonlib.net.RequestParameter;
 import com.gypsophila.trygank.business.news.view.NewsFragment;
-import com.gypsophila.trygank.engine.AppConstants;
-import com.gypsophila.trygank.engine.RemoteService;
+import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.business.RemoteService;
 import com.gypsophila.trygank.business.news.NewsJsonUtils;
 import com.orhanobut.logger.Logger;
 
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Description : 新闻业务类，应在此处就完成数据解析
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/8/27
  */
 public class NewsBusinessImpl implements INewsBusiness {

@@ -2,14 +2,13 @@ package com.gypsophila.trygank.business.gank;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.business.gank.model.GankBean;
-import com.gypsophila.trygank.business.gank.model.SearchBean;
+import com.gypsophila.trygank.entity.GankBean;
+import com.gypsophila.trygank.entity.SearchBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.utils.DateUtil;
 
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/23
  */
 public class GankSearchAdapter extends AbstractRecyclerAdapter<SearchBean> {
