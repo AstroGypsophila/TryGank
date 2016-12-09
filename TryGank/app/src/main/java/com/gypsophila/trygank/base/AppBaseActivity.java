@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestCallback;
+import com.gypsophila.trygank.umeng.UmengEvent;
 import com.gypsophila.trygank.utils.ThemeUtil;
 
 /**
@@ -47,5 +48,17 @@ public abstract class AppBaseActivity extends BaseActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UmengEvent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        UmengEvent.onPause(this);
     }
 }

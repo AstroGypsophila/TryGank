@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.systemevent.ChangeTheme;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -117,7 +116,6 @@ public class GankFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ChangeTheme event) {
-        Logger.t("cj_data").w("invoke");
         mTabLayout.setBackgroundColor(getActivity().getResources().getColor(event.colorValue));
     }
 

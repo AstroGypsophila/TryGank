@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.systemevent.ChangeTheme;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +104,23 @@ public class NewsFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ChangeTheme event) {
+        mTabLayout.setBackgroundColor(getActivity().getResources().getColor(event.colorValue));
     }
 }
 

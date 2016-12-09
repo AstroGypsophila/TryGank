@@ -15,8 +15,8 @@ android {
         applicationId "com.gypsophila.trygank"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 1001
+        versionName "1.0.1"
     }
     signingConfigs {
 
@@ -60,6 +60,16 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    productFlavors {
+        xiaomimarket {}
+        wandoujia{}
+        yingyongbao {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
 }
 
 dependencies {
@@ -67,4 +77,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.jsoup:jsoup:1.10.1'
     compile project(':SwipeBack')
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

@@ -40,13 +40,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="156dp">
+                android:layout_marginTop="106dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/user_avatar"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="24dp"
                     android:src="@mipmap/deal"
                     app:civ_border_color="#FFFFFFFF"
@@ -56,9 +56,10 @@
                     android:id="@+id/user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/user_avatar"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:layout_toRightOf="@id/user_avatar"
                     android:text="@string/user_nickname"
                     android:textColor="@color/tab_indicator"
                     android:textSize="18sp" />
@@ -101,23 +102,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="介绍"
-                   />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Gank是一款App"/>
+                    android:text="介绍" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gank是一款App" />
             </LinearLayout>
         </ScrollView>
 

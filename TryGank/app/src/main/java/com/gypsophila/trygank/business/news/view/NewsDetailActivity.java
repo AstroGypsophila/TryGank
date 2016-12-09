@@ -12,15 +12,12 @@ import android.widget.ProgressBar;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.base.AppSwipeBackActivity;
 import com.gypsophila.trygank.business.news.model.NewsBean;
 import com.gypsophila.trygank.business.news.presenter.INewsDetailPresenter;
 import com.gypsophila.trygank.business.news.presenter.NewsDetailPresenterImpl;
-import com.gypsophila.trygank.utils.ToolsUtil;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
-
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Description :
@@ -28,7 +25,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * Github  : https://github.com/AstroGypsophila
  * Date   : 2016/9/11
  */
-public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiView {
+public class NewsDetailActivity extends AppSwipeBackActivity implements INewsDetaiView {
 
     private NewsBean news;
     private Toolbar mToolbar;
@@ -37,7 +34,6 @@ public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiV
     private INewsDetailPresenter mNewsDetailPresenter;
     private ImageView mNewsDetailImg;
     private Context mContext;
-    private SwipeBackLayout mSwipeBackLayout;
     private ProgressBar mProgressBar;
 
     @Override
@@ -52,9 +48,6 @@ public class NewsDetailActivity extends SwipeBackActivity implements INewsDetaiV
         news = (NewsBean) getIntent().getSerializableExtra("news");
         initToolbar();
 
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeSize(ToolsUtil.getWidthInPx(this));
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(news.getTitle());
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar);

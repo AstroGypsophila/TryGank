@@ -103,3 +103,7 @@
 -keep public class com.gypsophila.commonlib.utils.** {
     *;
 }
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
