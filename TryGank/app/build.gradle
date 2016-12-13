@@ -72,10 +72,18 @@ android {
     }
 }
 
+repositories {
+    //反馈arr文件
+    flatDir {
+        dirs project(':Feedback').file('libs')
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'org.jsoup:jsoup:1.10.1'
     compile project(':SwipeBack')
+    compile project(':Feedback')
     compile 'com.umeng.analytics:analytics:latest.integration'
 }

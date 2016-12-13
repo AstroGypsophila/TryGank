@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,12 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.gank.GankAdapter;
-import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
+import com.gypsophila.trygank.entity.GankBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,8 @@ public class GankListFragment extends Fragment implements IGankView,
     private TextView mEmptyView;
     private int itemType;
     private boolean isLoading = false;
+    //页面统计
+    private boolean isCreated = false;
 
 
     public static GankListFragment newInstance(String type) {
@@ -63,6 +67,7 @@ public class GankListFragment extends Fragment implements IGankView,
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mType = getArguments().getString("type");
+        isCreated = true;
         mGankPresenter = new GankPresenterImpl(this);
         if (TYPE_FAVORITE.equals(mType)) {
             setHasOptionsMenu(true);
@@ -149,6 +154,56 @@ public class GankListFragment extends Fragment implements IGankView,
 
     }
 
+    private boolean isFirstInflate = true;
+    private PopupMenu mPopup;
+
+    @Override
+    public void showFilteringPopUpMenu() {
+        if (isFirstInflate || mPopup == null) {
+            mPopup = new PopupMenu(getContext(), getActivity().findViewById(R.id.option_filter));
+            mPopup.getMenuInflater().inflate(R.menu.filter_menu, mPopup.getMenu());
+            isFirstInflate = false;
+            mPopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    for (int i = 0; i < mPopup.getMenu().size(); i++) {
+                        MenuItem menuItem = mPopup.getMenu().getItem(i);
+                        menuItem.setCheckable(false);
+                        menuItem.setChecked(false);
+                    }
+                    item.setCheckable(true);
+                    item.setChecked(true);
+                    switch (item.getItemId()) {
+                        case R.id.all:
+                            Toast.makeText(mContext, "all", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.android:
+                            Toast.makeText(mContext, "android", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.ios:
+                            Toast.makeText(mContext, "ios", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.welfare:
+                            Toast.makeText(mContext, "福利", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.front_end:
+                            Toast.makeText(mContext, "前端", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.app:
+                            Toast.makeText(mContext, "App", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.extra:
+                            Toast.makeText(mContext, "拓展", Toast.LENGTH_SHORT).show();
+                            break;
+
+                    }
+                    return true;
+                }
+            });
+        }
+
+        mPopup.show();
+    }
+
     @Override
     public void onRefresh() {
         mPageIndex = 1;
@@ -189,14 +244,24 @@ public class GankListFragment extends Fragment implements IGankView,
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         if (TYPE_FAVORITE.equals(mType)) {
-            inflater.inflate(R.menu.base_toolbar_menu, menu);
+            inflater.inflate(R.menu.fragment_option_menu, menu);
             MenuItem item = menu.findItem(R.id.action_notification);
             item.setVisible(false);
         }
 
+    }
+
+    //http://www.cnblogs.com/mengdd/p/5590634.html
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option_filter:
+                showFilteringPopUpMenu();
+                return true;
+        }
+        return false;
     }
 
     public boolean getLoadingStatus() {
@@ -206,4 +271,18 @@ public class GankListFragment extends Fragment implements IGankView,
     public void setLoadingStatus(boolean isLoading) {
         this.isLoading = isLoading;
     }
+
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        if (!isCreated) {
+//            //第一次调用setUserVisibleHint在create前，会导致错误统计
+//            return;
+//        }
+//        if (isVisibleToUser) {
+//            Logger.t("cj_data").w("invoke mtype " + mType);
+//            UmengEvent.onFragmentStart(mType);
+//        } else {
+//            UmengEvent.onFragmentEnd(mType);
+//        }
+//    }
 }

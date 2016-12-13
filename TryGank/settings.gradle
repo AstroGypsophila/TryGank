@@ -1,4 +1,4 @@
-include ':app', ':ResModule'
+include ':app', ':ResModule', ':Feedback'
 include ':CommonLib';
 include ':SwipeBack';
 project(':CommonLib').projectDir = new File('../TryGankLib/Common/CommonLib')
@@ -6,3 +6,5 @@ include ':SwipeBack';
 project(':SwipeBack').projectDir = new File('../TryGankLib/Common/SwipeBack')
 include ':ResModule';
 project(':ResModule').projectDir = new File('../TryGankLib/Common/ResModule')
+include ':Feedback';
+project(':Feedback').projectDir = new File('../TryGankLib/Common/Feedback')

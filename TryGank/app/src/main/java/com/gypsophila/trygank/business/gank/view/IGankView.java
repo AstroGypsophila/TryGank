@@ -20,4 +20,6 @@ public interface IGankView {
     void hideProgress();
 
     void showLoadFailMsg();
+
+    void showFilteringPopUpMenu();
 }

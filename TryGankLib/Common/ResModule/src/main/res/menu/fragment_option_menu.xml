@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white"
+        android:title="@string/menu_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_notification"
+        android:icon="@drawable/ic_notifications_white"
+        android:title="@string/menu_notifications"
+        app:showAsAction="ifRoom" />
+
+    <!--其他item id命名与activity中的一样，将在activity中被处理，不会分发，就不必再重复写逻辑-->
+    <item
+        android:id="@+id/option_filter"
+        android:icon="@drawable/ic_filter_list"
+        android:title="@string/menu_filter"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_item1"
+        android:title="@string/item_01"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_item2"
+        android:title="@string/item_02"
+        app:showAsAction="never" />
+</menu>

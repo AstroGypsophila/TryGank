@@ -26,6 +26,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.alibaba.sdk.android.feedback.util.IWxCallback;
 import com.gypsophila.commonlib.system.SystemConst;
 import com.gypsophila.commonlib.utils.PreferenceUtils;
 import com.gypsophila.trygank.R;
@@ -99,12 +101,36 @@ public class MainActivity extends AppBaseActivity implements IMainView {
         //取消选中后的颜色变化
         mNavigationView.setItemTextColor(null);
         mNavigationView.setItemIconTintList(null);
+        //可选功能，第二个参数是当前登录的openim账号，如果是匿名账号方式使用，则可以传空的。返回的未读数在onsuccess接口数组中第一个元素，直接转成Integer就可以。
+        FeedbackAPI.getFeedbackUnreadCount(mContext, null, new IWxCallback() {
+            @Override
+            public void onSuccess(Object... objects) {
+                Integer reads = (Integer) objects[0];
+                if (reads > 0) {
+                    Toast.makeText(mContext, "有" + reads + "条反馈未读", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onProgress(int i) {
+
+            }
+        });
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 if (item.getItemId() == R.id.menu_palette) {
                     showThemeDialog();
                     mDrawerLayout.closeDrawers();
+                    return true;
+                } else if (item.getItemId() == R.id.menu_feedback) {
+                    //如果发生错误，请查看logcat日志
+                    FeedbackAPI.openFeedbackActivity(mContext);
                     return true;
                 }
                 switchNavigation(item.getItemId());
@@ -121,26 +147,6 @@ public class MainActivity extends AppBaseActivity implements IMainView {
             public void onClick(View v) {
                 startUserInfoActivity();
                 mDrawerLayout.closeDrawers();
-            }
-        });
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.action_search) {
-                    Toast.makeText(mContext, R.string.menu_search, Toast.LENGTH_SHORT).show();
-                    switchToSearch();
-                } else if (id == R.id.action_notification) {
-                    Toast.makeText(mContext, R.string.menu_notifications, Toast.LENGTH_SHORT).show();
-
-                } else if (id == R.id.action_item1) {
-                    Toast.makeText(mContext, R.string.item_01, Toast.LENGTH_SHORT).show();
-
-                } else if (id == R.id.action_item2) {
-                    Toast.makeText(mContext, R.string.item_02, Toast.LENGTH_SHORT).show();
-
-                }
-                return true;
             }
         });
     }
@@ -241,6 +247,28 @@ public class MainActivity extends AppBaseActivity implements IMainView {
             window.setStatusBarColor(mContext.getResources().getColor(color));
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+    }
+
+    //mToolbar.setOnMenuItemClickListener也可以实现
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                switchToSearch();
+                return true;
+            case R.id.action_notification:
+                Toast.makeText(mContext, R.string.menu_notifications, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_item1:
+                Toast.makeText(mContext, R.string.item_01, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_item2:
+                Toast.makeText(mContext, R.string.item_02, Toast.LENGTH_SHORT).show();
+                return true;
+
+        }
+        return false;
     }
 
     //设置toolbar菜单
