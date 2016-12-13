@@ -18,6 +18,7 @@ public class UmengEvent {
         if (DEBUG) {
             MobclickAgent.setDebugMode(true);
         }
+//        MobclickAgent.openActivityDurationTrack(false);
     }
 
     /**
@@ -26,6 +27,10 @@ public class UmengEvent {
      * @param ctx
      */
     public static void onResume(Context ctx) {
+//        if (ctx instanceof Activity) {
+//            Activity activity = (Activity) ctx;
+//            MobclickAgent.onPageEnd(activity.getClass().getSimpleName());
+//        }
         MobclickAgent.onResume(ctx);
     }
 
@@ -35,7 +40,19 @@ public class UmengEvent {
      * @param ctx
      */
     public static void onPause(Context ctx) {
-        MobclickAgent.onResume(ctx);
+//        if (ctx instanceof Activity) {
+//            Activity activity = (Activity) ctx;
+//            MobclickAgent.onPageEnd(activity.getClass().getSimpleName());
+//        }
+        MobclickAgent.onPause(ctx);
+    }
+
+    public static void onFragmentStart(String fragmentTag) {
+        MobclickAgent.onPageStart(fragmentTag);
+    }
+
+    public static void onFragmentEnd(String fragmentTag) {
+        MobclickAgent.onPageEnd(fragmentTag);
     }
 
 }
