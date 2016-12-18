@@ -12,14 +12,14 @@
     <string name="item_02">Item 2</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="user_nickname">Gypsophila</string>
+    <string name="author_nickname">Gypsophila</string>
+    <string name="author_github">https://github.com/AstroGypsophila</string>
+    <string name="app_introduce_title">TryGank 介绍</string>
+    <string name="app_introduce_content">TryGank 是一款基于 gank.io 接口的第三方 Android 客户端。\n主要数据内容包括每日精选的一张妹纸图、工程师知识干货，功能模块包括根据干货数据展示但不局限于此，以后更多地会是自己学习过程中的模块整合。</string>
 
-    <string name="top">头条</string>
-    <string name="nba">NBA</string>
-    <string name="cars">汽车</string>
-    <string name="jokes">笑话</string>
+
     <string name="load_data_failed">加载数据失败</string>
-    <string name="nav_news">时事新闻</string>
+    <string name="nav_news">闲读</string>
     <!--gank-->
     <string name="gank_android">Android</string>
     <string name="gank_ios">iOS</string>
@@ -29,10 +29,11 @@
     <string name="gank_app">App</string>
     <string name="gank_extra">拓展资源</string>
     <string name="gank_via">via %1$s</string>
-    <string name="empty_tip">暂无数据</string>
     <string name="share_send_to">分享至</string>
-    <string name="user_nick">Gypsophila</string>
-    <string name="author_github">https://github.com/AstroGypsophila</string>
+
+    <!--empty_tip-->
+    <string name="favorite_empty_tip">暂无数据，赶紧去搜索一篇好文章收藏吧~</string>
+
 
     <!--menu-->
     <string name="menu_favorite">收藏</string>

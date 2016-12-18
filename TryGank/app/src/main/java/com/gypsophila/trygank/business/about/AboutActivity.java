@@ -1,4 +1,4 @@
-package com.gypsophila.trygank.business.gank.view;
+package com.gypsophila.trygank.business.about;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -29,7 +29,6 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 /**
  * Description :
@@ -37,7 +36,7 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
  * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/28
  */
-public class UserInfoActivity extends AppSwipeBackActivity {
+public class AboutActivity extends AppSwipeBackActivity {
 
     /**
      * 头像大小
@@ -52,7 +51,6 @@ public class UserInfoActivity extends AppSwipeBackActivity {
     private Context mContext;
     private String headerImgPath;
     private Toolbar mToolbar;
-    private SwipeBackLayout mSwipeBackLayout;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
@@ -80,23 +78,19 @@ public class UserInfoActivity extends AppSwipeBackActivity {
     }
 
     private void initViews() {
-//        mSwipeBackLayout = getSwipeBackLayout();
-//        mSwipeBackLayout.setEdgeSize(ToolsUtil.getWidthInPx(this));
-//        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mCollapsingToolbarLayout.setTitle(getString(R.string.user_nick));
         blurImg = (ImageView) findViewById(R.id.blur_img_bg);
         avatarImg = (CircleImageView) findViewById(R.id.user_avatar);
         Glide.with(mContext)
-                .load(R.mipmap.deal)
-                .bitmapTransform(new BlurTransformation(mContext, 5))
+                .load(R.mipmap.author_avatar)
+                .bitmapTransform(new BlurTransformation(mContext, 8))
                 .into(blurImg);
-        avatarImg.setImageResource(R.mipmap.deal);
+        avatarImg.setImageResource(R.mipmap.author_avatar);
 
         avatarImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(UserInfoActivity.this);
+                final Dialog dialog = new Dialog(AboutActivity.this);
                 View view = View.inflate(mContext, R.layout.user_header_item, null);
                 dialog.setContentView(view);
                 RelativeLayout cameraLayout = (RelativeLayout) view.findViewById(R.id.user_header_camaralayout);

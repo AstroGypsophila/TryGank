@@ -2,6 +2,7 @@ package com.gypsophila.trygank.business.gank;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,9 @@ import android.widget.TextView;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
-import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.business.gank.view.GankPictureActivity;
+import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.utils.DateUtil;
 
 import java.util.List;
@@ -74,7 +75,9 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             GankViewHolder gankViewHolder = (GankViewHolder) holder;
             GankBean gankBean = (GankBean) mBeanList.get(position);
             gankViewHolder.gankTitle.setText(gankBean.desc);
-            gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
+            if (!TextUtils.isEmpty(gankBean.who)) {
+                gankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
+            }
             gankViewHolder.gankTime.setText(DateUtil.DateToString(gankBean.publishTime));
         } else if (holder instanceof PhotoViewHolder) {
             PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
@@ -86,7 +89,9 @@ public class GankAdapter extends AbstractRecyclerAdapter {
             ImageGankViewHolder imageGankViewHolder = (ImageGankViewHolder) holder;
             GankBean gankBean = (GankBean) mBeanList.get(position);
             imageGankViewHolder.gankTitle.setText(gankBean.desc);
-            imageGankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
+            if (!TextUtils.isEmpty(gankBean.who)) {
+                imageGankViewHolder.gankVia.setText(mContext.getString(R.string.gank_via, gankBean.who));
+            }
             imageGankViewHolder.gankTime.setText(DateUtil.DateToString(gankBean.publishTime));
             ImageLoaderUtils.loadImage(mContext, imageGankViewHolder.imageView, gankBean.images[0]);
             holder.itemView.setOnClickListener(new View.OnClickListener() {

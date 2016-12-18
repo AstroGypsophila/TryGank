@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/9/27
  * copy from:https://github.com/laobie/StatusBarUtil
  */

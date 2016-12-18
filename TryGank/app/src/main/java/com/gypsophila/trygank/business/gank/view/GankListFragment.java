@@ -3,7 +3,9 @@ package com.gypsophila.trygank.business.gank.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,14 +17,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gypsophila.trygank.R;
+import com.gypsophila.trygank.business.AppConstants;
 import com.gypsophila.trygank.business.gank.GankAdapter;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
 import com.gypsophila.trygank.entity.GankBean;
+import com.gypsophila.trygank.umeng.UmengEvent;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +51,12 @@ public class GankListFragment extends Fragment implements IGankView,
     private Context mContext;
     private int mPageIndex;
     private List<GankBean> mData;
-    private TextView mEmptyView;
     private int itemType;
     private boolean isLoading = false;
     //页面统计
     private boolean isCreated = false;
 
+    private NestedScrollView mEmptyLayout;
 
     public static GankListFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -84,7 +88,7 @@ public class GankListFragment extends Fragment implements IGankView,
                 R.color.colorPrimaryDark);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mEmptyView = (TextView) view.findViewById(R.id.empty_view);
+        mEmptyLayout = (NestedScrollView) view.findViewById(R.id.empty_layout);
         if (mType.equals(mContext.getString(R.string.gank_welfare))) {
             itemType = GankAdapter.TYPE_PHOTO;
             mLayoutManager = new GridLayoutManager(mContext, 2);
@@ -119,20 +123,20 @@ public class GankListFragment extends Fragment implements IGankView,
 
     @Override
     public void addNews(List<GankBean> gankBeanList) {
-        if (mPageIndex == 1 && mData != null) {
-            mData.clear();
-        }
+
         //收藏不需要footerview
         if (TYPE_FAVORITE.equals(mType)) {
             mAdapter.isShowFooter(false);
-        } else {
-            if (gankBeanList != null && gankBeanList.size() <= 0) {
-                mEmptyView.setVisibility(View.VISIBLE);
-                mSwipeRefreshLayout.setVisibility(View.GONE);
-            }
         }
         if (mData == null) {
             mData = new ArrayList<>();
+        }
+        if (mPageIndex == 1 && mData != null) {
+            mData.clear();
+            if (gankBeanList != null && gankBeanList.size() <= 0) {
+                showNoData();
+                return;
+            }
         }
         mData.addAll(gankBeanList);
         mAdapter.setData(mData);
@@ -150,8 +154,8 @@ public class GankListFragment extends Fragment implements IGankView,
     }
 
     @Override
-    public void showLoadFailMsg() {
-
+    public void showLoadFailMsg(String msg) {
+        showMessage(msg);
     }
 
     private boolean isFirstInflate = true;
@@ -174,7 +178,8 @@ public class GankListFragment extends Fragment implements IGankView,
                     item.setChecked(true);
                     switch (item.getItemId()) {
                         case R.id.all:
-                            Toast.makeText(mContext, "all", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "all", Toast.LENGTH_SHORT).show();
+                            showMessage("all");
                             break;
                         case R.id.android:
                             Toast.makeText(mContext, "android", Toast.LENGTH_SHORT).show();
@@ -205,8 +210,20 @@ public class GankListFragment extends Fragment implements IGankView,
     }
 
     @Override
+    public void showNoData() {
+        mEmptyLayout.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        Snackbar.make(getView(), msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onRefresh() {
         mPageIndex = 1;
+        AppConstants.PAGE_SIZE = 10;
         if (TYPE_FAVORITE.equals(mType)) {
             mGankPresenter.loadGankFromDataBase(getActivity());
         } else {
@@ -229,6 +246,7 @@ public class GankListFragment extends Fragment implements IGankView,
                     isLoading = true;
                     mAdapter.isShowFooter(true);
                     mPageIndex++;
+                    AppConstants.PAGE_SIZE = 20;
                     mGankPresenter.loadGank(getActivity(), mType, mPageIndex, null);
                 }
 
@@ -281,8 +299,6 @@ public class GankListFragment extends Fragment implements IGankView,
 //        if (isVisibleToUser) {
 //            Logger.t("cj_data").w("invoke mtype " + mType);
 //            UmengEvent.onFragmentStart(mType);
-//        } else {
-//            UmengEvent.onFragmentEnd(mType);
 //        }
 //    }
 }

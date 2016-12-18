@@ -19,7 +19,11 @@ public interface IGankView {
 
     void hideProgress();
 
-    void showLoadFailMsg();
+    void showLoadFailMsg(String msg);
 
     void showFilteringPopUpMenu();
+
+    void showNoData();
+
+    void showMessage(String msg);
 }

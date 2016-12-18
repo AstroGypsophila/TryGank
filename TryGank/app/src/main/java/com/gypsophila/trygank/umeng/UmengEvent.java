@@ -2,6 +2,7 @@ package com.gypsophila.trygank.umeng;
 
 import android.content.Context;
 
+import com.gypsophila.commonlib.activity.BaseActivity;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -18,7 +19,7 @@ public class UmengEvent {
         if (DEBUG) {
             MobclickAgent.setDebugMode(true);
         }
-//        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.openActivityDurationTrack(false);
     }
 
     /**
@@ -27,10 +28,10 @@ public class UmengEvent {
      * @param ctx
      */
     public static void onResume(Context ctx) {
-//        if (ctx instanceof Activity) {
-//            Activity activity = (Activity) ctx;
-//            MobclickAgent.onPageEnd(activity.getClass().getSimpleName());
-//        }
+        if (ctx instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) ctx;
+            MobclickAgent.onPageStart(activity.getClass().getSimpleName());
+        }
         MobclickAgent.onResume(ctx);
     }
 
@@ -40,10 +41,10 @@ public class UmengEvent {
      * @param ctx
      */
     public static void onPause(Context ctx) {
-//        if (ctx instanceof Activity) {
-//            Activity activity = (Activity) ctx;
-//            MobclickAgent.onPageEnd(activity.getClass().getSimpleName());
-//        }
+        if (ctx instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) ctx;
+            MobclickAgent.onPageEnd(activity.getClass().getSimpleName());
+        }
         MobclickAgent.onPause(ctx);
     }
 

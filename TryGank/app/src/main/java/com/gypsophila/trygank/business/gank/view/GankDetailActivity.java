@@ -16,10 +16,9 @@ import android.widget.ProgressBar;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppSwipeBackActivity;
-import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.business.gank.presenter.GankDetailPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankDetailPresenter;
-
+import com.gypsophila.trygank.entity.GankBean;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -38,6 +37,7 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
     private IGankDetailPresenter mGankDetailPresenter;
     private Context mContext;
     private GankBean mGankBean;
+    private String mUrl;
     private boolean mCurrentStatus = false;
     private boolean mInitStatus = false;
 
@@ -47,14 +47,25 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
         ctx.startActivity(intent);
     }
 
+    public static void openWebView(Context ctx, String url) {
+        Intent intent = new Intent(ctx, GankDetailActivity.class);
+        intent.putExtra("webUrl", url);
+        ctx.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.activity_gankdetail);
         mGankBean = (GankBean) getIntent().getSerializableExtra("gankBean");
-        mGankDetailPresenter = new GankDetailPresenterImpl(this);
-        mGankDetailPresenter.loadGank(mContext, mGankBean.id);
+        if (mGankBean != null) {
+            mGankDetailPresenter = new GankDetailPresenterImpl(this);
+            mGankDetailPresenter.loadGank(mContext, mGankBean.id);
+            mUrl = mGankBean.url;
+        } else {
+            mUrl = getIntent().getStringExtra("webUrl");
+        }
         initViews();
         initData();
     }
@@ -78,7 +89,7 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
                 return true;
             }
         });
-        mWebView.loadUrl(mGankBean.url);
+        mWebView.loadUrl(mUrl);
     }
 
     private void initToolbar() {
@@ -92,27 +103,8 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
                 onBackPressed();
             }
         });
-        mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
 
     }
-
-    Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            int id = item.getItemId();
-            if (id == R.id.action_favorite) {
-                mCurrentStatus = !mCurrentStatus;
-                if (mCurrentStatus) {
-                    item.setIcon(R.drawable.ic_star_white);
-                } else {
-                    item.setIcon(R.drawable.ic_star_border);
-                }
-            } else if (id == R.id.action_share) {
-
-            }
-            return true;
-        }
-    };
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KEYCODE_BACK) && mWebView.canGoBack()) {
@@ -123,8 +115,30 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favorite:
+                mCurrentStatus = !mCurrentStatus;
+                if (mCurrentStatus) {
+                    item.setIcon(R.drawable.ic_star_white);
+                } else {
+                    item.setIcon(R.drawable.ic_star_border);
+                }
+                return true;
+            case R.id.action_share:
+                share(mUrl);
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.gankdetail_toolbar_menu, menu);
+        if (mGankBean == null) {
+            MenuItem item = menu.findItem(R.id.action_favorite);
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -134,6 +148,16 @@ public class GankDetailActivity extends AppSwipeBackActivity implements IGankDet
             mInitStatus = true;
             mCurrentStatus = true;
         }
+    }
+
+    @Override
+    public void share(String url) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        String value = getTitle() + "\n" + mWebView.getUrl();
+        sendIntent.putExtra(Intent.EXTRA_TEXT, value);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_send_to)));
     }
 
     //动态改变item的方式

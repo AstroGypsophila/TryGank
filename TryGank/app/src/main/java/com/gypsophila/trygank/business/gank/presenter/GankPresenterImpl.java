@@ -46,7 +46,7 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankB
     }
 
     public String getUrl(String type, int pageIndex) {
-        StringBuffer sb = new StringBuffer(AppConstants.GANK_HOST).append("data/");
+        StringBuffer sb = new StringBuffer(AppConstants.GANK_API).append("data/");
         sb.append(type);
         sb.append("/").append(AppConstants.PAGE_SIZE).append("/").append(pageIndex);
         return sb.toString();
@@ -61,5 +61,6 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankB
     @Override
     public void onFailed(String errorMessage) {
         mGankView.hideProgress();
+        mGankView.showLoadFailMsg(errorMessage);
     }
 }

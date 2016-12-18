@@ -22,7 +22,12 @@
     <color name="common_black">#000000</color>
     <color name="common_write">#ffffff</color>
 
-    <color name="common_s">#893232</color>
+    <!--<color name="common_s">#893232</color>-->
+    <color name="text_link1">#1A0DAB</color>
+    <color name="text_link2">#01A4EF</color>
+    <color name="introduce_title">#535353</color>
+
+
 
     <!--RedTheme-->
     <color name="redtheme_primary">#F44336</color>

@@ -48,8 +48,8 @@
                     android:layout_height="72dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="24dp"
-                    android:src="@mipmap/deal"
-                    app:civ_border_color="#FFFFFFFF"
+                    android:src="@mipmap/author_avatar"
+                    app:civ_border_color="@color/white"
                     app:civ_border_width="2dp" />
 
                 <TextView
@@ -60,9 +60,18 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:text="@string/user_nickname"
+                    android:text="@string/author_nickname"
                     android:textColor="@color/tab_indicator"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_nickname"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/author_github"
+                    android:textColor="@color/tab_indicator"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -101,28 +110,48 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:padding="12dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/introduce_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:text="@string/app_introduce_title"
+                android:textColor="@color/grey_primary_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="介绍" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Gank是一款App" />
-            </LinearLayout>
-        </ScrollView>
+            <TextView
+                android:layout_below="@id/introduce_title"
+                android:id="@+id/introduce_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/about_introduce_grey_shape"
+                android:padding="2dp"
+                android:lineSpacingMultiplier="1.1"
+                android:text="@string/app_introduce_content"
+                android:textIsSelectable="true"
+                android:textSize="14sp" />
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/download_link"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/introduce_content"-->
+            <!--android:text="下载地址"-->
+            <!--android:textColor="@color/indigo_primary"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textStyle="bold" />-->
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

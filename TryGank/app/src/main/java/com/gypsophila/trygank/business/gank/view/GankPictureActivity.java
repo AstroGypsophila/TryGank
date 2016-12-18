@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.gypsophila.commonlib.utils.ImageLoaderUtils;
 import com.gypsophila.trygank.R;
@@ -74,7 +76,18 @@ public class GankPictureActivity extends AppSwipeBackActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.picture_save) {
-                    ImageLoaderUtils.downloadImage(mContext, mImgUrl, mImgTitle);
+                    ImageLoaderUtils.downloadImage(mContext, mImgUrl, mImgTitle, new ImageLoaderUtils.DownloadImageListener() {
+                        @Override
+                        public void loadSuccess(Uri uri) {
+                            Toast.makeText(mContext, (getString(R.string.download_picture_success)
+                                    + uri.getPath()), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void loadFailed(Exception e) {
+
+                        }
+                    });
                 } else if (id == R.id.picture_share) {
                     File appDir = new File(Environment.getExternalStorageDirectory(),
                             getString(R.string.app_name));
@@ -122,7 +135,7 @@ public class GankPictureActivity extends AppSwipeBackActivity {
 
             @Override
             public void loadFailed(Exception e) {
-
+//                Snackbar.make(this,"保存失败",Snackbar.LENGTH_SHORT).show();
             }
         });
     }

@@ -33,13 +33,13 @@ import com.gypsophila.commonlib.utils.PreferenceUtils;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppBaseActivity;
 import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.business.about.AboutActivity;
 import com.gypsophila.trygank.business.gank.ColorsListAdapter;
+import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 import com.gypsophila.trygank.business.gank.view.GankFragment;
 import com.gypsophila.trygank.business.gank.view.GankListFragment;
 import com.gypsophila.trygank.business.gank.view.SearchActivity;
 import com.gypsophila.trygank.business.gank.view.TodayFragment;
-import com.gypsophila.trygank.business.gank.view.UserInfoActivity;
-import com.gypsophila.trygank.business.news.view.NewsFragment;
 import com.gypsophila.trygank.systemevent.ChangeTheme;
 import com.gypsophila.trygank.utils.ThemeUtil;
 
@@ -281,10 +281,9 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     }
 
     @Override
-    public void switchToNews() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.id_content_container, NewsFragment.newInstance(), NewsFragment.TAG)
-                .commit();
+    public void switchToXiandu() {
+
+        GankDetailActivity.openWebView(mContext, AppConstants.GANK_XIANDU);
     }
 
     @Override
@@ -321,7 +320,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
     }
 
     private void startUserInfoActivity() {
-        Intent intent = new Intent(this, UserInfoActivity.class);
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
@@ -359,7 +358,7 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 switchToToday();
                 break;
             case R.id.menu_news:
-                switchToNews();
+                switchToXiandu();
                 break;
             case R.id.menu_favorite:
                 switchToFavorite();

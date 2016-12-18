@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/10/15
  */
 public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

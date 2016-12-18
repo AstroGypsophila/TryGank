@@ -54,7 +54,7 @@ public class SearchPresenterImpl implements IGankPresenter, GankLoadListener<Sea
 
     private String getUrl(String keyWord, int pageIndex) {
         String type = "all";
-        StringBuffer sb = new StringBuffer(AppConstants.GANK_HOST).append("search/query/");
+        StringBuffer sb = new StringBuffer(AppConstants.GANK_API).append("search/query/");
         sb.append(keyWord);
         sb.append("/category/").append(type).append("/count/")
                 .append(AppConstants.PAGE_SIZE)

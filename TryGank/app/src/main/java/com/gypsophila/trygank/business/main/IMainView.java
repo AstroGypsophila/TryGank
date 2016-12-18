@@ -10,7 +10,7 @@ public interface IMainView {
 
     void switchNavigation(int id);
 
-    void switchToNews();
+    void switchToXiandu();
 
     void switchToGank();
 

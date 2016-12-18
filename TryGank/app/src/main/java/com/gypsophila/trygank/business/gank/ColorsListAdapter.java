@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Description :
  * Author : AstroGypsophila
- * Github  : https://github.com/AstroGypsophila
+ * GitHub  : https://github.com/AstroGypsophila
  * Date   : 2016/11/17
  */
 public class ColorsListAdapter extends BaseAdapter {
