@@ -17,16 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.business.gank.FilterType;
 import com.gypsophila.trygank.business.gank.GankAdapter;
 import com.gypsophila.trygank.business.gank.presenter.GankPresenterImpl;
 import com.gypsophila.trygank.business.gank.presenter.IGankPresenter;
 import com.gypsophila.trygank.entity.GankBean;
-import com.gypsophila.trygank.umeng.UmengEvent;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,8 +132,10 @@ public class GankListFragment extends Fragment implements IGankView,
         if (mPageIndex == 1 && mData != null) {
             mData.clear();
             if (gankBeanList != null && gankBeanList.size() <= 0) {
-                showNoData();
+                showNoData(true);
                 return;
+            } else {
+                showNoData(false);
             }
         }
         mData.addAll(gankBeanList);
@@ -171,33 +171,37 @@ public class GankListFragment extends Fragment implements IGankView,
                 public boolean onMenuItemClick(MenuItem item) {
                     for (int i = 0; i < mPopup.getMenu().size(); i++) {
                         MenuItem menuItem = mPopup.getMenu().getItem(i);
-                        menuItem.setCheckable(false);
                         menuItem.setChecked(false);
                     }
-                    item.setCheckable(true);
                     item.setChecked(true);
                     switch (item.getItemId()) {
                         case R.id.all:
-//                            Toast.makeText(mContext, "all", Toast.LENGTH_SHORT).show();
-                            showMessage("all");
+                            mGankPresenter.setFilter(FilterType.ALL);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
                         case R.id.android:
-                            Toast.makeText(mContext, "android", Toast.LENGTH_SHORT).show();
+                            mGankPresenter.setFilter(FilterType.ANDROID);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
                         case R.id.ios:
-                            Toast.makeText(mContext, "ios", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.welfare:
-                            Toast.makeText(mContext, "福利", Toast.LENGTH_SHORT).show();
+                            mGankPresenter.setFilter(FilterType.IOS);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
                         case R.id.front_end:
-                            Toast.makeText(mContext, "前端", Toast.LENGTH_SHORT).show();
+                            mGankPresenter.setFilter(FilterType.FRONT_END);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
                         case R.id.app:
-                            Toast.makeText(mContext, "App", Toast.LENGTH_SHORT).show();
+                            mGankPresenter.setFilter(FilterType.APP);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
                         case R.id.extra:
-                            Toast.makeText(mContext, "拓展", Toast.LENGTH_SHORT).show();
+                            mGankPresenter.setFilter(FilterType.EXTRA);
+                            mGankPresenter.loadGankFromDataBase(mContext);
+                            break;
+                        case R.id.recommend:
+                            mGankPresenter.setFilter(FilterType.RECOMMEND);
+                            mGankPresenter.loadGankFromDataBase(mContext);
                             break;
 
                     }
@@ -210,9 +214,14 @@ public class GankListFragment extends Fragment implements IGankView,
     }
 
     @Override
-    public void showNoData() {
-        mEmptyLayout.setVisibility(View.VISIBLE);
-        mSwipeRefreshLayout.setVisibility(View.GONE);
+    public void showNoData(boolean shown) {
+        if (shown) {
+            mEmptyLayout.setVisibility(View.VISIBLE);
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+        } else {
+            mEmptyLayout.setVisibility(View.GONE);
+            mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

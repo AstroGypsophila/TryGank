@@ -28,6 +28,7 @@
     <string name="gank_video">休息视频</string>
     <string name="gank_app">App</string>
     <string name="gank_extra">拓展资源</string>
+    <string name="gank_recommend">瞎推荐</string>
     <string name="gank_via">via %1$s</string>
     <string name="share_send_to">分享至</string>
 

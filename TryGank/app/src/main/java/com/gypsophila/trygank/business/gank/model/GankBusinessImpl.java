@@ -40,8 +40,8 @@ public class GankBusinessImpl implements IGankBusiness {
     }
 
     @Override
-    public void loadBeansFromDataBase(BaseActivity activity, final GankLoadListener listener) {
-        List<GankBean> gankBeanList = GankDataBaseManager.getGankList(activity);
+    public void loadBeansFromDataBase(BaseActivity activity, String filter, final GankLoadListener listener) {
+        List<GankBean> gankBeanList = GankDataBaseManager.getGankList(activity, filter);
         if (gankBeanList != null) {
             listener.onSuccess(gankBeanList);
         } else {

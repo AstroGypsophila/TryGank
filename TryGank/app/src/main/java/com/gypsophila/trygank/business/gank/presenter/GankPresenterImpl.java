@@ -4,12 +4,13 @@ import android.content.Context;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
-import com.gypsophila.trygank.entity.GankBean;
+import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.business.gank.FilterType;
 import com.gypsophila.trygank.business.gank.model.GankBusinessImpl;
 import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
 import com.gypsophila.trygank.business.gank.view.IGankView;
-import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.entity.GankBean;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankB
 
     private IGankView mGankView;
     private IGankBusiness mGankBusiness;
+    private boolean isFirstLoad = true;
+    private FilterType mFilter = FilterType.ALL;
+
 
     public GankPresenterImpl(IGankView gankView) {
         mGankView = gankView;
@@ -41,8 +45,13 @@ public class GankPresenterImpl implements IGankPresenter, GankLoadListener<GankB
     @Override
     public void loadGankFromDataBase(Context ctx) {
         mGankView.showProgress();
-        mGankBusiness.loadBeansFromDataBase((BaseActivity) ctx, this);
+        mGankBusiness.loadBeansFromDataBase((BaseActivity) ctx, FilterType.getFilter(mFilter), this);
 
+    }
+
+    @Override
+    public void setFilter(FilterType requestType) {
+        mFilter = requestType;
     }
 
     public String getUrl(String type, int pageIndex) {

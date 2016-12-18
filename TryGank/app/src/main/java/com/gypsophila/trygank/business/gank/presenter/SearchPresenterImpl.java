@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.gypsophila.commonlib.activity.BaseActivity;
 import com.gypsophila.commonlib.net.RequestParameter;
+import com.gypsophila.trygank.business.gank.FilterType;
 import com.gypsophila.trygank.business.gank.model.GankLoadListener;
 import com.gypsophila.trygank.business.gank.model.IGankBusiness;
 import com.gypsophila.trygank.entity.SearchBean;
@@ -38,6 +39,11 @@ public class SearchPresenterImpl implements IGankPresenter, GankLoadListener<Sea
 
     @Override
     public void loadGankFromDataBase(Context ctx) {
+
+    }
+
+    @Override
+    public void setFilter(FilterType requestType) {
 
     }
 

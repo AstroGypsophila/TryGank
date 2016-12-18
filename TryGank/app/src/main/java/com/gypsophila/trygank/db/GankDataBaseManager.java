@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 import com.gypsophila.trygank.entity.GankBean;
 import com.gypsophila.trygank.utils.DateUtil;
@@ -49,14 +50,20 @@ public class GankDataBaseManager {
         return re;
     }
 
-    public static List<GankBean> getGankList(Context ctx) {
+    public static List<GankBean> getGankList(Context ctx, String filter) {
         List<GankBean> gankBeanList = new ArrayList<>();
         SQLiteDatabase db = null;
         Cursor cursor = null;
         try {
             GankDataBaseHelper helper = GankDataBaseHelper.getInstance(ctx);
             db = helper.getReadableDatabase();
-            cursor = db.query(TABLE_NAME, null, null, null, null, null, "_id desc");
+            if (!TextUtils.isEmpty(filter)) {
+                String selection = GANKTYPE + " = ?";
+                String[] selectionArgs = {filter};
+                cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, "_id desc");
+            } else {
+                cursor = db.query(TABLE_NAME, null, null, null, null, null, "_id desc");
+            }
             while (cursor.moveToNext()) {
                 GankBean gankBean = new GankBean();
                 gankBean.id = cursor.getString(cursor.getColumnIndex(GANKID));
@@ -80,7 +87,10 @@ public class GankDataBaseManager {
             }
         }
         return gankBeanList;
+    }
 
+    public static List<GankBean> getGankList(Context ctx) {
+        return getGankList(ctx, null);
     }
 
     public static GankBean getGankBean(Context ctx, String gankId) {

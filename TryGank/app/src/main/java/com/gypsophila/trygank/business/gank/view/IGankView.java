@@ -23,7 +23,7 @@ public interface IGankView {
 
     void showFilteringPopUpMenu();
 
-    void showNoData();
+    void showNoData(boolean shown);
 
     void showMessage(String msg);
 }

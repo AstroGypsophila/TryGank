@@ -38,7 +38,7 @@ public class SearchBusinessImpl implements IGankBusiness {
     }
 
     @Override
-    public void loadBeansFromDataBase(BaseActivity activity, GankLoadListener listener) {
+    public void loadBeansFromDataBase(BaseActivity activity, String filter, GankLoadListener listener) {
 
     }
 }
