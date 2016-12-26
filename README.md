@@ -1,11 +1,11 @@
 # TryGank
 
-![image](https://github.com/AstroGypsophila/TryGank/screenshots/icon_v1.png)
+![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/icon_v1.png)
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
 
-README: English | [中文](https://github.com/AstroGypsophila/TryGank/README-zh.md)
+README: English | [中文](https://github.com/AstroGypsophila/TryGank/blob/master/README-zh.md)
 
 TryGank is unofficial Android client about website [干货集中营][gank]. It is also my first practical and open source project, which based on the Model-View-Presenter (MVP) Pattern, following the Google's Material Design.
 
@@ -34,9 +34,9 @@ With the App, you can
 
 ## Screenshots
 
-![image](https://github.com/AstroGypsophila/TryGank/screenshots/run.gif)
+![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/run.gif)
 
-## Dependencies
+## Libraries
 
 - [Gson](https://github.com/google/gson):Gson is a Java library that can be used to convert Java Objects into their JSON representation.
 - [Glide](https://github.com/bumptech/glide):Glide is a fast and efficient open source media management and image loading framework for Android

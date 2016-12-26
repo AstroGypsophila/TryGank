@@ -1,9 +1,11 @@
 # TryGank
 
+![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/icon_v1.png)
+
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
 
-README: [English](https://github.com/AstroGypsophila/TryGank/README.md) | 中文
+README: [English](https://github.com/AstroGypsophila/TryGank/blob/master/README.md) | 中文
 
 TryGank 是基于 [干货集中营][gank] 数据接口的非官方 Android 客户端。它同时也是我第一个开源项目，它使用 MVP 模式并且遵循 Google 推荐的 Material Design 界面设计。
 
@@ -31,7 +33,7 @@ TryGank 是基于 [干货集中营][gank] 数据接口的非官方 Android 客�
 
 ## 运行截图
 
-![image](https://github.com/AstroGypsophila/TryGank/screenshots/run.gif)
+![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/run.gif)
 
 ## 开源库
 
