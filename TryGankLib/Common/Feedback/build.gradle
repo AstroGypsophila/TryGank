@@ -3,14 +3,14 @@ apply plugin: 'com.android.library'
 //apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "24.0.0"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         //feedbackSdk默认使用multidex模式编译
 //        multiDexEnabled true //不添加的话出现Error:Failed to resolve: :feedbackSdk:
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,19 +31,17 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile(name:'feedbackSdk', ext:'aar')
+    compile(name: 'feedbackSdk', ext: 'aar')
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile rootProject.ext.dependencies["appcompat-v7"]
 //    compile 'com.android.support:multidex:1.0.1'     // 此依赖用于开启mulidex模式编译
-    testCompile 'junit:junit:4.12'
 
     compile project(':CommonLib')
 

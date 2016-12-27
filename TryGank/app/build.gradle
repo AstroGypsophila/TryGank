@@ -8,15 +8,15 @@ def keystore = file("sign/trygank.jks")
 def signProperties = file("sign/signing.properties")
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "24.0.0"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.gypsophila.trygank"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1001
-        versionName "1.0.1"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
     signingConfigs {
 
@@ -54,6 +54,19 @@ android {
             shrinkResources true  //自动移除不用资源
             debuggable false //设为true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+            // 多渠道打包
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为TryGank_v1.0.0_2016-12-27_fir.apk
+                        def fileName = "TryGank_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
 
@@ -63,9 +76,9 @@ android {
 
     productFlavors {
         xiaomimarket {}
-        wandoujia{}
+        wandoujia {}
         yingyongbao {}
-        fir{}
+        fir {}
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
@@ -82,8 +95,7 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     compile project(':SwipeBack')
     compile project(':Feedback')
-    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile rootProject.ext.dependencies["umeng-analytics"]
 }

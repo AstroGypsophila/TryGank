@@ -1,6 +1,6 @@
 # TryGank
 
-![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/icon_v1.png)
+<img src="./TryGankLib/Common/ResModule/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="128" height="128" />
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
@@ -33,7 +33,7 @@ TryGank 是基于 [干货集中营][gank] 数据接口的非官方 Android 客�
 
 ## 运行截图
 
-![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/run.gif)
+<img src="./screenshots/run.gif" width="428" height="757" />
 
 ## 开源库
 

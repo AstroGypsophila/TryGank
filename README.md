@@ -1,6 +1,6 @@
 # TryGank
 
-![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/icon_v1.png)
+<img src="./TryGankLib/Common/ResModule/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="128" height="128" />
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
@@ -34,7 +34,7 @@ With the App, you can
 
 ## Screenshots
 
-![image](https://github.com/AstroGypsophila/TryGank/blob/master/screenshots/run.gif)
+<img src="./screenshots/run.gif" width="428" height="757" />
 
 ## Libraries
 
@@ -58,6 +58,7 @@ gmail:[astrogypsophila@gmail.com](mailto:astrogypsophila@gmail.com)
 - [干货集中营][gank]
 - [SimpleNews](https://github.com/liuling07/SimpleNews)
 - [Jianqiang's Mobile Dev Blog](http://www.cnblogs.com/Jax/)
+- [stormzhang](http://stormzhang.com/android/2016/03/13/gradle-config/)
 
 ## License
 

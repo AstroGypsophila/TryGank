@@ -30,6 +30,7 @@
         <activity
             android:name=".business.main.MainActivity"
             android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,10 +39,6 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name=".business.gank.view.XianduActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
             android:name=".business.gank.view.SearchActivity"
             android:screenOrientation="portrait"

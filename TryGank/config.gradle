@@ -1,0 +1,24 @@
+ext {
+
+    android = [compileSdkVersion: 23,
+               buildToolsVersion: "24.0.0",
+               applicationId    : "com.gypsophila.trygank",
+               minSdkVersion    : 15,
+               targetSdkVersion : 23,
+               versionCode      : 1000,
+               versionName      : "1.0.0"]
+
+    def android_support_version = "23.4.0"
+
+    dependencies = ["appcompat-v7"         : "com.android.support:appcompat-v7:" + android_support_version,
+                    "design"               : "com.android.support:design:" + android_support_version,
+                    "circleimageview"      : "de.hdodenhof:circleimageview:2.1.0",
+                    "cardview"             : "com.android.support:cardview-v7:" + android_support_version,
+                    "logger"               : "com.orhanobut:logger:1.8",
+                    "gson"                 : "com.google.code.gson:gson:2.2.4",
+                    "glide"                : "com.github.bumptech.glide:glide:3.7.0",
+                    "glide-transformations": "jp.wasabeef:glide-transformations:2.0.1",
+                    "umeng-analytics"      : "com.umeng.analytics:analytics:latest.integration",
+                    "eventbus"             : "org.greenrobot:eventbus:3.0.0"]
+
+}
