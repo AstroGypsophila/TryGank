@@ -4,6 +4,7 @@
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
+[![Download](https://img.shields.io/badge/download-fir.im-blue.svg)](http://fir.im/trygank)
 
 README: English | [中文](https://github.com/AstroGypsophila/TryGank/blob/master/README-zh.md)
 

@@ -4,6 +4,7 @@
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/AstroGypsophila/TryGank/pulls)
+[![Download](https://img.shields.io/badge/download-fir.im-blue.svg)](http://fir.im/trygank)
 
 README: [English](https://github.com/AstroGypsophila/TryGank/blob/master/README.md) | 中文
 
@@ -57,6 +58,7 @@ gmail:[astrogypsophila@gmail.com](mailto:astrogypsophila@gmail.com)
 - [干货集中营][gank]
 - [SimpleNews](https://github.com/liuling07/SimpleNews)
 - [Jianqiang's Mobile Dev Blog](http://www.cnblogs.com/Jax/)
+- [stormzhang](http://stormzhang.com/android/2016/03/13/gradle-config/)
 
 ## License
 
