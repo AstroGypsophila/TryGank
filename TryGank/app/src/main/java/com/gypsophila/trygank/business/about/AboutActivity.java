@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.gypsophila.trygank.R;
 import com.gypsophila.trygank.base.AppSwipeBackActivity;
 import com.gypsophila.trygank.business.AppConstants;
+import com.gypsophila.trygank.business.gank.view.GankDetailActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -52,6 +54,7 @@ public class AboutActivity extends AppSwipeBackActivity {
     private String headerImgPath;
     private Toolbar mToolbar;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,13 @@ public class AboutActivity extends AppSwipeBackActivity {
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         blurImg = (ImageView) findViewById(R.id.blur_img_bg);
         avatarImg = (CircleImageView) findViewById(R.id.user_avatar);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GankDetailActivity.openWebView(mContext,AppConstants.GITHUB);
+            }
+        });
         Glide.with(mContext)
                 .load(R.mipmap.author_avatar)
                 .bitmapTransform(new BlurTransformation(mContext, 8))

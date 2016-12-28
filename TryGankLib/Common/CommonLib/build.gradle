@@ -28,4 +28,5 @@ dependencies {
     compile rootProject.ext.dependencies["eventbus"]
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["glide-transformations"]
+    testCompile 'junit:junit:4.12'
 }

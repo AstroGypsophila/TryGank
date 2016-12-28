@@ -35,7 +35,8 @@ With the App, you can
 
 ## Screenshots
 
-<img src="./screenshots/run.gif" width="428" height="757" />
+<img src="./screenshots/screenshots.png"/>
+<img src="./screenshots/run.gif" width="300" height="530" />
 
 ## Libraries
 

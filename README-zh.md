@@ -34,7 +34,8 @@ TryGank 是基于 [干货集中营][gank] 数据接口的非官方 Android 客�
 
 ## 运行截图
 
-<img src="./screenshots/run.gif" width="428" height="757" />
+<img src="./screenshots/screenshots.png"/>
+<img src="./screenshots/run.gif" width="300" height="530" />
 
 ## 开源库
 

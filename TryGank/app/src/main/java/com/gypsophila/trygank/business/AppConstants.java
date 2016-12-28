@@ -22,6 +22,8 @@ public class AppConstants {
 
     public static int PAGE_SIZE = 20;
 
+    public static String GITHUB = "https://github.com/AstroGypsophila/TryGank";
+
 
     //http://gank.io/api/search/query/listview/category/Android/count/10/page/1
     //http://gank.io/api/history/content/day/2016/05/11
