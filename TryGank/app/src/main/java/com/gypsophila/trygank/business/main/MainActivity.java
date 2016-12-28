@@ -258,13 +258,13 @@ public class MainActivity extends AppBaseActivity implements IMainView {
                 switchToSearch();
                 return true;
             case R.id.action_notification:
-                Toast.makeText(mContext, R.string.menu_notifications, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.nothing_tip, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_item1:
-                Toast.makeText(mContext, R.string.item_01, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.nothing_tip, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_item2:
-                Toast.makeText(mContext, R.string.item_02, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.nothing_tip, Toast.LENGTH_SHORT).show();
                 return true;
 
         }

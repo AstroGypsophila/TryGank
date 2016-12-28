@@ -17,6 +17,7 @@
     <string name="app_introduce_title">TryGank 介绍</string>
     <string name="app_introduce_content">TryGank 是一款基于 gank.io 接口的第三方 Android 客户端。\n主要数据内容包括每日精选的一张妹纸图、工程师知识干货，功能模块包括根据干货数据展示但不局限于此，以后更多地会是自己学习过程中的模块整合。</string>
 
+    <string name="nothing_tip">暂无内容，等待开发</string>
 
     <string name="load_data_failed">加载数据失败</string>
     <string name="nav_news">闲读</string>
