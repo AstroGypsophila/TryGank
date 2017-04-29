@@ -98,4 +98,5 @@ dependencies {
     compile project(':SwipeBack')
     compile project(':Feedback')
     compile rootProject.ext.dependencies["umeng-analytics"]
+    testCompile 'junit:junit:4.12'
 }

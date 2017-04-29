@@ -1,2 +1,4 @@
 /build
-CommonLib.iml
+/.idea
+/.gradle
+*.iml

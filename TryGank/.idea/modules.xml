@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../TryGankLib/Common/CommonLib/CommonLib.iml" filepath="$PROJECT_DIR$/../TryGankLib/Common/CommonLib/CommonLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TryGankLib/Common/Feedback/Feedback.iml" filepath="$PROJECT_DIR$/../TryGankLib/Common/Feedback/Feedback.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TryGankLib/Common/ResModule/ResModule.iml" filepath="$PROJECT_DIR$/../TryGankLib/Common/ResModule/ResModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TryGankLib/Common/SwipeBack/SwipeBack.iml" filepath="$PROJECT_DIR$/../TryGankLib/Common/SwipeBack/SwipeBack.iml" />
       <module fileurl="file://$PROJECT_DIR$/TryGank.iml" filepath="$PROJECT_DIR$/TryGank.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
